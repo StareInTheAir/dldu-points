@@ -20,7 +20,7 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"dbaeumer.vscode-eslint",
-		"octref.vetur"
+		"johnsoncodehk.volar"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
