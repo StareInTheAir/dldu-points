@@ -1,27 +1,41 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <h1>DLDU S3</h1>
+  <p>{{ achievedPoints }}/{{ totalPoints }}</p>
+  <Level v-for="level in dlduData.levels" v-bind:key="level.name" v-bind:level="level" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
+import Level from './components/Level.vue'
+import DataService from './DataService'
+import { achievedRunPoints, totalRunPoints } from './points'
 
 export default defineComponent({
   name: 'App',
+  data: () => {
+    return {
+      dlduData: DataService.fetchData()
+    }
+  },
+  computed: {
+    totalPoints () {
+      return totalRunPoints(this.dlduData)
+    },
+    achievedPoints () {
+      return achievedRunPoints(this.dlduData)
+    }
+  },
   components: {
-    HelloWorld
+    Level
   }
 })
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  background-color: #444;
+  font-family: "EBGaramond";
+  font-size: 2em;
+  color: #fff;
 }
 </style>
