@@ -19,19 +19,21 @@ export default defineComponent({
 </script>
 
 <template>
-  <tr v-bind:class="className">
-    <td class="boss_name">{{ boss.name }}</td>
-    <td class="boss_points">{{ boss.points }}</td>
-    <td class="boss_beaten">{{ boss.beaten ? 'X' : 'O' }}</td>
-  </tr>
+  <p v-bind:class="className" class="name">{{ boss.name }}</p>
+  <p v-bind:class="className" class="points">{{ boss.points }}</p>
 </template>
 
 <style scoped>
 .beaten {
   color: rgb(255, 255, 255);
 }
-
 .alive {
   color: rgba(255, 255, 255, 0.5);
+}
+.name {
+  text-align: end;
+}
+.points {
+  text-align: start;
 }
 </style>

@@ -1,7 +1,9 @@
 <template>
   <template v-if="dlduData">
-    <p>{{ achievedPoints }}/{{ totalPoints }}</p>
-    <Level v-for="level in dlduData.levels" v-bind:key="level.name" v-bind:level="level" />
+    <p>Punkte: {{ achievedPoints }}/{{ totalPoints }}</p>
+    <div id="grid">
+      <Level v-for="level in dlduData.levels" v-bind:key="level.name" v-bind:level="level" />
+    </div>
   </template>
   <p v-else>Loading</p>
 </template>
@@ -52,9 +54,19 @@ export default defineComponent({
 
 <style>
 body {
-  background-color: #444;
+  background-color: #222;
   font-family: "EBGaramond";
-  font-size: 2em;
   color: #fff;
+}
+
+#grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 5em;
+  column-gap: 20px;
+}
+
+#grid * {
+  align-self: end;
 }
 </style>
