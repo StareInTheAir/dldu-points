@@ -1,4 +1,12 @@
 <template>
+  <template v-if="errors.length > 0">
+    Something went wrong:
+    <ul>
+      <li v-for="error in errors" :key="error">
+        {{ error }}
+      </li>
+    </ul>
+  </template>
   <template v-if="dlduData">
     <p>Punkte: {{ achievedPoints }}/{{ totalPoints }}</p>
     <div id="grid">
@@ -18,9 +26,10 @@ import { DlduData } from './types'
 
 export default defineComponent({
   name: 'App',
-  data: (): {dlduData?: DlduData} => {
+  data: () => {
     return {
-      dlduData: undefined
+      dlduData: undefined as DlduData | undefined,
+      errors: [] as string[]
     }
   },
   computed: {
@@ -41,12 +50,27 @@ export default defineComponent({
     Level
   },
   created () {
-    this.getData()
+    this.scheduleGetData()
   },
   methods: {
     async getData () {
-      const accessToken = await getAccessToken()
-      this.dlduData = await getDlduData(accessToken.token)
+      try {
+        const accessToken = await getAccessToken()
+        try {
+          this.dlduData = await getDlduData(accessToken.token)
+          this.errors = []
+        } catch (err) {
+          console.log('Error during getDlduData', err)
+          this.errors.push('Couldn\'t retrieve data from Google Sheets')
+        }
+      } catch (err) {
+        console.log('Error during getAccessToken', err)
+        this.errors.push('Couldn\'t get access token for Google Sheets')
+      }
+    },
+    async scheduleGetData () {
+      await this.getData()
+      setInterval(async () => { await this.getData() }, 60_000)
     }
   }
 })
