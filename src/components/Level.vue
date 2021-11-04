@@ -27,13 +27,24 @@ export default defineComponent({
 </script>
 
 <template>
-  <span class="name">{{ level.name }}</span>
-  <span class="points">{{ achievedPoints }}/{{ totalPoints }}</span>
-  <img src="../assets/line.svg" alt="Underline of level name" class="underline" />
-  <Boss v-for="boss in level.bosses" v-bind:key="level.name + boss.name" v-bind:boss="boss" />
+  <div id="grid">
+    <span class="name">{{ level.name }}</span>
+    <span class="points">{{ achievedPoints }}/{{ totalPoints }}</span>
+    <img src="../assets/line.svg" alt="Underline of level name" class="underline" />
+    <Boss v-for="boss in level.bosses" :key="level.name + boss.name" :boss="boss" />
+  </div>
 </template>
 
 <style scoped>
+#grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 5em;
+  column-gap: 20px;
+}
+#grid * {
+  align-self: end;
+}
 .name, .points {
   font-weight: 500;
   font-size: 130%;

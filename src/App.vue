@@ -82,15 +82,4 @@ body {
   font-family: "EBGaramond";
   color: #fff;
 }
-
-#grid {
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto 5em;
-  column-gap: 20px;
-}
-
-#grid * {
-  align-self: end;
-}
 </style>
