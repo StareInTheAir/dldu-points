@@ -9,9 +9,7 @@
   </template>
   <template v-if="dlduData">
     <p>Punkte: {{ achievedPoints }}/{{ totalPoints }}</p>
-    <div id="grid">
-      <Level v-for="level in dlduData.levels" v-bind:key="level.name" v-bind:level="level" />
-    </div>
+    <LevelsPager :levels="dlduData.levels" />
   </template>
   <p v-else>Loading</p>
 </template>
@@ -19,7 +17,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { getAccessToken } from './auth'
-import Level from './components/Level.vue'
+import LevelsPager from './components/LevelsPager.vue'
 import { getDlduData } from './google-sheets'
 import { achievedRunPoints, totalRunPoints } from './points'
 import { DlduData } from './types'
@@ -47,7 +45,7 @@ export default defineComponent({
     }
   },
   components: {
-    Level
+    LevelsPager
   },
   created () {
     this.scheduleGetData()
