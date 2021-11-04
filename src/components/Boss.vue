@@ -19,8 +19,8 @@ export default defineComponent({
 </script>
 
 <template>
-  <p v-bind:class="className" class="name">{{ boss.name }}</p>
-  <p v-bind:class="className" class="points">{{ boss.points }}</p>
+  <p :class="className" class="name">{{ boss.name }}</p>
+  <p :class="className" class="points">{{ boss.points }}</p>
 </template>
 
 <style scoped>
