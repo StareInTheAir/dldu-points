@@ -1,5 +1,5 @@
 <template>
-  <template v-if="errors.length > 0">
+  <template v-if="errors.size > 0">
     Something went wrong:
     <ul>
       <li v-for="error in errors" :key="error">
@@ -27,7 +27,7 @@ export default defineComponent({
   data: () => {
     return {
       dlduData: undefined as DlduData | undefined,
-      errors: [] as string[]
+      errors: new Set<string>()
     }
   },
   computed: {
@@ -56,14 +56,14 @@ export default defineComponent({
         const accessToken = await getAccessToken()
         try {
           this.dlduData = await getDlduData(accessToken.token)
-          this.errors = []
+          this.errors.clear()
         } catch (err) {
           console.log('Error during getDlduData', err)
-          this.errors.push('Couldn\'t retrieve data from Google Sheets')
+          this.errors.add('Couldn\'t retrieve data from Google Sheets')
         }
       } catch (err) {
         console.log('Error during getAccessToken', err)
-        this.errors.push('Couldn\'t get access token for Google Sheets')
+        this.errors.add('Couldn\'t get access token for Google Sheets')
       }
     },
     async scheduleGetData () {

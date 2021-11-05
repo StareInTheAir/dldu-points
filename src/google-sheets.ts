@@ -1,26 +1,38 @@
+import { clearAccessToken } from './auth'
 import { DarkSoulsBoss, DarkSoulsLevel, DlduData } from './types'
 import { GoogleSheetsDlduData, validateGoogleSheetsDlduData } from './validate'
 
 const SHEETS_API_URL = 'https://sheets.googleapis.com/v4/spreadsheets/1EmdjUnFUYcLUz9XH9EfNmb9jGomW6w955NElJqGeosI?fields=sheets/properties/title,sheets/data/rowData/values/formattedValue'
 
 async function getDlduData (accessToken: string): Promise<DlduData> {
-  const response = await fetch(SHEETS_API_URL, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${accessToken}`
-    }
-  })
+  try {
+    const response = await fetch(SHEETS_API_URL, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
 
-  const status = response.status
-  if (status >= 200 && status < 300) {
-    const json = await response.json()
-    if (validateGoogleSheetsDlduData(json)) {
-      return googleDataToDlduData(json)
+    const status = response.status
+    if (status >= 200 && status < 300) {
+      try {
+        const json = await response.json()
+        if (validateGoogleSheetsDlduData(json)) {
+          return googleDataToDlduData(json)
+        } else {
+          throw Error(`sheets JSON invalid: ${validateGoogleSheetsDlduData.errors}`)
+        }
+      } catch (err) {
+        throw Error(`sheets JSON parsing failed ${err}`)
+      }
+    } else if (status === 401) {
+      clearAccessToken()
+      throw Error('Access token expired')
     } else {
-      throw Error(`Got invalid JSON: ${validateGoogleSheetsDlduData.errors}`)
+      throw Error(`sheets fetch status code not OK: ${status}`)
     }
-  } else {
-    throw Error(`fetch status code not OK: ${status}`)
+  } catch (err) {
+    throw Error(`sheets fetch failed: ${err}`)
   }
 }
 

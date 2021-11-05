@@ -2,7 +2,7 @@ import { AccessToken } from './types'
 import { validateGoogleAccessToken } from './validate'
 
 const GET_ACCESS_TOKEN_URL = 'https://oauth2.googleapis.com/token'
-const REFRESH_TOKEN = '1//09vKIKaUu6YQVCgYIARAAGAkSNwF-L9IrFxj_7Hcpr06BfV9Eawm7K4m1y8sM3K3mNxqcRzrLZZ2dnNb0bMrKNtpmuqvV-9COQBo'
+const REFRESH_TOKEN = '1//092n1dTvvVOI3CgYIARAAGAkSNwF-L9Irr-ObwNc2oLaDjlIU0Mp6V1L_JaxrnlcCJDNdFil0xlx3YfS_4zqLA-BusIMAeXv_iVI'
 const CLIENT_ID = '162293629626-nsvuae4kf8d2dldb789ved4d39gg22ls.apps.googleusercontent.com'
 const CLIENT_SECRET = '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'
 
@@ -13,6 +13,10 @@ async function getAccessToken (): Promise<AccessToken> {
     lastAccessToken = await getNewAccessToken()
   }
   return lastAccessToken
+}
+
+function clearAccessToken (): void {
+  lastAccessToken = undefined
 }
 
 async function getNewAccessToken (): Promise<AccessToken> {
@@ -40,16 +44,16 @@ async function getNewAccessToken (): Promise<AccessToken> {
             validUntil: Date.now() + json.expires_in - 60
           }
         } else {
-          throw Error(`Access token format valid: ${validateGoogleAccessToken.errors}`)
+          throw Error(`getAccessToken JSON invalid: ${validateGoogleAccessToken.errors}`)
         }
       } catch (err) {
-        throw Error(`JSON parsing failed: ${err}`)
+        throw Error(`getAccessToken JSON parsing failed: ${err}`)
       }
     } else {
-      throw Error(`fetch status code not OK: ${status}`)
+      throw Error(`getAccessToken fetch status code not OK: ${status}`)
     }
   } catch (err) {
-    throw Error(`fetch failed: ${err}`)
+    throw Error(`getAccessToken fetch failed: ${err}`)
   }
 }
 
@@ -63,4 +67,4 @@ function encodeToForm (data: {[key: string]: string}): string {
   return formData.join('&')
 }
 
-export { getAccessToken }
+export { getAccessToken, clearAccessToken }
