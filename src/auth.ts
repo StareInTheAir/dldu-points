@@ -1,10 +1,7 @@
+import { CLIENT_ID, CLIENT_SECRET, REFRESH_TOKEN } from './auth-data'
 import { AccessToken } from './types'
 import { getAccessTokenUrl } from './urls'
 import { validateGoogleAccessToken } from './validate'
-
-const REFRESH_TOKEN = '1//092n1dTvvVOI3CgYIARAAGAkSNwF-L9Irr-ObwNc2oLaDjlIU0Mp6V1L_JaxrnlcCJDNdFil0xlx3YfS_4zqLA-BusIMAeXv_iVI'
-const CLIENT_ID = '162293629626-nsvuae4kf8d2dldb789ved4d39gg22ls.apps.googleusercontent.com'
-const CLIENT_SECRET = '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'
 
 let lastAccessToken: AccessToken | undefined
 
