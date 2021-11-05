@@ -3,10 +3,10 @@ function getSheetIdInternal (): string | null {
   return urlParams.get('sheetId')
 }
 
-function isSheetIdSupplied (): boolean {
+function isSheetIdSuppliedAndValid (): boolean {
   const sheetId = getSheetIdInternal()
   if (sheetId) {
-    return sheetId.trim().length > 0
+    return sheetId.match(/^[0-9a-zA-Z]+$/) !== null
   }
   return false
 }
@@ -27,4 +27,4 @@ function getAccessTokenUrl (): string {
   return 'https://oauth2.googleapis.com/token'
 }
 
-export { getSheetsApiUrl, isSheetIdSupplied, getAccessTokenUrl }
+export { getSheetsApiUrl, isSheetIdSuppliedAndValid, getAccessTokenUrl }
