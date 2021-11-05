@@ -41,7 +41,7 @@ async function getNewAccessToken (): Promise<AccessToken> {
         if (validateGoogleAccessToken(json)) {
           return {
             token: json.access_token,
-            validUntil: Date.now() + json.expires_in - 60
+            validUntil: Date.now() + json.expires_in * 1000 - 60_000
           }
         } else {
           throw Error(`getAccessToken JSON invalid: ${validateGoogleAccessToken.errors}`)
