@@ -1,17 +1,17 @@
 <template>
-  <template v-if="errors.size > 0">
+  <div v-if="errors.size > 0" id="errors">
     Something went wrong:
     <ul>
       <li v-for="error in errors" :key="error">
         {{ error }}
       </li>
     </ul>
-  </template>
+  </div>
   <template v-if="dlduData">
-    <p>Punkte: {{ achievedPoints }}/{{ totalPoints }}</p>
-    <LevelsPager :levels="dlduData.levels" />
+    <p id="total">Gesamtpunkte: {{ achievedPoints }}/{{ totalPoints }}</p>
+    <LevelsPager id="pager" :levels="dlduData.levels" />
   </template>
-  <p v-else>Loading</p>
+  <p v-else id="loading">Loading</p>
 </template>
 
 <script lang="ts">
@@ -75,9 +75,30 @@ export default defineComponent({
 </script>
 
 <style>
+html, body, #app {
+  height: 100%;
+}
 body {
   background-color: #222;
   font-family: "EBGaramond";
   color: #fff;
+}
+#app {
+  display: flex;
+  flex-direction: column;
+}
+#errors, #total, #loading {
+  flex: 0;
+}
+#pager {
+  flex: 1;
+}
+#total, #loading {
+  text-align: end;
+  font-weight: 500;
+  font-size: 200%;
+}
+#errors {
+  text-align: end;
 }
 </style>

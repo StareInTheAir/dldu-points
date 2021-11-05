@@ -21,17 +21,17 @@ export default defineComponent({
   },
   data: function () {
     return {
-      documentHeight: this.getDocumentHeight(),
+      componentHeight: Infinity,
       startIndex: 0
     }
   },
   computed: {
     endIndex: function () {
-      const refs = this.getRefs()
+      const refs = this.getLevelRefs()
       let end = 0
       let filledHeight = 0
       for (const [index, ref] of refs.slice(this.startIndex).entries()) {
-        if (filledHeight + ref.$el.clientHeight < this.documentHeight) {
+        if (filledHeight + ref.$el.clientHeight < this.componentHeight) {
           filledHeight += ref.$el.clientHeight
           end = this.startIndex + index
         } else {
@@ -43,17 +43,17 @@ export default defineComponent({
     }
   },
   methods: {
-    getDocumentHeight: function () {
-      return window.innerHeight
+    setComponentHeight: function () {
+      const container = this.$refs.container as HTMLDivElement | undefined
+      this.componentHeight = container ? container.clientHeight : Infinity
     },
-    setDocumentHeight: function () {
-      this.documentHeight = this.getDocumentHeight()
-    },
-    getRefs: function (): DivRef[] {
+    getLevelRefs: function (): DivRef[] {
       const refs = this.$refs
       const list: DivRef[] = []
       for (const key in refs) {
-        list.push(refs[key] as DivRef)
+        if (key.startsWith('level')) {
+          list.push(refs[key] as DivRef)
+        }
       }
       return list
     },
@@ -65,21 +65,23 @@ export default defineComponent({
       }
     },
     paginate: function () {
-      const refs = this.getRefs()
+      const refs = this.getLevelRefs()
       this.startIndex = this.endIndex + 1 < refs.length ? this.endIndex + 1 : 0
     }
   },
   mounted: function () {
-    window.addEventListener('resize', this.setDocumentHeight)
-    setInterval(this.paginate, 10_000)
+    this.setComponentHeight()
+    window.addEventListener('resize', this.setComponentHeight)
+
     this.paginate()
+    setInterval(this.paginate, 10_000)
   }
 })
 </script>
 
 <template>
-  <div id="pager_container">
-    <Level v-for="[i,level] in levels.entries()" :key="level.name"
+  <div ref="container">
+    <Level v-for="[i, level] in levels.entries()" :key="level.name"
       :ref="`level${i}`"
       :level="level"
       :class="getVisibilityClass(i)" />
@@ -87,10 +89,6 @@ export default defineComponent({
 </template>
 
 <style scoped>
-#pager_container {
-  bottom: 0;
-}
-
 .hidden {
   position: absolute;
   visibility: hidden;
