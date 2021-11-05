@@ -1,12 +1,11 @@
 import { clearAccessToken } from './auth'
 import { DarkSoulsBoss, DarkSoulsLevel, DlduData } from './types'
+import { getSheetsApiUrl } from './urls'
 import { GoogleSheetsDlduData, validateGoogleSheetsDlduData } from './validate'
-
-const SHEETS_API_URL = 'https://sheets.googleapis.com/v4/spreadsheets/1EmdjUnFUYcLUz9XH9EfNmb9jGomW6w955NElJqGeosI?fields=sheets/properties/title,sheets/data/rowData/values/formattedValue'
 
 async function getDlduData (accessToken: string): Promise<DlduData> {
   try {
-    const response = await fetch(SHEETS_API_URL, {
+    const response = await fetch(getSheetsApiUrl(), {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${accessToken}`

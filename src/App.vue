@@ -21,6 +21,7 @@ import LevelsPager from './components/LevelsPager.vue'
 import { getDlduData } from './google-sheets'
 import { achievedRunPoints, totalRunPoints } from './points'
 import { DlduData } from './types'
+import { isSheetIdSupplied } from './urls'
 
 export default defineComponent({
   name: 'App',
@@ -48,7 +49,11 @@ export default defineComponent({
     LevelsPager
   },
   created () {
-    this.scheduleGetData()
+    if (!isSheetIdSupplied()) {
+      this.errors.add('Sheet ID is missing in URL')
+    } else {
+      this.scheduleGetData()
+    }
   },
   methods: {
     async getData () {
@@ -98,5 +103,9 @@ body {
 }
 #errors {
   text-align: end;
+}
+#errors li:before, #errors li:after {
+  content: "⚠️";
+  padding: 0 5px;
 }
 </style>

@@ -1,7 +1,7 @@
 import { AccessToken } from './types'
+import { getAccessTokenUrl } from './urls'
 import { validateGoogleAccessToken } from './validate'
 
-const GET_ACCESS_TOKEN_URL = 'https://oauth2.googleapis.com/token'
 const REFRESH_TOKEN = '1//092n1dTvvVOI3CgYIARAAGAkSNwF-L9Irr-ObwNc2oLaDjlIU0Mp6V1L_JaxrnlcCJDNdFil0xlx3YfS_4zqLA-BusIMAeXv_iVI'
 const CLIENT_ID = '162293629626-nsvuae4kf8d2dldb789ved4d39gg22ls.apps.googleusercontent.com'
 const CLIENT_SECRET = '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'
@@ -33,7 +33,7 @@ async function getNewAccessToken (): Promise<AccessToken> {
     })
   }
   try {
-    const response = await fetch(GET_ACCESS_TOKEN_URL, request)
+    const response = await fetch(getAccessTokenUrl(), request)
     const status = response.status
     if (status >= 200 && status < 300) {
       try {
