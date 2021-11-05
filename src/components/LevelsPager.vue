@@ -72,6 +72,7 @@ export default defineComponent({
   mounted: function () {
     this.setComponentHeight()
     window.addEventListener('resize', this.setComponentHeight)
+    // new ResizeObserver(this.setComponentHeight).observe(this.$refs.container as HTMLDivElement)
 
     this.paginate()
     setInterval(this.paginate, 10_000)
