@@ -75,15 +75,13 @@ export default defineComponent({
 </script>
 
 <style>
-html, body, #app {
+html, body {
   height: 100%;
 }
 body {
   background-color: #222;
   font-family: "EBGaramond";
   color: #fff;
-}
-#app {
   display: flex;
   flex-direction: column;
 }
