@@ -41,20 +41,27 @@ function googleDataToDlduData (googleData: GoogleSheetsDlduData): DlduData {
   for (const sheet of googleData.sheets) {
     const levelName = sheet.properties.title.trim()
     const bosses: DarkSoulsBoss[] = []
-    for (const row of sheet.data[0].rowData) {
-      const name = row.values[0].formattedValue.trim()
-      const points = parseInt(row.values[1].formattedValue.trim())
-      const beaten = row.values[2].formattedValue !== 'n'
-      if (name.length > 0 && !isNaN(points)) {
-        bosses.push({ name, points, beaten })
-      } else {
-        console.log(`Ignoring boss ${name} in level ${levelName}`)
+    const rowData = sheet.data[0]?.rowData
+    if (rowData) {
+      for (const row of rowData) {
+        if (row.values.length >= 3) {
+          if (row.values[0].formattedValue && row.values[1].formattedValue && row.values[2].formattedValue) {
+            const name = row.values[0].formattedValue.trim()
+            const points = parseInt(row.values[1].formattedValue.trim())
+            const beaten = row.values[2].formattedValue !== 'n'
+            if (name.length > 0 && !isNaN(points)) {
+              bosses.push({ name, points, beaten })
+              continue
+            }
+          }
+        }
+        console.log(`Ignoring boss ${JSON.stringify(row)} in level ${levelName}`)
       }
     }
     if (levelName.length > 0 && bosses.length > 0) {
       levels.push({ name: levelName, bosses })
     } else {
-      console.log(`Ignoring empty level ${levelName} with bosses ${bosses}`)
+      console.log(`Ignoring empty level ${levelName}`)
     }
   }
 

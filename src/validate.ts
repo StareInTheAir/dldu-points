@@ -1,3 +1,4 @@
+/* eslint-disable quote-props */
 import Ajv, { JTDSchemaType } from 'ajv/dist/jtd'
 const ajv = new Ajv()
 
@@ -25,9 +26,9 @@ interface GoogleSheetsDlduData {
       title: string
     }
     data: {
-      rowData: {
+      rowData?: {
         values: {
-          formattedValue: string
+          formattedValue?: string
         }[]
       }[]
     }[]
@@ -36,26 +37,26 @@ interface GoogleSheetsDlduData {
 
 const googleSheetsDlduDataSchema: JTDSchemaType<GoogleSheetsDlduData> = {
   properties: {
-    sheets: {
+    'sheets': {
       elements: {
         properties: {
-          properties: {
+          'properties': {
             properties: {
-              title: {
+              'title': {
                 type: 'string'
               }
             }
           },
-          data: {
+          'data': {
             elements: {
-              properties: {
-                rowData: {
+              optionalProperties: {
+                'rowData': {
                   elements: {
                     properties: {
-                      values: {
+                      'values': {
                         elements: {
-                          properties: {
-                            formattedValue: {
+                          optionalProperties: {
+                            'formattedValue': {
                               type: 'string'
                             }
                           }
