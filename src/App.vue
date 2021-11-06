@@ -85,7 +85,7 @@ html, body {
 }
 body {
   background-color: #222;
-  font-family: "EBGaramond";
+  font-family: "EBGaramond", serif;
   color: #fff;
   display: flex;
   flex-direction: column;
