@@ -44,15 +44,14 @@ function googleDataToDlduData (googleData: GoogleSheetsDlduData): DlduData {
     const rowData = sheet.data[0]?.rowData
     if (rowData) {
       for (const row of rowData) {
-        if (row.values.length >= 3) {
-          if (row.values[0].formattedValue && row.values[1].formattedValue && row.values[2].formattedValue) {
-            const name = row.values[0].formattedValue.trim()
-            const points = parseInt(row.values[1].formattedValue.trim())
-            const beaten = row.values[2].formattedValue !== 'n'
-            if (name.length > 0 && !isNaN(points)) {
-              bosses.push({ name, points, beaten })
-              continue
-            }
+        if (row.values.length >= 3 && row.values[0].formattedValue &&
+            row.values[1].formattedValue && row.values[2].formattedValue) {
+          const name = row.values[0].formattedValue.trim()
+          const points = parseInt(row.values[1].formattedValue.trim())
+          const beaten = row.values[2].formattedValue === 'beaten'
+          if (name.length > 0 && !isNaN(points)) {
+            bosses.push({ name, points, beaten })
+            continue
           }
         }
         console.log(`Ignoring boss ${JSON.stringify(row)} in level ${levelName}`)
