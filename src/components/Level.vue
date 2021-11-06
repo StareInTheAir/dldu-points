@@ -47,7 +47,7 @@ export default defineComponent({
 }
 .name, .points {
   font-weight: 500;
-  font-size: 130%;
+  font-size: 150%;
 }
 .name {
   margin-top: 16px;

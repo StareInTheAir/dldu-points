@@ -98,7 +98,7 @@ body {
 }
 #total, #loading {
   text-align: end;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 200%;
 }
 #errors {
