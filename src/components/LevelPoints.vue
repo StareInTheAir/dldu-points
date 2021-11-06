@@ -1,13 +1,19 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { DarkSoulsLevel } from '@/types'
-import Boss from './Boss.vue'
+import BossPoints from './BossPoints.vue'
 import { achievedLevelPoints, totalLevelPoints } from '../points'
 
 export default defineComponent({
-  name: 'Level',
+  name: 'LevelPoints',
   components: {
-    Boss
+    BossPoints
+  },
+  props: {
+    level: {
+      type: Object as PropType<DarkSoulsLevel>,
+      required: true
+    }
   },
   computed: {
     totalPoints () {
@@ -16,33 +22,39 @@ export default defineComponent({
     achievedPoints () {
       return achievedLevelPoints(this.level)
     }
-  },
-  props: {
-    level: {
-      type: Object as PropType<DarkSoulsLevel>,
-      required: true
-    }
   }
 })
 </script>
 
 <template>
-  <div id="grid">
-    <span class="name">{{ level.name }}</span>
-    <span class="points">{{ achievedPoints }}/{{ totalPoints }}</span>
-    <img src="../assets/line.svg" alt="Underline of level name" class="underline" />
-    <Boss v-for="boss in level.bosses" :key="level.name + boss.name" :boss="boss" />
+  <div class="grid">
+    <span class="name">
+      {{ level.name }}
+    </span>
+    <span class="points">
+      {{ achievedPoints }}/{{ totalPoints }}
+    </span>
+    <img
+      src="../assets/line.svg"
+      alt="Underline of level name"
+      class="underline"
+    />
+    <BossPoints
+      v-for="boss in level.bosses"
+      :key="level.name + boss.name"
+      :boss="boss"
+    />
   </div>
 </template>
 
 <style scoped>
-#grid {
+.grid {
   width: 100%;
   display: grid;
   grid-template-columns: auto 5em;
   column-gap: 20px;
 }
-#grid * {
+.grid * {
   align-self: end;
 }
 .name, .points {

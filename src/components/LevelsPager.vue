@@ -2,7 +2,7 @@
 
 import { defineComponent, ObjectDirective, PropType } from 'vue'
 import { DarkSoulsLevel } from '@/types'
-import Level from './Level.vue'
+import LevelPoints from './LevelPoints.vue'
 
 type DivRef = {
   $el: HTMLDivElement
@@ -10,21 +10,49 @@ type DivRef = {
 
 export default defineComponent({
   name: 'LevelsPager',
+
   components: {
-    Level
+    LevelPoints
   },
+
+  directives: {
+    'fake-hide': {
+      mounted (el) {
+        // binding.value doesn't have correct value when mounted() is called,
+        // because componentHeight is not set correctly yet.
+        // We hide everything here and do a forceUpdate() when componentHeight is set.
+        el.classList.add('hidden')
+      },
+
+      updated (el, binding) {
+        if (binding.value) {
+          el.classList.add('hide')
+          setTimeout(function () {
+            el.classList.add('hidden')
+          }, 314)
+        } else {
+          setTimeout(function () {
+            el.classList.remove('hide', 'hidden')
+          }, 314)
+        }
+      }
+    } as ObjectDirective<HTMLDivElement, boolean>
+  },
+
   props: {
     levels: {
       type: Object as PropType<DarkSoulsLevel[]>,
       required: true
     }
   },
+
   data: function () {
     return {
       componentHeight: Infinity,
       startIndex: 0
     }
   },
+
   computed: {
     endIndex: function () {
       // For Vues tracking when to recompute this property to work,
@@ -47,6 +75,18 @@ export default defineComponent({
       return end
     }
   },
+
+  mounted: function () {
+    // Only here componentHeight can be calculated.
+    this.setComponentHeight()
+    window.addEventListener('resize', this.setComponentHeight)
+    // new ResizeObserver(this.setComponentHeight).observe(this.$refs.container as HTMLDivElement)
+
+    // Force redraw, because fakeHide directive needs correct componentHeight.
+    this.$forceUpdate()
+    setInterval(this.paginate, 10_000)
+  },
+
   methods: {
     setComponentHeight: function () {
       const container = this.$refs.container as HTMLDivElement | undefined
@@ -62,61 +102,34 @@ export default defineComponent({
       }
       return list
     },
+
     isHidden: function (index: number): boolean {
       return index < this.startIndex || index > this.endIndex
     },
+
     paginate: function () {
       this.startIndex = this.endIndex + 1 < this.getLevelRefs().length ? this.endIndex + 1 : 0
     }
-  },
-  mounted: function () {
-    // Only here componentHeight can be calculated.
-    this.setComponentHeight()
-    window.addEventListener('resize', this.setComponentHeight)
-    // new ResizeObserver(this.setComponentHeight).observe(this.$refs.container as HTMLDivElement)
-
-    // Force redraw, because fakeHide directive needs correct componentHeight.
-    this.$forceUpdate()
-    setInterval(this.paginate, 10_000)
-  },
-  directives: {
-    fakeHide: {
-      mounted (el) {
-        // binding.value doesn't have correct value when mounted() is called,
-        // because componentHeight is not set correctly yet.
-        // We hide everything here and do a forceUpdate() when componentHeight is set.
-        el.classList.add('hidden')
-      },
-      updated (el, binding) {
-        if (binding.value) {
-          el.classList.add('hide')
-          setTimeout(function () {
-            el.classList.add('hidden')
-          }, 314)
-        } else {
-          setTimeout(function () {
-            el.classList.remove('hide', 'hidden')
-          }, 314)
-        }
-      }
-    } as ObjectDirective<HTMLDivElement, boolean>
   }
 })
 </script>
 
 <template>
   <div ref="container">
-    <Level v-for="[i, level] in levels.entries()" :key="level.name"
+    <LevelPoints
+      v-for="[i, level] in levels.entries()"
+      :key="level.name"
       :ref="`level${i}`"
       :level="level"
-      v-fakeHide="isHidden(i)"
-      class="transition-opacity" />
+      v-fake-hide="isHidden(i)"
+      class="transition-opacity"
+    />
   </div>
 </template>
 
 <style scoped>
 .hidden {
-  /* display: none; is not an option because clientHeight returns 0 if set. */
+  /* display: none; is not an option because if set clientHeight returns 0. */
   position: absolute;
   top: -1000px;
 }

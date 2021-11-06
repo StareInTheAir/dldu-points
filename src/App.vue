@@ -1,19 +1,3 @@
-<template>
-  <div v-if="errors.size > 0" id="errors">
-    Something went wrong:
-    <ul>
-      <li v-for="error in errors" :key="error">
-        {{ error }}
-      </li>
-    </ul>
-  </div>
-  <template v-if="dlduData">
-    <p id="total">Gesamtpunkte: {{ achievedPoints }}/{{ totalPoints }}</p>
-    <LevelsPager id="pager" :levels="dlduData.levels" />
-  </template>
-  <p v-else id="loading">Loading</p>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { getAccessToken } from './auth'
@@ -25,12 +9,18 @@ import { isSheetIdSuppliedAndValid } from './urls'
 
 export default defineComponent({
   name: 'App',
+
+  components: {
+    LevelsPager
+  },
+
   data: () => {
     return {
       dlduData: undefined as DlduData | undefined,
       errors: new Set<string>()
     }
   },
+
   computed: {
     totalPoints () {
       if (!this.dlduData) {
@@ -38,6 +28,7 @@ export default defineComponent({
       }
       return totalRunPoints(this.dlduData)
     },
+
     achievedPoints () {
       if (!this.dlduData) {
         return 0
@@ -45,9 +36,7 @@ export default defineComponent({
       return achievedRunPoints(this.dlduData)
     }
   },
-  components: {
-    LevelsPager
-  },
+
   created () {
     if (!isSheetIdSuppliedAndValid()) {
       this.errors.add('Sheet ID is missing in URL')
@@ -55,6 +44,7 @@ export default defineComponent({
       this.scheduleGetData()
     }
   },
+
   methods: {
     async getData () {
       try {
@@ -71,6 +61,7 @@ export default defineComponent({
         this.errors.add('Couldn\'t get access token for Google Sheets')
       }
     },
+
     async scheduleGetData () {
       await this.getData()
       setInterval(async () => { await this.getData() }, 60_000)
@@ -78,6 +69,35 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <div
+    v-if="errors.size > 0"
+    class="errors"
+  >
+    Something went wrong:
+    <ul>
+      <li
+        v-for="error in errors"
+        :key="error"
+      >
+        {{ error }}
+      </li>
+    </ul>
+  </div>
+  <template v-if="dlduData">
+    <p class="total">
+      Gesamtpunkte: {{ achievedPoints }}/{{ totalPoints }}
+    </p>
+    <LevelsPager
+      :levels="dlduData.levels"
+      class="pager"
+    />
+  </template>
+  <p v-else class="loading">
+    Loading
+  </p>
+</template>
 
 <style>
 html, body {
@@ -90,21 +110,24 @@ body {
   display: flex;
   flex-direction: column;
 }
-#errors, #total, #loading {
+</style>
+
+<style scoped>
+.errors, .total, .loading {
   flex: 0;
 }
-#pager {
+.pager {
   flex: 1;
 }
-#total, #loading {
+.total, .loading {
   text-align: end;
   font-weight: 600;
   font-size: 200%;
 }
-#errors {
+.errors {
   text-align: end;
 }
-#errors li:before, #errors li:after {
+.errors li:before, .errors li:after {
   content: "⚠️";
   padding: 0 5px;
 }

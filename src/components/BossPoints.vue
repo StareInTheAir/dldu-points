@@ -3,7 +3,7 @@ import { DarkSoulsBoss } from '@/types'
 import { defineComponent, PropType } from 'vue'
 
 export default defineComponent({
-  name: 'Boss',
+  name: 'BossPoints',
   props: {
     boss: {
       type: Object as PropType<DarkSoulsBoss>,
@@ -19,8 +19,18 @@ export default defineComponent({
 </script>
 
 <template>
-  <p :class="className" class="name">{{ boss.name }}</p>
-  <p :class="className" class="points">{{ boss.points }}</p>
+  <p
+    :class="className"
+    class="name"
+  >
+    {{ boss.name }}
+  </p>
+  <p
+    :class="className"
+    class="points"
+  >
+    {{ boss.points }}
+  </p>
 </template>
 
 <style scoped>
