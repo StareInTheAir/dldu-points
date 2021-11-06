@@ -1,6 +1,6 @@
 <script lang="ts">
 
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, ObjectDirective, PropType } from 'vue'
 import { DarkSoulsLevel } from '@/types'
 import Level from './Level.vue'
 
@@ -62,23 +62,44 @@ export default defineComponent({
       }
       return list
     },
-    getVisibilityClass: function (index: number): string {
-      if (index < this.startIndex || index > this.endIndex) {
-        return 'hidden'
-      } else {
-        return ''
-      }
+    isHidden: function (index: number): boolean {
+      return index < this.startIndex || index > this.endIndex
     },
     paginate: function () {
       this.startIndex = this.endIndex + 1 < this.getLevelRefs().length ? this.endIndex + 1 : 0
     }
   },
   mounted: function () {
+    // Only here componentHeight can be calculated.
     this.setComponentHeight()
     window.addEventListener('resize', this.setComponentHeight)
     // new ResizeObserver(this.setComponentHeight).observe(this.$refs.container as HTMLDivElement)
 
+    // Force redraw, because fakeHide directive needs correct componentHeight.
+    this.$forceUpdate()
     setInterval(this.paginate, 10_000)
+  },
+  directives: {
+    fakeHide: {
+      mounted (el) {
+        // binding.value doesn't have correct value when mounted() is called,
+        // because componentHeight is not set correctly yet.
+        // We hide everything here and do a forceUpdate() when componentHeight is set.
+        el.classList.add('hidden')
+      },
+      updated (el, binding) {
+        if (binding.value) {
+          el.classList.add('hide')
+          setTimeout(function () {
+            el.classList.add('hidden')
+          }, 314)
+        } else {
+          setTimeout(function () {
+            el.classList.remove('hide', 'hidden')
+          }, 314)
+        }
+      }
+    } as ObjectDirective<HTMLDivElement, boolean>
   }
 })
 </script>
@@ -88,14 +109,22 @@ export default defineComponent({
     <Level v-for="[i, level] in levels.entries()" :key="level.name"
       :ref="`level${i}`"
       :level="level"
-      :class="getVisibilityClass(i)" />
+      v-fakeHide="isHidden(i)"
+      class="transition-opacity" />
   </div>
 </template>
 
 <style scoped>
 .hidden {
+  /* display: none; is not an option because clientHeight returns 0 if set. */
   position: absolute;
-  visibility: hidden;
   top: -1000px;
+}
+.transition-opacity {
+  opacity: 1;
+  transition: opacity .314s ease-in-out;
+}
+.hide {
+  opacity: 0;
 }
 </style>
