@@ -27,18 +27,23 @@ export default defineComponent({
   },
   computed: {
     endIndex: function () {
-      const refs = this.getLevelRefs()
+      // For Vues tracking when to recompute this property to work,
+      // we need to access all other properties used in the computation,
+      // even when this.getLevelRefs().length === 0, so we read componentHeight before the loop.
+      // When endIndex is computed the first time, this.getLevelRefs() still returns an empty list,
+      // so when it's first computed, we would never read this.componentHeight.
+      const componentHeight = this.componentHeight
+      const levelRefs = this.getLevelRefs()
       let end = 0
       let filledHeight = 0
-      for (const [index, ref] of refs.slice(this.startIndex).entries()) {
-        if (filledHeight + ref.$el.clientHeight < this.componentHeight) {
+      for (const [index, ref] of levelRefs.slice(this.startIndex).entries()) {
+        if (filledHeight + ref.$el.clientHeight < componentHeight) {
           filledHeight += ref.$el.clientHeight
           end = this.startIndex + index
         } else {
           break
         }
       }
-
       return end
     }
   },
@@ -65,8 +70,7 @@ export default defineComponent({
       }
     },
     paginate: function () {
-      const refs = this.getLevelRefs()
-      this.startIndex = this.endIndex + 1 < refs.length ? this.endIndex + 1 : 0
+      this.startIndex = this.endIndex + 1 < this.getLevelRefs().length ? this.endIndex + 1 : 0
     }
   },
   mounted: function () {
@@ -74,7 +78,6 @@ export default defineComponent({
     window.addEventListener('resize', this.setComponentHeight)
     // new ResizeObserver(this.setComponentHeight).observe(this.$refs.container as HTMLDivElement)
 
-    this.paginate()
     setInterval(this.paginate, 10_000)
   }
 })
