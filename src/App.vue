@@ -66,7 +66,7 @@ export default defineComponent({
 
     async scheduleGetData () {
       await this.getData()
-      setInterval(async () => { await this.getData() }, 60_000)
+      setInterval(async () => { await this.getData() }, 10_000)
     }
   }
 })
