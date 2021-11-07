@@ -4,8 +4,8 @@ import { getAccessToken } from './auth'
 import LevelsPager from './components/LevelsPager.vue'
 import { getDlduData } from './google-sheets'
 import { achievedRunPoints, totalRunPoints } from './points'
+import { getSecondsPerPage, isLeftSupplied, isSheetIdSuppliedAndValid } from './query-params'
 import { DlduData } from './types'
-import { isSheetIdSuppliedAndValid } from './urls'
 
 export default defineComponent({
   name: 'App',
@@ -17,7 +17,9 @@ export default defineComponent({
   data: () => {
     return {
       dlduData: undefined as DlduData | undefined,
-      errors: new Set<string>()
+      errors: new Set<string>(),
+      layoutDirection: isLeftSupplied() ? 'rtl' : 'ltr',
+      secondsPerPage: getSecondsPerPage() || 10
     }
   },
 
@@ -91,6 +93,7 @@ export default defineComponent({
     </p>
     <LevelsPager
       :levels="dlduData.levels"
+      :secondsPerPage="secondsPerPage"
       class="pager"
     />
   </template>
@@ -109,6 +112,7 @@ body {
   color: #fff;
   display: flex;
   flex-direction: column;
+  direction: v-bind(layoutDirection);
 }
 </style>
 

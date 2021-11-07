@@ -43,6 +43,10 @@ export default defineComponent({
     levels: {
       type: Object as PropType<DarkSoulsLevel[]>,
       required: true
+    },
+    secondsPerPage: {
+      type: Number,
+      required: true
     }
   },
 
@@ -84,7 +88,8 @@ export default defineComponent({
 
     // Force redraw, because fakeHide directive needs correct componentHeight.
     this.$forceUpdate()
-    setInterval(this.paginate, 10_000)
+
+    setInterval(this.nextPage, this.secondsPerPage * 1_000)
   },
 
   methods: {
@@ -107,7 +112,7 @@ export default defineComponent({
       return index < this.startIndex || index > this.endIndex
     },
 
-    paginate: function () {
+    nextPage: function () {
       this.startIndex = this.endIndex + 1 < this.getLevelRefs().length ? this.endIndex + 1 : 0
     }
   }
