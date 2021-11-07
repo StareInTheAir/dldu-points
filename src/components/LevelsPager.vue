@@ -83,8 +83,7 @@ export default defineComponent({
   mounted: function () {
     // Only here componentHeight can be calculated.
     this.setComponentHeight()
-    window.addEventListener('resize', this.setComponentHeight)
-    // new ResizeObserver(this.setComponentHeight).observe(this.$refs.container as HTMLDivElement)
+    new ResizeObserver(this.setComponentHeight).observe(this.$refs.container as HTMLDivElement)
 
     // Force redraw, because fakeHide directive needs correct componentHeight.
     this.$forceUpdate()
