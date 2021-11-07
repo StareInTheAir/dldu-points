@@ -40,6 +40,8 @@ export default defineComponent({
   },
 
   created () {
+    this.setBodyLayoutDirection()
+
     if (!isSheetIdSuppliedAndValid()) {
       this.errors.add('Sheet ID is missing in URL')
     } else {
@@ -48,6 +50,15 @@ export default defineComponent({
   },
 
   methods: {
+    setBodyLayoutDirection () {
+      // style v-bind expressions don't work on the Vue app container or body,
+      // so we need to do it manually here with a querySelector
+      const body = document.querySelector('body')
+      if (body) {
+        body.style.direction = this.layoutDirection
+      }
+    },
+
     async getData () {
       try {
         const accessToken = await getAccessToken()
@@ -112,7 +123,6 @@ body {
   color: #fff;
   display: flex;
   flex-direction: column;
-  direction: v-bind(layoutDirection);
 }
 </style>
 
