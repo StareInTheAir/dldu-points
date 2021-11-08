@@ -51,22 +51,22 @@ export default defineComponent({
   watch: {
     layoutDirection: {
       immediate: true,
-      handler (newVal) {
+      handler () {
         // style v-bind expressions don't work on the Vue app container or body,
         // so we need to do it manually here with a querySelector
         const body = document.querySelector('body')
         if (body) {
-          body.style.direction = newVal
+          body.style.direction = this.layoutDirection
         }
       }
     },
     baseFontSizeInRem: {
       immediate: true,
-      handler (newVal) {
+      handler () {
         // see comment above
         const body = document.querySelector('body')
         if (body) {
-          body.style.fontSize = newVal
+          body.style.fontSize = this.baseFontSizeInRem
         }
       }
     }
