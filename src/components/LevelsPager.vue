@@ -1,8 +1,9 @@
 <script lang="ts">
 
-import { defineComponent, ObjectDirective, PropType } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { DarkSoulsLevel } from '@/types'
 import LevelPoints from './LevelPoints.vue'
+import FakeHideDirective from '@/directives/FakeHide'
 
 type DivRef = {
   $el: HTMLDivElement
@@ -16,27 +17,7 @@ export default defineComponent({
   },
 
   directives: {
-    'fake-hide': {
-      mounted (el) {
-        // binding.value doesn't have correct value when mounted() is called,
-        // because componentHeight is not set correctly yet.
-        // We hide everything here and do a forceUpdate() when componentHeight is set.
-        el.classList.add('hidden')
-      },
-
-      updated (el, binding) {
-        if (binding.value) {
-          el.classList.add('hide')
-          setTimeout(function () {
-            el.classList.add('hidden')
-          }, 314)
-        } else {
-          setTimeout(function () {
-            el.classList.remove('hide', 'hidden')
-          }, 314)
-        }
-      }
-    } as ObjectDirective<HTMLDivElement, boolean>
+    'fake-hide': FakeHideDirective
   },
 
   props: {
@@ -143,18 +124,3 @@ export default defineComponent({
     />
   </div>
 </template>
-
-<style scoped>
-.hidden {
-  /* display: none; is not an option because if set clientHeight returns 0. */
-  position: absolute;
-  top: -1000px;
-}
-.transition-opacity {
-  opacity: 1;
-  transition: opacity .314s ease-in-out;
-}
-.hide {
-  opacity: 0;
-}
-</style>
