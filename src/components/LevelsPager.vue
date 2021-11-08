@@ -53,7 +53,8 @@ export default defineComponent({
   data: function () {
     return {
       componentHeight: Infinity,
-      startIndex: 0
+      startIndex: 0,
+      lastIntervalHandle: undefined as number | undefined
     }
   },
 
@@ -80,21 +81,30 @@ export default defineComponent({
     }
   },
 
+  watch: {
+    secondsPerPage: {
+      immediate: true,
+      handler (newVal) {
+        clearInterval(this.lastIntervalHandle)
+        this.lastIntervalHandle = setInterval(this.nextPage, newVal * 1_000)
+      }
+    }
+  },
+
   mounted: function () {
-    // Only here componentHeight can be calculated.
+    // Only when in mounted state, the componentHeight can be calculated.
     this.setComponentHeight()
     new ResizeObserver(this.setComponentHeight).observe(this.$refs.container as HTMLDivElement)
-
-    // Force redraw, because fakeHide directive needs correct componentHeight.
-    this.$forceUpdate()
-
-    setInterval(this.nextPage, this.secondsPerPage * 1_000)
   },
 
   methods: {
     setComponentHeight: function () {
       const container = this.$refs.container as HTMLDivElement | undefined
       this.componentHeight = container ? container.clientHeight : Infinity
+
+      // Force redraw, because fakeHide directive depends on isHidden(),
+      // which depends on endIndex, which depends on componentHeight.
+      this.$forceUpdate()
     },
     getLevelRefs: function (): DivRef[] {
       const refs = this.$refs
