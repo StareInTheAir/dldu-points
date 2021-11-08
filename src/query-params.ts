@@ -24,8 +24,8 @@ function isLeftSupplied (): boolean {
   return urlParams.has('left')
 }
 
-function getSecondsPerPage (): number | undefined {
-  const param = urlParams.get('secondsPerPage')
+function getIntParam (key: string): number | undefined {
+  const param = urlParams.get(key)
   if (param) {
     const numParam = parseInt(param)
     if (!isNaN(numParam)) {
@@ -35,4 +35,12 @@ function getSecondsPerPage (): number | undefined {
   return undefined
 }
 
-export { isSheetIdSuppliedAndValid, getSheetId, isLeftSupplied, getSecondsPerPage }
+function getSecondsPerPage (): number | undefined {
+  return getIntParam('secondsPerPage')
+}
+
+function getZoom (): number | undefined {
+  return getIntParam('zoom')
+}
+
+export { isSheetIdSuppliedAndValid, getSheetId, isLeftSupplied, getSecondsPerPage, getZoom }

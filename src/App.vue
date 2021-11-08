@@ -4,7 +4,7 @@ import { getAccessToken } from './auth'
 import LevelsPager from './components/LevelsPager.vue'
 import { getDlduData } from './google-sheets'
 import { achievedRunPoints, totalRunPoints } from './points'
-import { getSecondsPerPage, isLeftSupplied, isSheetIdSuppliedAndValid } from './query-params'
+import { getSecondsPerPage, getZoom, isLeftSupplied, isSheetIdSuppliedAndValid } from './query-params'
 import { DlduData } from './types'
 
 export default defineComponent({
@@ -18,8 +18,9 @@ export default defineComponent({
     return {
       dlduData: undefined as DlduData | undefined,
       errors: new Set<string>(),
-      layoutDirection: isLeftSupplied() ? 'rtl' : 'ltr',
-      secondsPerPage: getSecondsPerPage() || 10
+      leftLayout: isLeftSupplied(),
+      secondsPerPage: getSecondsPerPage() || 10,
+      baseFontSize: getZoom() || 100
     }
   },
 
@@ -36,12 +37,42 @@ export default defineComponent({
         return 0
       }
       return achievedRunPoints(this.dlduData)
+    },
+
+    layoutDirection () {
+      return this.leftLayout ? 'rtl' : 'ltr'
+    },
+
+    baseFontSizeInRem () {
+      return `${this.baseFontSize / 100}rem`
+    }
+  },
+
+  watch: {
+    layoutDirection: {
+      immediate: true,
+      handler (newVal) {
+        // style v-bind expressions don't work on the Vue app container or body,
+        // so we need to do it manually here with a querySelector
+        const body = document.querySelector('body')
+        if (body) {
+          body.style.direction = newVal
+        }
+      }
+    },
+    baseFontSizeInRem: {
+      immediate: true,
+      handler (newVal) {
+        // see comment above
+        const body = document.querySelector('body')
+        if (body) {
+          body.style.fontSize = newVal
+        }
+      }
     }
   },
 
   created () {
-    this.setBodyLayoutDirection()
-
     if (!isSheetIdSuppliedAndValid()) {
       this.errors.add('Sheet ID is missing in URL')
     } else {
@@ -50,15 +81,6 @@ export default defineComponent({
   },
 
   methods: {
-    setBodyLayoutDirection () {
-      // style v-bind expressions don't work on the Vue app container or body,
-      // so we need to do it manually here with a querySelector
-      const body = document.querySelector('body')
-      if (body) {
-        body.style.direction = this.layoutDirection
-      }
-    },
-
     async getData () {
       try {
         const accessToken = await getAccessToken()
@@ -100,7 +122,7 @@ export default defineComponent({
   </div>
   <template v-if="dlduData">
     <p class="total">
-      Gesamtpunkte: {{ achievedPoints }}/{{ totalPoints }}
+      Gesamtpunkte {{ achievedPoints }}/{{ totalPoints }}
     </p>
     <LevelsPager
       :levels="dlduData.levels"
