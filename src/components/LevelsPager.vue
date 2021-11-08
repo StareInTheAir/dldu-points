@@ -59,7 +59,7 @@ export default defineComponent({
   },
 
   computed: {
-    endIndex: function () {
+    endIndex (): number {
       // For Vues tracking when to recompute this property to work,
       // we need to access all other properties used in the computation,
       // even when this.getLevelRefs().length === 0, so we read componentHeight before the loop.
@@ -78,22 +78,32 @@ export default defineComponent({
         }
       }
       return end
+    },
+
+    levelVisible (): boolean[] {
+      const levelCount = this.levels.length
+      const startIndex = this.startIndex
+      const endIndex = this.endIndex
+      const visibleList = Array<boolean>(levelCount)
+      for (let index = 0; index < levelCount; index += 1) {
+        visibleList[index] = index < startIndex || index > endIndex
+      }
+      return visibleList
     }
   },
 
   watch: {
     secondsPerPage: {
       immediate: true,
-      handler (newVal) {
+      handler () {
         clearInterval(this.lastIntervalHandle)
-        this.lastIntervalHandle = setInterval(this.nextPage, newVal * 1_000)
+        this.lastIntervalHandle = setInterval(this.nextPage, this.secondsPerPage * 1_000)
       }
     }
   },
 
   mounted: function () {
-    // Only when in mounted state, the componentHeight can be calculated.
-    this.setComponentHeight()
+    // Only when in mounted state, refs are available
     new ResizeObserver(this.setComponentHeight).observe(this.$refs.container as HTMLDivElement)
   },
 
@@ -101,11 +111,8 @@ export default defineComponent({
     setComponentHeight: function () {
       const container = this.$refs.container as HTMLDivElement | undefined
       this.componentHeight = container ? container.clientHeight : Infinity
-
-      // Force redraw, because fakeHide directive depends on isHidden(),
-      // which depends on endIndex, which depends on componentHeight.
-      this.$forceUpdate()
     },
+
     getLevelRefs: function (): DivRef[] {
       const refs = this.$refs
       const list: DivRef[] = []
@@ -115,10 +122,6 @@ export default defineComponent({
         }
       }
       return list
-    },
-
-    isHidden: function (index: number): boolean {
-      return index < this.startIndex || index > this.endIndex
     },
 
     nextPage: function () {
@@ -135,7 +138,7 @@ export default defineComponent({
       :key="level.name"
       :ref="`level${i}`"
       :level="level"
-      v-fake-hide="isHidden(i)"
+      v-fake-hide="levelVisible[i]"
       class="transition-opacity"
     />
   </div>
