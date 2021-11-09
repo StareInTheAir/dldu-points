@@ -4,7 +4,7 @@ import { getAccessToken } from './auth'
 import LevelsPager from './components/LevelsPager.vue'
 import { getDlduData } from './google-sheets'
 import { achievedRunPoints, totalRunPoints } from './points'
-import { getSecondsPerPage, getZoom, isLeftSupplied, isSheetIdSuppliedAndValid } from './query-params'
+import { getSecondsPerPage, isSheetIdSuppliedAndValid } from './query-params'
 import { DlduData } from './types'
 
 export default defineComponent({
@@ -18,9 +18,7 @@ export default defineComponent({
     return {
       dlduData: undefined as DlduData | undefined,
       errors: new Set<string>(),
-      leftLayout: isLeftSupplied(),
-      secondsPerPage: getSecondsPerPage() || 10,
-      baseFontSize: getZoom() || 100
+      secondsPerPage: getSecondsPerPage() || 10
     }
   },
 
@@ -37,38 +35,6 @@ export default defineComponent({
         return 0
       }
       return achievedRunPoints(this.dlduData)
-    },
-
-    layoutDirection () {
-      return this.leftLayout ? 'rtl' : 'ltr'
-    },
-
-    baseFontSizeInRem () {
-      return `${this.baseFontSize / 100}rem`
-    }
-  },
-
-  watch: {
-    layoutDirection: {
-      immediate: true,
-      handler () {
-        // style v-bind expressions don't work on the Vue app container or body,
-        // so we need to do it manually here with a querySelector
-        const body = document.querySelector('body')
-        if (body) {
-          body.style.direction = this.layoutDirection
-        }
-      }
-    },
-    baseFontSizeInRem: {
-      immediate: true,
-      handler () {
-        // see comment above
-        const body = document.querySelector('body')
-        if (body) {
-          body.style.fontSize = this.baseFontSizeInRem
-        }
-      }
     }
   },
 

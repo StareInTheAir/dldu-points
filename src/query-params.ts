@@ -20,10 +20,6 @@ function getSheetId (): string {
   throw Error('sheetId query parameter is missing')
 }
 
-function isLeftSupplied (): boolean {
-  return urlParams.has('left')
-}
-
 function getIntParam (key: string): number | undefined {
   const param = urlParams.get(key)
   if (param) {
@@ -39,8 +35,4 @@ function getSecondsPerPage (): number | undefined {
   return getIntParam('secondsPerPage')
 }
 
-function getZoom (): number | undefined {
-  return getIntParam('zoom')
-}
-
-export { isSheetIdSuppliedAndValid, getSheetId, isLeftSupplied, getSecondsPerPage, getZoom }
+export { isSheetIdSuppliedAndValid, getSheetId, getSecondsPerPage }
