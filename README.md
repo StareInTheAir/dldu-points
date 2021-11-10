@@ -1,24 +1,60 @@
 # dldu-points
 
-## Project setup
-```
-npm install
-```
+A single page web application that shows a total a detailed score when playing a DLDU run on stream. It's made for being integrated into OBS as a browser source. A Google Docs sheet is used a data source and changes made to it automatically update the current score.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Demo
 
-### Compiles and minifies for production
-```
-npm run build
-```
+TODO
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Google Docs setup
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Open the [template Google Docs sheet](https://docs.google.com/spreadsheets/d/1NIl-058tT5CDlrNdAuthv_8ofH3oMzB3ruT97cJHm4s)
+- Select File -> Make a copy
+
+<img alt="Screenshot of make a copy menu item in Google Docs" src="docs/01-make-a-copy.png" width="350" />
+
+- Set a file name and save it to your Google Drive
+- In the URL of your browsers address bar you will see the sheet id. You need that sheet ID during the OBS setup, so copy it now. It's the numbers and letters between `spreadsheets/d/` and `/edit`. You can also see it here:
+
+<img alt="Screenshot of browser address bar with sheet id highlighted and selected" src="docs/02-sheet-id.png" width="350" />
+
+- The last step is to share your new sheet with <img alt="Bot prove image of the mail address to add" src="docs/03-mil.svg" width="150" /> (you can't copy this address). To invite this user, click to Share button in Google docs at the top right and type the mail address manually. The website accesses your Google sheet data via this user, so it needs view access to your otherwise private document.
+
+
+## OBS setup
+
+A deployed and hosted version of the website exists, but is only not public. Contact stareintheair#7130 on Discord or via the mail address below to request access.
+
+- Insert your sheet id into the URL: `https://CENSORED_DOMAIN.com/?sheetId=YOUR_SHEET_ID_HERE`
+- Create a new browser source and use the URL you just created.
+- Set the width to 350 and the height to 500. Width and height can be adjusted to your needs. The website automatically uses all available space.
+
+## Structure of the Google sheet
+
+You can share access to the Google sheet with moderators and trusted viewers, so they can update the score live during the stream for you.
+
+### Bosses
+
+- Each boss has its own row in a table.
+- If a boss was beaten change the value in the third column from `alive` to `beaten`.
+- The order of bosses can be switched by reordering the rows.
+- If I missed a boss, new ones can be added in the Google doc and are automatically shown on the website.
+- The points are locked to 3 or 5, but the data validation rule can be remove manually, if the points ever change.
+- Incomplete rows and rows with invalid values will be ignored by the website. Valid rows will still be displayed.
+
+### Regions
+
+- Each region of Dark Souls has its own table, that can be switched at the bottom:
+
+<img alt="Screenshot of make a copy menu item in Google Docs" src="docs/05-tables.png" width="350" />
+
+- New regions can be added by creating a new table. The name of the table will be the region name. I recommend duplicating an existing one to copy the validation rules.
+- The order of the regions on the website can also be changed by reordering the tables in Google Docs via drag and drop.
+
+## Configuration options
+
+### Seconds per page
+
+### Text size
+
+### Left aligned layout
