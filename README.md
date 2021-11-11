@@ -1,6 +1,6 @@
 # dldu-points
 
-A single page web application that shows a total a detailed score when playing a DLDU run on stream. It's made for being integrated into OBS as a browser source. A Google Docs sheet is used a data source and changes made to it automatically update the current score.
+A web application that shows a total and a detailed score when playing a DLDU run on stream. It's made for being integrated into OBS as a browser source. A Google Docs sheet is used the data source and changing it automatically update the current score.
 
 ## Demo
 
@@ -8,22 +8,24 @@ TODO
 
 ## Google Docs setup
 
-- Open the [template Google Docs sheet](https://docs.google.com/spreadsheets/d/1NIl-058tT5CDlrNdAuthv_8ofH3oMzB3ruT97cJHm4s)
+- Open the [template Google Docs sheet](https://docs.google.com/spreadsheets/d/1NIl-058tT5CDlrNdAuthv_8ofH3oMzB3ruT97cJHm4s).
 - Select File -> Make a copy
 
 <img alt="Screenshot of make a copy menu item in Google Docs" src="docs/01-make-a-copy.png" width="350" />
 
-- Set a file name and save it to your Google Drive
-- In the URL of your browsers address bar you will see the sheet id. You need that sheet ID during the OBS setup, so copy it now. It's the numbers and letters between `spreadsheets/d/` and `/edit`. You can also see it here:
+- Set a file name and save it to your Google Drive.
+- Share your new sheet with <img alt="Bot prove image of the mail address to add" src="docs/03-mil.svg" width="150" /> (you can't copy this address). To invite this user, click to Share button in Google docs at the top right and type the mail address manually. The website accesses your Google sheet data via this user, so it needs view access to your otherwise private document.
 
-<img alt="Screenshot of browser address bar with sheet id highlighted and selected" src="docs/02-sheet-id.png" width="350" />
+<img alt="Screenshot of the Google Docs share dialog with viewer access rights selected" src="docs/04-share-dialog.png" width="350" />
 
-- The last step is to share your new sheet with <img alt="Bot prove image of the mail address to add" src="docs/03-mil.svg" width="150" /> (you can't copy this address). To invite this user, click to Share button in Google docs at the top right and type the mail address manually. The website accesses your Google sheet data via this user, so it needs view access to your otherwise private document.
+- In the URL of your browsers address bar you will see the sheet id. You need that sheet ID during the OBS setup, so copy it now. It's the numbers and letters between `spreadsheets/d/` and `/edit`:
+
+<img alt="Screenshot of browser address bar with sheet id highlighted and selected" src="docs/02-sheet-id.png" />
 
 
 ## OBS setup
 
-A deployed and hosted version of the website exists, but is only not public. Contact stareintheair#7130 on Discord or via the mail address below to request access.
+A deployed and hosted version of the website exists, but it isn't public. Contact stareintheair#7130 on Discord or the mail address above to request access.
 
 - Insert your sheet id into the URL: `https://CENSORED_DOMAIN.com/?sheetId=YOUR_SHEET_ID_HERE`
 - Create a new browser source and use the URL you just created.
@@ -55,6 +57,18 @@ You can share access to the Google sheet with moderators and trusted viewers, so
 
 ### Seconds per page
 
+By default each page is displayed 10 seconds. This delay can be changed by adding an additional query parameter to the URL. Append `&secondsPerPage=5` to the URL to half the display time of each page:
+
+IMG
+
 ### Text size
 
+The text size can be increased and decreased if necessary. This is better than scaling the browser source itself, because it will keep the text sharp. Use the OBS CSS style override to change the text size. Add `font-size: 1.3rem;` to the body style section as seen an the screenshot here:
+
+IMG
+
+`1rem` doesn't change the size, `0.8rem` decreases the size by 20 %, and `2rem` doubles it. The width and height of the browser source probably need to be adapted as well.
+
 ### Left aligned layout
+
+The default layout is designed to be placed on the right side of the screen. If you want to put it on the left, use the following CSS body style to switch the columns: `direction: rtl;`
