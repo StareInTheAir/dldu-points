@@ -1,6 +1,6 @@
 {
   "name": "dldu-points",
-  "version": "0.9.0",
+  "version": "0.9.5",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -26,6 +26,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.1",
     "eslint-plugin-vue": "^8.0.3",
+    "git-describe": "^4.1.0",
     "typescript": "~4.4.4"
   }
 }

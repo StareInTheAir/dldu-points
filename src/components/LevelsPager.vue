@@ -4,6 +4,7 @@ import { defineComponent, PropType } from 'vue'
 import { DarkSoulsLevel } from '@/types'
 import LevelPoints from './LevelPoints.vue'
 import FakeHideDirective from '@/directives/FakeHide'
+import AboutPanel from './AboutPanel.vue'
 
 type DivRef = {
   $el: HTMLDivElement
@@ -13,7 +14,8 @@ export default defineComponent({
   name: 'LevelsPager',
 
   components: {
-    LevelPoints
+    LevelPoints,
+    AboutPanel
   },
 
   directives: {
@@ -70,6 +72,10 @@ export default defineComponent({
         visibleList[index] = index < startIndex || index > endIndex
       }
       return visibleList
+    },
+
+    aboutIndex (): number {
+      return this.levels.length - 1
     }
   },
 
@@ -122,5 +128,9 @@ export default defineComponent({
       v-fake-hide="levelVisible[i]"
       class="transition-opacity"
     />
+    <AboutPanel
+      ref="level_about"
+      v-fake-hide="levelVisible[aboutIndex]"
+     />
   </div>
 </template>
