@@ -18,7 +18,7 @@ TODO
 
 <img alt="Screenshot of the Google Docs share dialog with viewer access rights selected" src="docs/04-share-dialog.png" width="350" />
 
-- In the URL of your browsers address bar you will see the sheet id. You need that sheet ID during the OBS setup, so copy it now. It's the numbers and letters between `spreadsheets/d/` and `/edit`:
+- In the URL of your browsers address bar you will see the sheet id. You need that sheet ID during the OBS setup, so copy it now. It's the numbers and letters (any maybe symbols) between `spreadsheets/d/` and `/edit`:
 
 <img alt="Screenshot of browser address bar with sheet id highlighted and selected" src="docs/02-sheet-id.png" />
 
@@ -71,4 +71,4 @@ IMG
 
 ### Left aligned layout
 
-The default layout is designed to be placed on the right side of the screen. If you want to put it on the left, use the following CSS body style to switch the columns: `direction: rtl;`
+The default layout is designed to be placed on the right side of the screen. If you want to put it on the left, use the following CSS body style to switch the columns: `direction: rtl;` Put in the same place as in the screenshot above.
