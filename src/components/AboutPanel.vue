@@ -32,7 +32,7 @@ export default defineComponent({
     text-align: end;
     padding: 32px 16px 0 16px;
   }
-  a, a:visited {
-    color: white;
+  div, a, a:visited {
+    color: rgba(255, 255, 255, 0.5);
   }
 </style>
