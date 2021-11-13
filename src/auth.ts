@@ -64,4 +64,27 @@ function encodeToForm (data: {[key: string]: string}): string {
   return formData.join('&')
 }
 
-export { getAccessToken, clearAccessToken }
+async function getAuthDataHash (): Promise<string> {
+  const textEncoder = new TextEncoder()
+  const clientIdBytes = textEncoder.encode(CLIENT_ID)
+  const clientSecretBytes = textEncoder.encode(CLIENT_SECRET)
+  const refershTokenBytes = textEncoder.encode(REFRESH_TOKEN)
+
+  const clientIdHash = await crypto.subtle.digest('SHA-256', clientIdBytes)
+  const clientSecretHash = await crypto.subtle.digest('SHA-256', clientSecretBytes)
+  const refershTokenHash = await crypto.subtle.digest('SHA-256', refershTokenBytes)
+
+  const clientIdHex = bufferToHex(clientIdHash.slice(0, 1))
+  const clientSecretHex = bufferToHex(clientSecretHash.slice(0, 1))
+  const refershTokenHex = bufferToHex(refershTokenHash.slice(0, 1))
+
+  return `${clientIdHex}${clientSecretHex}${refershTokenHex}`
+}
+
+function bufferToHex (buffer: ArrayBuffer): string {
+  return [...new Uint8Array(buffer)]
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('')
+}
+
+export { getAccessToken, clearAccessToken, getAuthDataHash }

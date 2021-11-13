@@ -1,4 +1,5 @@
 <script lang="ts">
+import { getAuthDataHash } from '@/auth'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -6,8 +7,14 @@ export default defineComponent({
   data () {
     return {
       version: process.env.VUE_APP_VERSION,
-      gitCommitHash: process.env.VUE_APP_GIT_COMMIT_HASH
+      gitCommitHash: process.env.VUE_APP_GIT_COMMIT_HASH,
+      authDataHash: ''
     }
+  },
+  created () {
+    getAuthDataHash().then((hash) => {
+      this.authDataHash = hash
+    })
   }
 })
 </script>
@@ -22,7 +29,7 @@ export default defineComponent({
       </a>
     </p>
     <p>
-      Version: {{ version }}-{{ gitCommitHash }}
+      Version: {{ version }}-{{ gitCommitHash }}-{{ authDataHash }}
     </p>
   </div>
 </template>
