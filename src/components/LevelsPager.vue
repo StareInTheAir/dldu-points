@@ -6,8 +6,8 @@ import LevelPoints from './LevelPoints.vue'
 import FakeHideDirective from '@/directives/FakeHide'
 import AboutPanel from './AboutPanel.vue'
 
-type DivRef = {
-  $el: HTMLDivElement
+type HtmlRef = {
+  $el: HTMLElement
 }
 
 export default defineComponent({
@@ -37,7 +37,8 @@ export default defineComponent({
     return {
       componentHeight: Infinity,
       startIndex: 0,
-      lastIntervalHandle: undefined as number | undefined
+      lastIntervalHandle: undefined as number | undefined,
+      elementCount: 0
     }
   },
 
@@ -45,17 +46,18 @@ export default defineComponent({
     endIndex (): number {
       // For Vues tracking when to recompute this property to work,
       // we need to access all other properties used in the computation,
-      // even when this.getLevelRefs().length === 0, so we read componentHeight before the loop.
-      // When endIndex is computed the first time, this.getLevelRefs() still returns an empty list,
+      // even when this.getElementRefs().length === 0, so we read componentHeight before the loop.
+      // When endIndex is computed the first time, this.getElementRefs() still returns an empty list,
       // so when it's first computed, we would never read this.componentHeight.
       const componentHeight = this.componentHeight
-      const levelRefs = this.getLevelRefs()
+      const elementRefs = this.getElementRefs()
+      const startIndex = this.startIndex
       let end = 0
       let filledHeight = 0
-      for (const [index, ref] of levelRefs.slice(this.startIndex).entries()) {
+      for (const [index, ref] of elementRefs.slice(startIndex).entries()) {
         if (filledHeight + ref.$el.clientHeight < componentHeight) {
           filledHeight += ref.$el.clientHeight
-          end = this.startIndex + index
+          end = startIndex + index
         } else {
           break
         }
@@ -63,19 +65,19 @@ export default defineComponent({
       return end
     },
 
-    levelHidden (): boolean[] {
-      const levelCount = this.levels.length
+    elementHidden (): boolean[] {
+      const elementCount = this.elementCount
       const startIndex = this.startIndex
       const endIndex = this.endIndex
-      const hiddenList = Array<boolean>(levelCount)
-      for (let index = 0; index < levelCount; index += 1) {
+      const hiddenList = Array<boolean>(elementCount)
+      for (let index = 0; index < elementCount; index += 1) {
         hiddenList[index] = index < startIndex || index > endIndex
       }
       return hiddenList
     },
 
     aboutIndex (): number {
-      return this.levels.length - 1
+      return this.elementCount - 1
     }
   },
 
@@ -92,6 +94,7 @@ export default defineComponent({
   mounted: function () {
     // Only when in mounted state, refs are available
     new ResizeObserver(this.setComponentHeight).observe(this.$refs.container as HTMLDivElement)
+    this.elementCount = this.getElementRefs().length
   },
 
   methods: {
@@ -100,19 +103,19 @@ export default defineComponent({
       this.componentHeight = container ? container.clientHeight : Infinity
     },
 
-    getLevelRefs: function (): DivRef[] {
+    getElementRefs: function (): HtmlRef[] {
       const refs = this.$refs
-      const list: DivRef[] = []
+      const list: HtmlRef[] = []
       for (const key in refs) {
-        if (key.startsWith('level')) {
-          list.push(refs[key] as DivRef)
+        if (key.startsWith('element')) {
+          list.push(refs[key] as HtmlRef)
         }
       }
       return list
     },
 
     nextPage: function () {
-      this.startIndex = this.endIndex + 1 < this.getLevelRefs().length ? this.endIndex + 1 : 0
+      this.startIndex = this.endIndex + 1 < this.elementCount ? this.endIndex + 1 : 0
     }
   }
 })
@@ -123,14 +126,13 @@ export default defineComponent({
     <LevelPoints
       v-for="[i, level] in levels.entries()"
       :key="level.name"
-      :ref="`level${i}`"
+      :ref="`element${i}`"
       :level="level"
-      v-fake-hide="levelHidden[i]"
-      class="transition-opacity"
+      v-fake-hide="elementHidden[i]"
     />
     <AboutPanel
-      ref="level_about"
-      v-fake-hide="levelHidden[aboutIndex]"
+      ref="element_about"
+      v-fake-hide="elementHidden[aboutIndex]"
      />
   </div>
 </template>
