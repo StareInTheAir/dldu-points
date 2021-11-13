@@ -9,14 +9,14 @@ TODO
 ## Google Docs setup
 
 - Open the [template Google Docs sheet](https://docs.google.com/spreadsheets/d/1NIl-058tT5CDlrNdAuthv_8ofH3oMzB3ruT97cJHm4s).
-- Select File -> Make a copy
+- Select `File` → `Make a copy`
 
 <img alt="Screenshot of make a copy menu item in Google Docs" src="docs/01-make-a-copy.png" width="350" />
 
 - Set a file name and save it to your Google Drive.
 - Share your new sheet with <img alt="Bot prove image of the mail address to add" src="docs/03-mil.svg" width="150" /> (you can't copy this address). To invite this user, click to Share button in Google docs at the top right and type the mail address manually. The website accesses your Google sheet data via this user, so it needs view access to your otherwise private document.
 
-<img alt="Screenshot of the Google Docs share dialog with viewer access rights selected" src="docs/04-share-dialog.png" width="350" />
+<img alt="Screenshot of the Google Docs share dialog with viewer access rights selected" src="docs/04-share-dialog.png" width="500" />
 
 - In the URL of your browsers address bar you will see the sheet id. You need that sheet ID during the OBS setup, so copy it now. It's the numbers and letters (any maybe symbols) between `spreadsheets/d/` and `/edit`:
 
@@ -30,6 +30,8 @@ A deployed and hosted version of the website exists, but it isn't public. Contac
 - Insert your sheet id into the URL: `https://CENSORED_DOMAIN.com/?sheetId=YOUR_SHEET_ID_HERE`
 - Create a new browser source and use the URL you just created.
 - Set the width to 350 and the height to 500. Width and height can be adjusted to your needs. The website automatically uses all available space.
+
+<img alt="Screenshot of OBS browser source window with all textfields filled" src="docs/06-browser-source.png" width="350" />
 
 ## Structure of the Google sheet
 
@@ -59,13 +61,13 @@ You can share access to the Google sheet with moderators and trusted viewers, so
 
 By default each page is displayed 10 seconds. This delay can be changed by adding an additional query parameter to the URL. Append `&secondsPerPage=5` to the URL to half the display time of each page:
 
-IMG
+<img alt="Screenshot of OBS browser source windows with secondsPerPage parameter highlighted" src="docs/07-seconds-per-page.png" width="350" />
 
 ### Text size
 
-The text size can be increased and decreased if necessary. This is better than scaling the browser source itself, because it will keep the text sharp. Use the OBS CSS style override to change the text size. Add `font-size: 1.3rem;` to the body style section as seen an the screenshot here:
+The text size can be increased and decreased if necessary. This is better than scaling the browser source itself, because it will keep the text sharp. Use the OBS custom CSS override to change the text size. Add `font-size: 1.3rem;` to the body style section as seen an the screenshot here:
 
-IMG
+<img alt="Screenshot of OBS browser source windows with font-size CSS overwrite highlighted" src="docs/08-font-size.png" width="350" />
 
 `1rem` doesn't change the size, `0.8rem` decreases the size by 20 %, and `2rem` doubles it. The width and height of the browser source probably need to be adapted as well.
 
