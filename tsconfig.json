@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "es6",
+    "target": "es2019",
+    "module": "es2015",
     "strict": true,
     "jsx": "preserve",
     "moduleResolution": "node",
@@ -21,7 +21,7 @@
       ]
     },
     "lib": [
-      "es6",
+      "es2019",
       "dom",
       "dom.iterable",
       "scripthost"
