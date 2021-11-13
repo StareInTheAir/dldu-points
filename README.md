@@ -4,7 +4,11 @@ A web application that shows a total and a detailed score when playing a DLDU ru
 
 ## Demo
 
-TODO
+Demo video: https://youtu.be/yrKhPNEN7qU
+
+[![YouTube thumbnail of demo video](https://img.youtube.com/vi/yrKhPNEN7qU/0.jpg)](https://www.youtube.com/watch?v=yrKhPNEN7qU)
+
+<img alt="Screenshot dldu-points overlayed over Dark Souls" src="docs/00-demo.jpg" />
 
 ## Google Docs setup
 
