@@ -63,15 +63,15 @@ export default defineComponent({
       return end
     },
 
-    levelVisible (): boolean[] {
+    levelHidden (): boolean[] {
       const levelCount = this.levels.length
       const startIndex = this.startIndex
       const endIndex = this.endIndex
-      const visibleList = Array<boolean>(levelCount)
+      const hiddenList = Array<boolean>(levelCount)
       for (let index = 0; index < levelCount; index += 1) {
-        visibleList[index] = index < startIndex || index > endIndex
+        hiddenList[index] = index < startIndex || index > endIndex
       }
-      return visibleList
+      return hiddenList
     },
 
     aboutIndex (): number {
@@ -125,12 +125,12 @@ export default defineComponent({
       :key="level.name"
       :ref="`level${i}`"
       :level="level"
-      v-fake-hide="levelVisible[i]"
+      v-fake-hide="levelHidden[i]"
       class="transition-opacity"
     />
     <AboutPanel
       ref="level_about"
-      v-fake-hide="levelVisible[aboutIndex]"
+      v-fake-hide="levelHidden[aboutIndex]"
      />
   </div>
 </template>
