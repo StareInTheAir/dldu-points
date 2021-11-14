@@ -22,6 +22,8 @@ https://youtu.be/yrKhPNEN7qU
 
 <img alt="Screenshot of the Google Docs share dialog with viewer access rights selected" src="docs/04-share-dialog.png" width="500" />
 
+- You can skip the invitation, if you change the document to be visible for anyone with the link. This can also be set in the share dialog.
+
 - In the URL of your browsers address bar you will see the sheet id. You need that sheet ID during the OBS setup, so copy it now. It's the numbers and letters (any maybe symbols) between `spreadsheets/d/` and `/edit`:
 
 <img alt="Screenshot of browser address bar with sheet id highlighted and selected" src="docs/02-sheet-id.png" />
