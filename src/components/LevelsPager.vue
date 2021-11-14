@@ -47,12 +47,16 @@ export default defineComponent({
     endIndex (): number {
       // For Vues tracking when to recompute this property to work,
       // we need to access all other properties used in the computation,
-      // even when this.getElementRefs().length === 0, so we read componentHeight before the loop.
+      // even when this.getElementRefs().length === 0. So we read componentHeight before the loop.
       // When endIndex is computed the first time, this.getElementRefs() still returns an empty list,
       // so when it's first computed, we would never read this.componentHeight.
       const componentHeight = this.componentHeight
-      const elementRefs = this.getElementRefs()
       const startIndex = this.startIndex
+      // Access this.levels because endIndex depends on the height of each level.
+      // If a level changes, the endIndex could also change.
+      this.levels.keys()
+
+      const elementRefs = this.getElementRefs()
       let end = 0
       let filledHeight = 0
       for (const [index, ref] of elementRefs.slice(startIndex).entries()) {
@@ -94,8 +98,13 @@ export default defineComponent({
 
   mounted: function () {
     // Only when in mounted state, refs are available
-    new ResizeObserver(debounce(this.setComponentHeight, 300)).observe(this.$refs.container as HTMLDivElement)
-    this.elementCount = this.getElementRefs().length
+    const container = this.$refs.container as HTMLDivElement
+
+    // this.setComponentHeight is also called immediately after starting observing
+    new ResizeObserver(debounce(this.setComponentHeight, 300)).observe(container)
+
+    this.setElementCount()
+    new MutationObserver(this.setElementCount).observe(container, { childList: true })
   },
 
   methods: {
@@ -104,12 +113,20 @@ export default defineComponent({
       this.componentHeight = container ? container.clientHeight : Infinity
     },
 
+    setElementCount: function () {
+      this.elementCount = this.getElementRefs().length
+    },
+
     getElementRefs: function (): HtmlRef[] {
       const refs = this.$refs
       const list: HtmlRef[] = []
       for (const key in refs) {
         if (key.startsWith('element')) {
-          list.push(refs[key] as HtmlRef)
+          const ref = refs[key] as HtmlRef | null
+          // ref can be null when it was removed from the DOM
+          if (ref) {
+            list.push(refs[key] as HtmlRef)
+          }
         }
       }
       return list
