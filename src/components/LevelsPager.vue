@@ -5,6 +5,7 @@ import { DarkSoulsLevel } from '@/types'
 import LevelPoints from './LevelPoints.vue'
 import FakeHideDirective from '@/directives/FakeHide'
 import AboutPanel from './AboutPanel.vue'
+import debounce from 'lodash.debounce'
 
 type HtmlRef = {
   $el: HTMLElement
@@ -93,7 +94,7 @@ export default defineComponent({
 
   mounted: function () {
     // Only when in mounted state, refs are available
-    new ResizeObserver(this.setComponentHeight).observe(this.$refs.container as HTMLDivElement)
+    new ResizeObserver(debounce(this.setComponentHeight, 300)).observe(this.$refs.container as HTMLDivElement)
     this.elementCount = this.getElementRefs().length
   },
 
