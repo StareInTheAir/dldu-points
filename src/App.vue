@@ -2,10 +2,11 @@
 import { defineComponent } from 'vue'
 import { getAccessToken } from './auth'
 import LevelsPager from './components/LevelsPager.vue'
+import { ForbiddenError } from './errors'
 import { getDlduData } from './google-sheets'
 import { achievedRunPoints, totalRunPoints } from './points'
 import { getSecondsPerPage, isSheetIdSuppliedAndValid } from './query-params'
-import { DlduData } from './types'
+import { AccessToken, DlduData } from './types'
 
 export default defineComponent({
   name: 'App',
@@ -48,18 +49,24 @@ export default defineComponent({
 
   methods: {
     async getData () {
+      let accessToken: AccessToken
       try {
-        const accessToken = await getAccessToken()
-        try {
-          this.dlduData = await getDlduData(accessToken.token)
-          this.errors.clear()
-        } catch (err) {
-          console.log('Error during getDlduData', err)
-          this.errors.add('Couldn\'t retrieve data from Google Sheets')
-        }
+        accessToken = await getAccessToken()
       } catch (err) {
         console.log('Error during getAccessToken', err)
         this.errors.add('Couldn\'t get access token for Google Sheets')
+        return
+      }
+
+      try {
+        this.dlduData = await getDlduData(accessToken.token)
+        this.errors.clear()
+      } catch (err) {
+        if (err instanceof ForbiddenError) {
+          this.errors.add('No permission to access data from Google Sheets')
+        } else {
+          this.errors.add('Couldn\'t retrieve data from Google Sheets')
+        }
       }
     },
 

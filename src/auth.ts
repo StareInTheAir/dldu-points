@@ -1,4 +1,5 @@
 import { CLIENT_ID, CLIENT_SECRET, REFRESH_TOKEN } from './auth-data'
+import { FetchFailedError, FetchStatusError, JsonParsingFailedError, JsonValidationFailedError } from './errors'
 import { AccessToken } from './types'
 import { getAccessTokenUrl } from './urls'
 import { validateGoogleAccessToken } from './validate'
@@ -29,28 +30,32 @@ async function getNewAccessToken (): Promise<AccessToken> {
       grant_type: 'refresh_token'
     })
   }
+  let response: Response
   try {
-    const response = await fetch(getAccessTokenUrl(), request)
-    const status = response.status
-    if (status >= 200 && status < 300) {
-      try {
-        const json = await response.json()
-        if (validateGoogleAccessToken(json)) {
-          return {
-            token: json.access_token,
-            validUntil: Date.now() + json.expires_in * 1000 - 60_000
-          }
-        } else {
-          throw Error(`getAccessToken JSON invalid: ${validateGoogleAccessToken.errors}`)
-        }
-      } catch (err) {
-        throw Error(`getAccessToken JSON parsing failed: ${err}`)
-      }
-    } else {
-      throw Error(`getAccessToken fetch status code not OK: ${status}`)
-    }
+    response = await fetch(getAccessTokenUrl(), request)
   } catch (err) {
-    throw Error(`getAccessToken fetch failed: ${err}`)
+    throw new FetchFailedError('auth', err)
+  }
+
+  const status = response.status
+  if (status < 200 || status >= 300) {
+    throw new FetchStatusError('auth', status)
+  }
+
+  let json
+  try {
+    json = await response.json()
+  } catch (err) {
+    throw new JsonParsingFailedError('auth', err)
+  }
+
+  if (validateGoogleAccessToken(json)) {
+    return {
+      token: json.access_token,
+      validUntil: Date.now() + json.expires_in * 1000 - 60_000
+    }
+  } else {
+    throw new JsonValidationFailedError('auth', validateGoogleAccessToken.errors)
   }
 }
 

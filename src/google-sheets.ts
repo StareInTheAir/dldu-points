@@ -1,37 +1,43 @@
 import { clearAccessToken } from './auth'
+import { FetchFailedError, FetchStatusError, ForbiddenError, JsonParsingFailedError, JsonValidationFailedError, UnauthorizedError } from './errors'
 import { DarkSoulsBoss, DarkSoulsLevel, DlduData } from './types'
 import { getSheetsApiUrl } from './urls'
 import { GoogleSheetsDlduData, validateGoogleSheetsDlduData } from './validate'
 
 async function getDlduData (accessToken: string): Promise<DlduData> {
+  let response: Response
   try {
-    const response = await fetch(getSheetsApiUrl(), {
+    response = await fetch(getSheetsApiUrl(), {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
     })
-
-    const status = response.status
-    if (status >= 200 && status < 300) {
-      try {
-        const json = await response.json()
-        if (validateGoogleSheetsDlduData(json)) {
-          return googleDataToDlduData(json)
-        } else {
-          throw Error(`sheets JSON invalid: ${validateGoogleSheetsDlduData.errors}`)
-        }
-      } catch (err) {
-        throw Error(`sheets JSON parsing failed ${err}`)
-      }
-    } else if (status === 401) {
-      clearAccessToken()
-      throw Error('Access token expired')
-    } else {
-      throw Error(`sheets fetch status code not OK: ${status}`)
-    }
   } catch (err) {
-    throw Error(`sheets fetch failed: ${err}`)
+    console.log('FetchFailedError')
+    throw new FetchFailedError('sheets', err)
+  }
+
+  const status = response.status
+  if (status === 401) {
+    clearAccessToken()
+    throw new UnauthorizedError('sheets access token expired')
+  } else if (status === 403) {
+    throw new ForbiddenError('sheets')
+  } else if (status < 200 || status >= 300) {
+    throw new FetchStatusError('sheets', status)
+  }
+
+  let json
+  try {
+    json = await response.json()
+  } catch (err) {
+    throw new JsonParsingFailedError('sheets', err)
+  }
+  if (validateGoogleSheetsDlduData(json)) {
+    return googleDataToDlduData(json)
+  } else {
+    throw new JsonValidationFailedError('sheets', validateGoogleSheetsDlduData.errors)
   }
 }
 
