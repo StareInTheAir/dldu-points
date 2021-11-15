@@ -95,7 +95,7 @@ export default defineComponent({
   </div>
   <template v-if="dlduData">
     <p class="total">
-      Gesamtpunkte {{ achievedPoints }}/{{ totalPoints }}
+      Gesamtpunkte: {{ achievedPoints }}/{{ totalPoints }}
     </p>
     <LevelsPager
       :levels="dlduData.levels"
