@@ -1,7 +1,5 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.202.5/containers/typescript-node
 {
-	"name": "Node.js & TypeScript",
+	"name": "Node.js",
 	"runArgs": ["--init"],
 	"build": {
 		"dockerfile": "Dockerfile",
