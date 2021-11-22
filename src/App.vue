@@ -7,12 +7,14 @@ import { getDlduData } from './google-sheets'
 import { achievedRunPoints, totalRunPoints } from './points'
 import { getSecondsPerPage, isSheetIdSuppliedAndValid } from './query-params'
 import { AccessToken, DlduData } from './types'
+import AboutPanel from './components/AboutPanel.vue'
 
 export default defineComponent({
   name: 'App',
 
   components: {
-    LevelsPager
+    LevelsPager,
+    AboutPanel
   },
 
   data: () => {
@@ -92,6 +94,7 @@ export default defineComponent({
         {{ error }}
       </li>
     </ul>
+    <AboutPanel />
   </div>
   <template v-if="dlduData">
     <p class="total">
