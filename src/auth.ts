@@ -1,12 +1,12 @@
 import { CLIENT_ID, CLIENT_SECRET, REFRESH_TOKEN } from './auth-data'
-import { FetchFailedError, FetchStatusError, JsonParsingFailedError, JsonValidationFailedError } from './errors'
-import { AccessToken } from './types'
+import { FetchFailedError, FetchStatusError, JsonParsingFailedError, JsonValidationFailedError, RefreshTokenInvalidError } from './errors'
+import { Token } from './types'
 import { getAccessTokenUrl } from './urls'
 import { validateGoogleAccessToken } from './validate'
 
-let lastAccessToken: AccessToken | undefined
+let lastAccessToken: Token | undefined
 
-async function getAccessToken (): Promise<AccessToken> {
+async function getAccessToken (): Promise<Token> {
   if (!lastAccessToken || lastAccessToken.validUntil < Date.now()) {
     lastAccessToken = await getNewAccessToken()
   }
@@ -17,14 +17,18 @@ function clearAccessToken (): void {
   lastAccessToken = undefined
 }
 
-async function getNewAccessToken (): Promise<AccessToken> {
+async function getNewAccessToken (): Promise<Token> {
+  if (REFRESH_TOKEN.validUntil < Date.now()) {
+    throw new RefreshTokenInvalidError()
+  }
+
   const request = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
     body: encodeToForm({
-      refresh_token: REFRESH_TOKEN,
+      refresh_token: REFRESH_TOKEN.token,
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
       grant_type: 'refresh_token'
@@ -73,7 +77,7 @@ async function getAuthDataHash (): Promise<string> {
   const textEncoder = new TextEncoder()
   const clientIdBytes = textEncoder.encode(CLIENT_ID)
   const clientSecretBytes = textEncoder.encode(CLIENT_SECRET)
-  const refershTokenBytes = textEncoder.encode(REFRESH_TOKEN)
+  const refershTokenBytes = textEncoder.encode(REFRESH_TOKEN.token)
 
   const clientIdHash = await crypto.subtle.digest('SHA-256', clientIdBytes)
   const clientSecretHash = await crypto.subtle.digest('SHA-256', clientSecretBytes)

@@ -2,11 +2,11 @@
 import { defineComponent } from 'vue'
 import { getAccessToken } from './auth'
 import LevelsPager from './components/LevelsPager.vue'
-import { ForbiddenError } from './errors'
+import { ForbiddenError, RefreshTokenInvalidError } from './errors'
 import { getDlduData } from './google-sheets'
 import { achievedRunPoints, totalRunPoints } from './points'
 import { getSecondsPerPage, isSheetIdSuppliedAndValid } from './query-params'
-import { AccessToken, DlduData } from './types'
+import { Token, DlduData } from './types'
 import AboutPanel from './components/AboutPanel.vue'
 
 export default defineComponent({
@@ -51,12 +51,16 @@ export default defineComponent({
 
   methods: {
     async getData () {
-      let accessToken: AccessToken
+      let accessToken: Token
       try {
         accessToken = await getAccessToken()
       } catch (err) {
         console.log('Error during getAccessToken', err)
-        this.errors.add('Couldn\'t get access token for Google Sheets')
+        if (err instanceof RefreshTokenInvalidError) {
+          this.errors.add('Token is no longer valid. Contact the author.')
+        } else {
+          this.errors.add('Couldn\'t get access token for Google Sheets.')
+        }
         return
       }
 
@@ -65,9 +69,9 @@ export default defineComponent({
         this.errors.clear()
       } catch (err) {
         if (err instanceof ForbiddenError) {
-          this.errors.add('No permission to access data from Google Sheets')
+          this.errors.add('No permission to access data from Google Sheets.')
         } else {
-          this.errors.add('Couldn\'t retrieve data from Google Sheets')
+          this.errors.add('Couldn\'t retrieve data from Google Sheets.')
         }
       }
     },
