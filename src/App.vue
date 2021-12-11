@@ -68,6 +68,7 @@ export default defineComponent({
         this.dlduData = await getDlduData(accessToken.token)
         this.errors.clear()
       } catch (err) {
+        console.log('Error during getDlduData', err)
         if (err instanceof ForbiddenError) {
           this.errors.add('No permission to access data from Google Sheets.')
         } else {

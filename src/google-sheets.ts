@@ -14,7 +14,6 @@ async function getDlduData (accessToken: string): Promise<DlduData> {
       }
     })
   } catch (err) {
-    console.log('FetchFailedError')
     throw new FetchFailedError('sheets', err)
   }
 
