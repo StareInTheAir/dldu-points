@@ -1,13 +1,13 @@
 <script lang="ts">
-import { getAuthDataHash } from '@/auth'
+import { getAuthDataHash } from '../auth'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'AboutPanel',
   data () {
     return {
-      version: process.env.VUE_APP_VERSION,
-      gitCommitHash: process.env.VUE_APP_GIT_COMMIT_HASH,
+      version: APP_VERSION,
+      gitCommitHash: GIT_COMMIT_HASH,
       authDataHash: ''
     }
   },

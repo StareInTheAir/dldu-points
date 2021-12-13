@@ -3,32 +3,20 @@
   "version": "1.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "ajv": "^8.8.2",
-    "core-js": "^3.19.3",
     "lodash.debounce": "^4.0.8",
     "vue": "3.2.24"
   },
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.6",
-    "@typescript-eslint/eslint-plugin": "^5.4.0",
-    "@typescript-eslint/parser": "^5.4.0",
-    "@vue/cli-plugin-babel": "~5.0.0-rc.1",
-    "@vue/cli-plugin-eslint": "~5.0.0-rc.1",
-    "@vue/cli-plugin-typescript": "~5.0.0-rc.1",
-    "@vue/cli-service": "~5.0.0-rc.1",
-    "@vue/eslint-config-standard": "^6.1.0",
-    "@vue/eslint-config-typescript": "^9.1.0",
-    "eslint": "^8.4.1",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.2.0",
-    "eslint-plugin-vue": "^8.2.0",
-    "git-describe": "^4.1.0",
-    "typescript": "~4.5.2"
+    "@vitejs/plugin-vue": "^1.10.2",
+    "typescript": "^4.5.3",
+    "vite": "^2.7.1",
+    "vue-tsc": "^0.29.8"
   }
 }

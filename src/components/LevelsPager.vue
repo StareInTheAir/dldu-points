@@ -1,9 +1,9 @@
 <script lang="ts">
 
 import { defineComponent, PropType } from 'vue'
-import { DarkSoulsLevel } from '@/types'
+import { DarkSoulsLevel } from '../types'
 import LevelPoints from './LevelPoints.vue'
-import FakeHideDirective from '@/directives/FakeHide'
+import FakeHideDirective from '../directives/FakeHide'
 import AboutPanel from './AboutPanel.vue'
 import debounce from 'lodash.debounce'
 

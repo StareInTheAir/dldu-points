@@ -4,4 +4,4 @@
 ARG VARIANT=16-bullseye
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${VARIANT}
 
-RUN su node -c "npm install -g @vue/cli@5.0.0-rc.1 npm-check-updates"
+RUN su node -c "npm install -g npm-check-updates"
