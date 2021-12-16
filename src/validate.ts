@@ -4,7 +4,7 @@ const ajv = new Ajv()
 
 interface GoogleAccessToken {
   'access_token': string
-  'expires_in': number,
+  'expires_in': number
   'scope': 'https://www.googleapis.com/auth/spreadsheets.readonly'
   'token_type': 'Bearer'
 }
@@ -21,18 +21,18 @@ const accessGoogleAccessToken: JTDSchemaType<GoogleAccessToken> = {
 const validateGoogleAccessToken = ajv.compile<GoogleAccessToken>(accessGoogleAccessToken)
 
 interface GoogleSheetsDlduData {
-  sheets: {
+  sheets: Array<{
     properties: {
       title: string
     }
-    data: {
-      rowData?: {
-        values: {
+    data: Array<{
+      rowData?: Array<{
+        values: Array<{
           formattedValue?: string
-        }[]
-      }[]
-    }[]
-  }[]
+        }>
+      }>
+    }>
+  }>
 }
 
 const googleSheetsDlduDataSchema: JTDSchemaType<GoogleSheetsDlduData> = {

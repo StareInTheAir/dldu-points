@@ -6,7 +6,7 @@ function getSheetIdInternal (): string | null {
 
 function isSheetIdSuppliedAndValid (): boolean {
   const sheetId = getSheetIdInternal()
-  if (sheetId) {
+  if (sheetId != null) {
     return sheetId.match(/^[0-9a-zA-Z-_]+$/) !== null
   }
   return false
@@ -14,7 +14,7 @@ function isSheetIdSuppliedAndValid (): boolean {
 
 function getSheetId (): string {
   const sheetId = getSheetIdInternal()
-  if (sheetId) {
+  if (sheetId != null) {
     return sheetId.trim()
   }
   throw Error('sheetId query parameter is missing')
@@ -22,7 +22,7 @@ function getSheetId (): string {
 
 function getIntParam (key: string): number | undefined {
   const param = urlParams.get(key)
-  if (param) {
+  if (param != null) {
     const numParam = parseInt(param)
     if (!isNaN(numParam)) {
       return numParam

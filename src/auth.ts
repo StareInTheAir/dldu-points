@@ -7,7 +7,7 @@ import { validateGoogleAccessToken } from './validate'
 let lastAccessToken: Token | undefined
 
 async function getAccessToken (): Promise<Token> {
-  if (!lastAccessToken || lastAccessToken.validUntil < Date.now()) {
+  if ((lastAccessToken == null) || lastAccessToken.validUntil < Date.now()) {
     lastAccessToken = await getNewAccessToken()
   }
   return lastAccessToken

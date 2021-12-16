@@ -47,10 +47,12 @@ function googleDataToDlduData (googleData: GoogleSheetsDlduData): DlduData {
     const levelName = sheet.properties.title.trim()
     const bosses: DarkSoulsBoss[] = []
     const rowData = sheet.data[0]?.rowData
-    if (rowData) {
+    if (rowData != null) {
       for (const row of rowData) {
-        if (row.values.length >= 3 && row.values[0].formattedValue &&
-            row.values[1].formattedValue && row.values[2].formattedValue) {
+        if (row.values.length >= 3 &&
+            row.values[0].formattedValue != null &&
+            row.values[1].formattedValue != null &&
+            row.values[2].formattedValue != null) {
           const name = row.values[0].formattedValue.trim()
           const points = parseInt(row.values[1].formattedValue.trim())
           const beaten = row.values[2].formattedValue === 'beaten'

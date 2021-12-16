@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "ts-standard"
   },
   "dependencies": {
     "ajv": "^8.8.2",
@@ -15,8 +16,9 @@
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.6",
     "@vitejs/plugin-vue": "^1.10.2",
-    "typescript": "^4.5.3",
-    "vite": "^2.7.1",
+    "ts-standard": "^11.0.0",
+    "typescript": "^4.5.4",
+    "vite": "^2.7.3",
     "vue-tsc": "^0.29.8"
   }
 }
