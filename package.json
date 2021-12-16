@@ -11,7 +11,7 @@
     "ajv": "^8.8.2",
     "core-js": "^3.19.3",
     "lodash.debounce": "^4.0.8",
-    "vue": "^3.2.24"
+    "vue": "3.2.24"
   },
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.6",
