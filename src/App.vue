@@ -65,7 +65,15 @@ export default defineComponent({
       }
 
       try {
-        this.dlduData = await getDlduData(accessToken.token)
+        const newDlduData = await getDlduData(accessToken.token)
+        if (this.didAchievedPointsChange(newDlduData)) {
+          this.playVideo()
+          setTimeout(() => {
+            this.dlduData = newDlduData
+          }, 600)
+        } else {
+          this.dlduData = newDlduData
+        }
         this.errors.clear()
       } catch (err) {
         console.log('Error during getDlduData', err)
@@ -75,11 +83,45 @@ export default defineComponent({
           this.errors.add('Couldn\'t retrieve data from Google Sheets.')
         }
       }
+      // achievedPoints text is not immediatelly after visible
+      setTimeout(this.positionVideo, 100)
     },
 
     async scheduleGetData () {
       await this.getData()
       setInterval(async () => { await this.getData() }, 10_000)
+    },
+
+    positionVideo () {
+      const points = this.$refs.achievedPoints as HTMLElement | undefined
+      if (!points) {
+        return
+      }
+      const boundingBox = points.getBoundingClientRect()
+      const pointsY = boundingBox.top + boundingBox.height / 2
+      const pointsX = boundingBox.left + boundingBox.width / 2
+
+      const video = this.$refs.pop as HTMLElement
+      const videoX = video.clientWidth / 2
+      const videoY = video.clientHeight / 2
+
+      video.style.top = `${pointsY - videoY}px`
+      video.style.left = `${pointsX - videoX}px`
+    },
+
+    playVideo () {
+      const video = this.$refs.pop as HTMLMediaElement
+      video.currentTime = 0
+      video.play()
+    },
+
+    didAchievedPointsChange (newData: DlduData): boolean {
+      const currentData = this.dlduData
+      if (currentData) {
+        return achievedRunPoints(currentData) < achievedRunPoints(newData)
+      } else {
+        return false
+      }
     }
   }
 })
@@ -103,7 +145,7 @@ export default defineComponent({
   </div>
   <template v-if="dlduData">
     <p class="total">
-      Gesamtpunkte: {{ achievedPoints }}/{{ totalPoints }}
+      Gesamtpunkte: <span ref="achievedPoints">{{ achievedPoints }}</span>/{{ totalPoints }}
     </p>
     <LevelsPager
       :levels="dlduData.levels"
@@ -114,6 +156,9 @@ export default defineComponent({
   <p v-else class="loading">
     Loading
   </p>
+  <video class="pop" ref="pop">
+    <source src="/pop.webm" type="video/webm">
+  </video>
 </template>
 
 <style>
@@ -140,6 +185,7 @@ body {
   text-align: end;
   font-weight: 600;
   font-size: 200%;
+  margin-top: 20px;
 }
 .errors {
   text-align: end;
@@ -147,5 +193,9 @@ body {
 .errors li:before, .errors li:after {
   content: "⚠️";
   padding: 0 5px;
+}
+.pop {
+  position: absolute;
+  width: 300px;
 }
 </style>
