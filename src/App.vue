@@ -59,7 +59,7 @@ export default defineComponent({
           (this.$refs.animation as any).play()
           setTimeout(() => {
             this.dlduData = newDlduData
-          }, 600)
+          }, 1_000)
         } else {
           this.dlduData = newDlduData
         }
