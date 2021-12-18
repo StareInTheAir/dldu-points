@@ -18,11 +18,9 @@ https://youtu.be/yrKhPNEN7qU
 <img alt="Screenshot of make a copy menu item in Google Docs" src="docs/01-make-a-copy.png" width="350" />
 
 - Set a file name and save it to your Google Drive.
-- Share your new sheet with <img alt="Bot prove image of the mail address to add" src="docs/03-mil.svg" width="150" /> (you can't copy this address). To invite this user, click to Share button in Google docs at the top right and type the mail address manually. The website accesses your Google sheet data via this user, so it needs view access to your otherwise private document.
+- Change your sheet to be viewable by anyone with the link. To do this, click to Share button in Google Docs at the top right and click this button:
 
-<img alt="Screenshot of the Google Docs share dialog with viewer access rights selected" src="docs/04-share-dialog.png" width="500" />
-
-- You can skip the invitation, if you change the document to be visible for anyone with the link. This can also be set in the share dialog.
+<img alt="Screenshot of the Google Docs share dialog with the 'Change to anyone with the link' button highlighted" src="docs/04-share-dialog.png" width="500" />
 
 - In the URL of your browsers address bar you will see the sheet id. You need that sheet ID during the OBS setup, so copy it now. It's the numbers and letters (any maybe symbols) between `spreadsheets/d/` and `/edit`:
 
@@ -31,7 +29,7 @@ https://youtu.be/yrKhPNEN7qU
 
 ## OBS setup
 
-A deployed and hosted version of the website exists, but it isn't public. Contact stareintheair#7130 on Discord or the mail address above to request access.
+A deployed and hosted version of the website exists, but it isn't public. Contact stareintheair#7130 on Discord to request access.
 
 - Insert your sheet id into the URL: `https://CENSORED_DOMAIN.com/?sheetId=YOUR_SHEET_ID_HERE`
 - Create a new browser source and use the URL you just created.
