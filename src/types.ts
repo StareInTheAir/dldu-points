@@ -13,9 +13,4 @@ interface DlduData {
   levels: DarkSoulsLevel[]
 }
 
-interface Token {
-  token: string
-  validUntil: number
-}
-
-export { DarkSoulsBoss, DarkSoulsLevel, DlduData, Token }
+export { DarkSoulsBoss, DarkSoulsLevel, DlduData }

@@ -22,5 +22,4 @@ pnpm-debug.log*
 *.sw?
 
 # Project specific files
-src/auth-data.ts
-tokens.numbers
+src/api-key.ts

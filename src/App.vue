@@ -1,12 +1,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { getAccessToken } from './auth'
 import LevelsPager from './components/LevelsPager.vue'
-import { ForbiddenError, RefreshTokenInvalidError } from './errors'
+import { ForbiddenError } from './errors'
 import { getDlduData } from './google-sheets'
 import { achievedRunPoints, totalRunPoints } from './points'
 import { getSecondsPerPage, isSheetIdSuppliedAndValid } from './query-params'
-import { Token, DlduData } from './types'
+import { DlduData } from './types'
 import AboutPanel from './components/AboutPanel.vue'
 
 export default defineComponent({
@@ -51,21 +50,8 @@ export default defineComponent({
 
   methods: {
     async getData () {
-      let accessToken: Token
       try {
-        accessToken = await getAccessToken()
-      } catch (err) {
-        console.log('Error during getAccessToken', err)
-        if (err instanceof RefreshTokenInvalidError) {
-          this.errors.add('Token is no longer valid. Contact the author.')
-        } else {
-          this.errors.add('Couldn\'t get access token for Google Sheets.')
-        }
-        return
-      }
-
-      try {
-        const newDlduData = await getDlduData(accessToken.token)
+        const newDlduData = await getDlduData()
         if (this.didAchievedPointsChange(newDlduData)) {
           this.playVideo()
           setTimeout(() => {

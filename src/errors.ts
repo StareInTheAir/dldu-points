@@ -44,19 +44,11 @@ class ForbiddenError extends FetchStatusError {
   }
 }
 
-class RefreshTokenInvalidError extends Error {
-  constructor () {
-    super()
-    this.name = 'RefreshTokenInvalidError'
-  }
-}
-
 export {
   JsonValidationFailedError,
   JsonParsingFailedError,
   FetchFailedError,
   FetchStatusError,
   UnauthorizedError,
-  ForbiddenError,
-  RefreshTokenInvalidError
+  ForbiddenError
 }

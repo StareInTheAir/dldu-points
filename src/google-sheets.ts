@@ -1,17 +1,13 @@
-import { clearAccessToken } from './auth'
 import { FetchFailedError, FetchStatusError, ForbiddenError, JsonParsingFailedError, JsonValidationFailedError, UnauthorizedError } from './errors'
 import { DarkSoulsBoss, DarkSoulsLevel, DlduData } from './types'
 import { getSheetsApiUrl } from './urls'
 import { GoogleSheetsDlduData, validateGoogleSheetsDlduData } from './validate'
 
-async function getDlduData (accessToken: string): Promise<DlduData> {
+async function getDlduData (): Promise<DlduData> {
   let response: Response
   try {
     response = await fetch(getSheetsApiUrl(), {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
+      method: 'GET'
     })
   } catch (err) {
     throw new FetchFailedError('sheets', err)
@@ -19,8 +15,7 @@ async function getDlduData (accessToken: string): Promise<DlduData> {
 
   const status = response.status
   if (status === 401) {
-    clearAccessToken()
-    throw new UnauthorizedError('sheets access token expired')
+    throw new UnauthorizedError('api key expired')
   } else if (status === 403) {
     throw new ForbiddenError('sheets')
   } else if (status < 200 || status >= 300) {

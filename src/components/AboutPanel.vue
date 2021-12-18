@@ -1,6 +1,6 @@
 <script lang="ts">
-import { getAuthDataHash } from '../auth'
 import { defineComponent } from 'vue'
+import { getApiKeyHash } from '../api-key-hash'
 
 export default defineComponent({
   name: 'AboutPanel',
@@ -8,12 +8,12 @@ export default defineComponent({
     return {
       version: APP_VERSION,
       gitCommitHash: GIT_COMMIT_HASH,
-      authDataHash: ''
+      apiKeyHash: ''
     }
   },
   created () {
-    getAuthDataHash().then((hash) => {
-      this.authDataHash = hash
+    getApiKeyHash().then((hash) => {
+      this.apiKeyHash = hash
     })
   }
 })
@@ -29,7 +29,7 @@ export default defineComponent({
       </a>
     </p>
     <p>
-      Version: {{ version }}-{{ gitCommitHash }}-{{ authDataHash }}
+      Version: {{ version }}-{{ gitCommitHash }}-{{ apiKeyHash }}
     </p>
   </div>
 </template>
