@@ -157,6 +157,7 @@ body {
   color: #fff;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 </style>
 
