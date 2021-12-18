@@ -1,19 +1,22 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import LevelsPager from './components/LevelsPager.vue'
+import AboutPanel from './components/AboutPanel.vue'
+import PointsAnimation from './components/PointsAnimation.vue'
 import { ForbiddenError } from './errors'
 import { getDlduData } from './google-sheets'
 import { achievedRunPoints, totalRunPoints } from './points'
 import { getSecondsPerPage, isSheetIdSuppliedAndValid } from './query-params'
 import { DlduData } from './types'
-import AboutPanel from './components/AboutPanel.vue'
+
 
 export default defineComponent({
   name: 'App',
 
   components: {
     LevelsPager,
-    AboutPanel
+    AboutPanel,
+    PointsAnimation
   },
 
   data: () => {
@@ -53,7 +56,7 @@ export default defineComponent({
       try {
         const newDlduData = await getDlduData()
         if (this.didAchievedPointsChange(newDlduData)) {
-          this.playVideo()
+          (this.$refs.animation as any).play()
           setTimeout(() => {
             this.dlduData = newDlduData
           }, 600)
@@ -69,36 +72,11 @@ export default defineComponent({
           this.errors.add('Couldn\'t retrieve data from Google Sheets.')
         }
       }
-      // achievedPoints text is not immediatelly after visible
-      setTimeout(this.positionVideo, 100)
     },
 
     async scheduleGetData () {
       await this.getData()
       setInterval(async () => { await this.getData() }, 10_000)
-    },
-
-    positionVideo () {
-      const points = this.$refs.achievedPoints as HTMLElement | undefined
-      if (!points) {
-        return
-      }
-      const boundingBox = points.getBoundingClientRect()
-      const pointsY = boundingBox.top + boundingBox.height / 2
-      const pointsX = boundingBox.left + boundingBox.width / 2
-
-      const video = this.$refs.pop as HTMLElement
-      const videoX = video.clientWidth / 2
-      const videoY = video.clientHeight / 2
-
-      video.style.top = `${pointsY - videoY}px`
-      video.style.left = `${pointsX - videoX}px`
-    },
-
-    playVideo () {
-      const video = this.$refs.pop as HTMLMediaElement
-      video.currentTime = 0
-      video.play()
     },
 
     didAchievedPointsChange (newData: DlduData): boolean {
@@ -131,20 +109,19 @@ export default defineComponent({
   </div>
   <template v-if="dlduData">
     <p class="total">
-      Gesamtpunkte: <span ref="achievedPoints">{{ achievedPoints }}</span>/{{ totalPoints }}
+      Gesamtpunkte: <span class="animationPosition">{{ achievedPoints }}</span>/{{ totalPoints }}
     </p>
     <LevelsPager
       :levels="dlduData.levels"
       :secondsPerPage="secondsPerPage"
       class="pager"
     />
+    <PointsAnimation ref="animation" />
   </template>
   <p v-else class="loading">
     Loading
   </p>
-  <video class="pop" ref="pop">
-    <source src="/pop.webm" type="video/webm">
-  </video>
+
 </template>
 
 <style>
@@ -180,9 +157,5 @@ body {
 .errors li:before, .errors li:after {
   content: "⚠️";
   padding: 0 5px;
-}
-.pop {
-  position: absolute;
-  width: 300px;
 }
 </style>
