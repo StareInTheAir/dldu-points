@@ -56,13 +56,13 @@ function googleDataToDlduData (googleData: GoogleSheetsDlduData): DlduData {
             continue
           }
         }
-        console.log(`Ignoring boss ${JSON.stringify(row)} in level ${levelName}`)
+        console.warn(`Ignoring boss ${JSON.stringify(row)} in level ${levelName}`)
       }
     }
     if (levelName.length > 0 && bosses.length > 0) {
       levels.push({ name: levelName, bosses })
     } else {
-      console.log(`Ignoring empty level ${levelName}`)
+      console.warn(`Ignoring empty level ${levelName}`)
     }
   }
 
