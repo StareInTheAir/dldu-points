@@ -1,0 +1,6 @@
+.devcontainer
+.git
+.vscode
+dist
+docs
+node_modules
