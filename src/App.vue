@@ -76,7 +76,7 @@ export default defineComponent({
 
     async scheduleGetData () {
       await this.getData()
-      setInterval(async () => { await this.getData() }, 10_000)
+      setInterval(async () => { await this.getData() }, 9_901)
     },
 
     didAchievedPointsChange (newData: DlduData): boolean {
