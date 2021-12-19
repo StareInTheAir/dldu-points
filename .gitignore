@@ -22,4 +22,4 @@ pnpm-debug.log*
 *.sw?
 
 # Project specific files
-src/api-key.ts
+/*.key

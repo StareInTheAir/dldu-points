@@ -1,4 +1,3 @@
-import { API_KEY } from './api-key'
 import { getSheetId } from './query-params'
 
 function getSheetsApiUrl (): string {
