@@ -12,7 +12,7 @@ export default defineComponent({
     }
   },
   created () {
-    getApiKeyHash().then((hash) => {
+    void getApiKeyHash().then((hash) => {
       this.apiKeyHash = hash
     })
   }

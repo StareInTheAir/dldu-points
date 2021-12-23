@@ -7,7 +7,7 @@ import FakeHideDirective from '../directives/FakeHide'
 import AboutPanel from './AboutPanel.vue'
 import debounce from 'lodash.debounce'
 
-type HtmlRef = {
+interface HtmlRef {
   $el: HTMLElement
 }
 
@@ -110,7 +110,7 @@ export default defineComponent({
   methods: {
     setComponentHeight: function () {
       const container = this.$refs.container as HTMLDivElement | undefined
-      this.componentHeight = container ? container.clientHeight : Infinity
+      this.componentHeight = container != null ? container.clientHeight : Infinity
     },
 
     setElementCount: function () {
@@ -124,7 +124,7 @@ export default defineComponent({
         if (key.startsWith('element')) {
           const ref = refs[key] as HtmlRef | null
           // ref can be null when it was removed from the DOM
-          if (ref) {
+          if (ref != null) {
             list.push(refs[key] as HtmlRef)
           }
         }

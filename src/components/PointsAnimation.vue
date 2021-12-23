@@ -6,21 +6,21 @@ export default defineComponent({
   name: 'PointsAnimation',
 
   created () {
-    const body = document.querySelector('body');
-    if (body) {
+    const body = document.querySelector('body')
+    if (body != null) {
       // this.positionVideo is also called immediately after starting observing
       new ResizeObserver(debounce(this.positionVideo, 1000)).observe(body)
     }
-    const animationPosition = document.querySelector('.animationPosition');
-    if (animationPosition) {
+    const animationPosition = document.querySelector('.animationPosition')
+    if (animationPosition != null) {
       new MutationObserver(this.positionVideo).observe(animationPosition, { childList: true })
     }
   },
 
   methods: {
     positionVideo () {
-      const animationPosition = document.querySelector('.animationPosition');
-      if (!animationPosition) {
+      const animationPosition = document.querySelector('.animationPosition')
+      if (animationPosition == null) {
         return
       }
       const boundingBox = animationPosition.getBoundingClientRect()
@@ -35,13 +35,13 @@ export default defineComponent({
       video.style.left = `${pointsX - videoX}px`
     },
 
-    play () {
+    async play () {
       const video = this.$refs.animation as HTMLMediaElement | undefined
-      if (video) {
+      if (video != null) {
         video.currentTime = 0
-        video.play()
+        await video.play()
       }
-    },
+    }
   }
 })
 </script>

@@ -9,7 +9,6 @@ import { achievedRunPoints, totalRunPoints } from './points'
 import { getSecondsPerPage, isSheetIdSuppliedAndValid } from './query-params'
 import { DlduData } from './types'
 
-
 export default defineComponent({
   name: 'App',
 
@@ -23,20 +22,20 @@ export default defineComponent({
     return {
       dlduData: undefined as DlduData | undefined,
       errors: new Set<string>(),
-      secondsPerPage: getSecondsPerPage() || 10
+      secondsPerPage: getSecondsPerPage() ?? 10
     }
   },
 
   computed: {
     totalPoints () {
-      if (!this.dlduData) {
+      if (this.dlduData == null) {
         return 0
       }
       return totalRunPoints(this.dlduData)
     },
 
     achievedPoints () {
-      if (!this.dlduData) {
+      if (this.dlduData == null) {
         return 0
       }
       return achievedRunPoints(this.dlduData)
@@ -47,7 +46,7 @@ export default defineComponent({
     if (!isSheetIdSuppliedAndValid()) {
       this.errors.add('Sheet ID is missing in URL')
     } else {
-      this.scheduleGetData()
+      void this.scheduleGetData()
     }
   },
 
@@ -56,7 +55,7 @@ export default defineComponent({
       try {
         const newDlduData = await getDlduData()
         if (this.didAchievedPointsChange(newDlduData)) {
-          (this.$refs.animation as any).play()
+          void (this.$refs.animation as any).play()
           setTimeout(() => {
             this.dlduData = newDlduData
           }, 1_000)
@@ -81,7 +80,7 @@ export default defineComponent({
 
     didAchievedPointsChange (newData: DlduData): boolean {
       const currentData = this.dlduData
-      if (currentData) {
+      if (currentData != null) {
         return achievedRunPoints(currentData) < achievedRunPoints(newData)
       } else {
         return false
