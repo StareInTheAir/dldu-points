@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "lint": "ts-standard"
+    "lint": "src/run-standard.sh"
   },
   "dependencies": {
     "ajv": "^8.8.2",
