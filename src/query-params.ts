@@ -7,7 +7,7 @@ function getSheetIdInternal (): string | null {
 function isSheetIdSuppliedAndValid (): boolean {
   const sheetId = getSheetIdInternal()
   if (sheetId != null) {
-    return sheetId.match(/^[0-9a-zA-Z-_]+$/) !== null
+    return sheetId.match(/^[0-9a-zA-Z-_]+$/) != null
   }
   return false
 }
