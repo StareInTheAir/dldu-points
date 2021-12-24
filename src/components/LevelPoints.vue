@@ -21,6 +21,16 @@ export default defineComponent({
     },
     achievedPoints () {
       return achievedLevelPoints(this.level)
+    },
+    levelInProgress () {
+      return this.achievedPoints > 0 && this.achievedPoints < this.totalPoints
+    },
+    filteredBosses() {
+      if (this.levelInProgress) {
+        return this.level.bosses
+      } else {
+        return []
+      }
     }
   }
 })
@@ -28,6 +38,7 @@ export default defineComponent({
 
 <template>
   <div class="grid">
+    <span v-if="levelInProgress" class="spacer" />
     <span class="name">
       {{ level.name }}
     </span>
@@ -35,15 +46,17 @@ export default defineComponent({
       {{ achievedPoints }}/{{ totalPoints }}
     </span>
     <img
+      v-if="levelInProgress"
       src="../assets/line.svg"
       alt="Underline of level name"
       class="underline"
     />
     <BossPoints
-      v-for="boss in level.bosses"
+      v-for="boss in filteredBosses"
       :key="level.name + boss.name"
       :boss="boss"
     />
+    <span v-if="levelInProgress" class="spacer" />
   </div>
 </template>
 
@@ -57,12 +70,14 @@ export default defineComponent({
 .grid * {
   align-self: end;
 }
+.spacer {
+  grid-column: span 2;
+  height: 8px;
+}
 .name, .points {
-  font-weight: 500;
   font-size: 150%;
 }
 .name {
-  margin-top: 16px;
   text-align: end;
 }
 .points {
