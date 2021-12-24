@@ -22,7 +22,7 @@ https://youtu.be/yrKhPNEN7qU
 
 <img alt="Screenshot of the Google Docs share dialog with the 'Change to anyone with the link' button highlighted" src="docs/04-share-dialog.png" width="500" />
 
-- In the URL of your browsers address bar you will see the sheet id. You need that sheet ID during the OBS setup, so copy it now. It's the numbers and letters (any maybe symbols) between `spreadsheets/d/` and `/edit`:
+- In the URL of your browsers address bar you will see the sheet id. You need that sheet ID during the OBS setup, so copy it now. It's the numbers and letters (and maybe symbols) between `spreadsheets/d/` and `/edit`:
 
 <img alt="Screenshot of browser address bar with sheet id highlighted and selected" src="docs/02-sheet-id.png" />
 
