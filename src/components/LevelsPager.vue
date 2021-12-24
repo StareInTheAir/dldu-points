@@ -125,7 +125,7 @@ export default defineComponent({
           const ref = refs[key] as HtmlRef | null
           // ref can be null when it was removed from the DOM
           if (ref != null) {
-            list.push(refs[key] as HtmlRef)
+            list.push(ref)
           }
         }
       }
