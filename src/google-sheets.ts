@@ -36,37 +36,65 @@ async function getDlduData (): Promise<DlduData> {
 }
 
 function googleDataToDlduData (googleData: GoogleSheetsDlduData): DlduData {
+  if (googleData.majorDimension !== 'ROWS') {
+    throw new JsonValidationFailedError('majorDimension must be ROWS', undefined)
+  }
+
   const levels: DarkSoulsLevel[] = []
 
-  for (const sheet of googleData.sheets) {
-    const levelName = sheet.properties.title.trim()
-    const bosses: DarkSoulsBoss[] = []
-    const rowData = sheet.data[0]?.rowData
-    if (rowData != null) {
-      for (const row of rowData) {
-        if (row.values.length >= 3 &&
-            row.values[0].formattedValue != null &&
-            row.values[1].formattedValue != null &&
-            row.values[2].formattedValue != null) {
-          const name = row.values[0].formattedValue.trim()
-          const points = parseInt(row.values[1].formattedValue.trim())
-          const beaten = row.values[2].formattedValue === 'beaten'
-          if (name.length > 0 && !isNaN(points)) {
-            bosses.push({ name, points, beaten })
-            continue
-          }
-        }
-        console.warn(`Ignoring boss ${JSON.stringify(row)} in level ${levelName}`)
-      }
+  for (const row of googleData.values) {
+    const rowAsString = JSON.stringify(row)
+
+    if (row.length === 0) {
+      continue
+    } else if (row.length < 4) {
+      console.warn(`Ignoring incomplete row: ${rowAsString}`)
+      continue
     }
-    if (levelName.length > 0 && bosses.length > 0) {
-      levels.push({ name: levelName, bosses })
-    } else {
-      console.warn(`Ignoring empty level ${levelName}`)
+
+    const type = row[0].trim()
+    const name = row[1].trim()
+    const points = parseInt(row[2].trim())
+    const checked = row[3] === 'TRUE'
+
+    if (type === 'level') {
+      if (name.length === 0) {
+        console.warn(`Ignoring nameless level: ${rowAsString}`)
+      } else {
+        levels.push({
+          name,
+          bosses: [],
+          alwaysShowExpanded: checked
+        })
+      }
+    } else if (type === 'boss') {
+      if (name.length === 0 || isNaN(points)) {
+        console.warn(`Ignoring boss with invalid data: ${rowAsString}`)
+      } else {
+        if (levels.length === 0) {
+          console.warn(`Ignoring boss without previous level: ${rowAsString}`)
+        } else {
+          const boss: DarkSoulsBoss = {
+            name,
+            points,
+            beaten: checked
+          }
+          levels[levels.length - 1].bosses.push(boss)
+        }
+      }
+    } else if (type !== 'Type') {
+      console.warn(`Ignoring unexpected type in row ${rowAsString}`)
     }
   }
 
-  return { levels }
+  const nonEmptyLevels = levels.filter(level => {
+    if (level.bosses.length === 0) {
+      console.warn(`Ignoring bossless level ${level.name}`)
+      return false
+    }
+    return true
+  })
+  return { levels: nonEmptyLevels }
 }
 
 export { getDlduData }

@@ -3,53 +3,23 @@ import Ajv, { JTDSchemaType } from 'ajv/dist/jtd'
 const ajv = new Ajv()
 
 interface GoogleSheetsDlduData {
-  sheets: Array<{
-    properties: {
-      title: string
-    }
-    data: Array<{
-      rowData?: Array<{
-        values: Array<{
-          formattedValue?: string
-        }>
-      }>
-    }>
-  }>
+  range: string
+  majorDimension: string
+  values: string[][]
 }
 
 const googleSheetsDlduDataSchema: JTDSchemaType<GoogleSheetsDlduData> = {
   properties: {
-    'sheets': {
+    'range': {
+      type: 'string'
+    },
+    'majorDimension': {
+      type: 'string'
+    },
+    'values': {
       elements: {
-        properties: {
-          'properties': {
-            properties: {
-              'title': {
-                type: 'string'
-              }
-            }
-          },
-          'data': {
-            elements: {
-              optionalProperties: {
-                'rowData': {
-                  elements: {
-                    properties: {
-                      'values': {
-                        elements: {
-                          optionalProperties: {
-                            'formattedValue': {
-                              type: 'string'
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
+        elements: {
+          type: 'string'
         }
       }
     }

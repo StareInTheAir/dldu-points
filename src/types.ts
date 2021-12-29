@@ -7,6 +7,7 @@ interface DarkSoulsBoss {
 interface DarkSoulsLevel {
   name: string
   bosses: DarkSoulsBoss[]
+  alwaysShowExpanded: boolean
 }
 
 interface DlduData {
