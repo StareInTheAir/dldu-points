@@ -22,11 +22,12 @@ export default defineComponent({
     achievedPoints (): number {
       return achievedLevelPoints(this.level)
     },
-    levelInProgress (): boolean {
-      return this.achievedPoints > 0 && this.achievedPoints < this.totalPoints
+    bossesVisible (): boolean {
+      const levelInProgress = this.achievedPoints > 0 && this.achievedPoints < this.totalPoints
+      return this.level.alwaysShowBosses || levelInProgress
     },
     filteredBosses (): DarkSoulsBoss[] {
-      if (this.levelInProgress) {
+      if (this.bossesVisible) {
         return this.level.bosses
       } else {
         return []
@@ -38,7 +39,7 @@ export default defineComponent({
 
 <template>
   <div class="grid">
-    <span v-if="levelInProgress" class="spacer" />
+    <span v-if="bossesVisible" class="spacer" />
     <span class="name">
       {{ level.name }}
     </span>
@@ -46,7 +47,7 @@ export default defineComponent({
       {{ achievedPoints }}/{{ totalPoints }}
     </span>
     <img
-      v-if="levelInProgress"
+      v-if="bossesVisible"
       src="../assets/line.svg"
       alt="Underline of level name"
       class="underline"
@@ -56,7 +57,7 @@ export default defineComponent({
       :key="level.name + boss.name"
       :boss="boss"
     />
-    <span v-if="levelInProgress" class="spacer" />
+    <span v-if="bossesVisible" class="spacer" />
   </div>
 </template>
 
@@ -72,7 +73,7 @@ export default defineComponent({
 }
 .spacer {
   grid-column: span 2;
-  height: 8px;
+  height: 12px;
 }
 .name, .points {
   font-size: 150%;

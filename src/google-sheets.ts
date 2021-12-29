@@ -64,7 +64,7 @@ function googleDataToDlduData (googleData: GoogleSheetsDlduData): DlduData {
         levels.push({
           name,
           bosses: [],
-          alwaysShowExpanded: checked
+          alwaysShowBosses: checked
         })
       }
     } else if (type === 'boss') {
