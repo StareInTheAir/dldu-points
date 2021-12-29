@@ -5,7 +5,7 @@ import AboutPanel from './components/AboutPanel.vue'
 import PointsAnimation from './components/PointsAnimation.vue'
 import { ForbiddenError } from './errors'
 import { getDlduData } from './google-sheets'
-import { achievedRunPoints, totalRunPoints } from './points'
+import { achievedLevelPoints, achievedRunPoints, totalRunPoints } from './points'
 import { getSecondsPerPage, isSheetIdSuppliedAndValid } from './query-params'
 import { DlduData } from './types'
 
@@ -39,6 +39,13 @@ export default defineComponent({
         return 0
       }
       return achievedRunPoints(this.dlduData)
+    },
+
+    levelsWithPoints (): DarkSoulsLevel[] {
+      if (this.dlduData == null) {
+        return []
+      }
+      return this.dlduData.levels.filter((level) => achievedLevelPoints(level) > 0);
     }
   },
 
@@ -111,7 +118,7 @@ export default defineComponent({
       Gesamtpunkte: <span class="animationPosition">{{ achievedPoints }}</span>/{{ totalPoints }}
     </p>
     <LevelsPager
-      :levels="dlduData.levels"
+      :levels="levelsWithPoints"
       :secondsPerPage="secondsPerPage"
       class="pager"
     />

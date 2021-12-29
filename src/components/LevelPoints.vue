@@ -23,7 +23,8 @@ export default defineComponent({
       return achievedLevelPoints(this.level)
     },
     levelInProgress () {
-      return this.achievedPoints > 0 && this.achievedPoints < this.totalPoints
+      return true
+      // return this.achievedPoints > 0 && this.achievedPoints < this.totalPoints
     },
     filteredBosses() {
       if (this.levelInProgress) {
