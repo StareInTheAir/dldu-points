@@ -65,7 +65,7 @@ export default defineComponent({
       let end = -1
       let filledHeight = 0
       for (const [index, ref] of elementRefs.slice(startIndex).entries()) {
-        if (filledHeight + ref.$el.clientHeight < componentHeight) {
+        if (filledHeight + ref.$el.clientHeight <= componentHeight) {
           filledHeight += ref.$el.clientHeight
           end = startIndex + index
         } else {
