@@ -12,7 +12,7 @@ https://youtu.be/yrKhPNEN7qU
 
 ## Google Docs setup
 
-- Open the [template Google Docs sheet](https://docs.google.com/spreadsheets/d/1NIl-058tT5CDlrNdAuthv_8ofH3oMzB3ruT97cJHm4s).
+- Open the [template Google Docs sheet](https://docs.google.com/spreadsheets/d/1_Tn673N1v82LwOvFGkrqM5unOFDev61IUvkAHs8Z7V0).
 - Select `File` → `Make a copy`
 
 <img alt="Screenshot of make a copy menu item in Google Docs" src="docs/01-make-a-copy.png" width="350" />
@@ -41,23 +41,25 @@ A deployed and hosted version of the website exists, but it isn't public. Contac
 
 You can share access to the Google sheet with moderators and trusted viewers, so they can update the score live during the stream for you.
 
-### Bosses
-
-- Each boss has its own row in a table.
-- If a boss was beaten change the value in the third column from `alive` to `beaten`.
-- The order of bosses can be switched by reordering the rows.
-- If I missed a boss, new ones can be added in the Google doc and are automatically shown on the website.
-- The points are locked to 3 or 5, but the data validation rule can be remove manually, if the points ever change.
+- All bosses defined below a level belong to that level.
 - Incomplete rows and rows with invalid values will be ignored by the website. Valid rows will still be displayed.
 
-### Regions
+<img alt="Screenshot of the Google sheet with a few bosses marked as beaten" src="docs/05-sheet-structure.png" width="350" />
 
-- Each region of Dark Souls has its own table, that can be switched at the bottom:
+### Bosses
 
-<img alt="Screenshot of make a copy menu item in Google Docs" src="docs/05-tables.png" width="350" />
+- If a boss was beaten check the checkmark in the fourth column.
+- New bosses can be added as a new row in the Google sheet and are automatically shown on the website. Make sure to set the type in the first column to `boss`.
+- The order of bosses can be switched by reordering the rows.
 
-- New regions can be added by creating a new table. The name of the table will be the region name. I recommend duplicating an existing one to copy the validation rules.
-- The order of the regions on the website can also be changed by reordering the tables in Google Docs via drag and drop.
+### Levels
+
+- Bosses in a level will only be shown on the website if at least one boss, but not all bosses in that level were beaten.
+- You can force always showing bosses of a level, by checking the checkmark in the fourth column.
+- If you want the same behavior as in version 1, check the boxes of every level.
+- New bosses can be added as a new row in the Google sheet and are automatically shown on the website. Make sure to set the type in the first column to `level`.
+- Levels with no bosses will be ignored.
+- The order of levels can be switched by reordering the rows.
 
 ## Configuration options
 
