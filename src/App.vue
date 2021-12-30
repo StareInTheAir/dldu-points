@@ -3,7 +3,7 @@ import { defineComponent } from 'vue'
 import LevelsPager from './components/LevelsPager.vue'
 import AboutPanel from './components/AboutPanel.vue'
 import PointsAnimation from './components/PointsAnimation.vue'
-import { ForbiddenError } from './errors'
+import { BadRequestError, ForbiddenError } from './errors'
 import { getDlduData } from './google-sheets'
 import { achievedRunPoints, totalRunPoints } from './points'
 import { getSecondsPerPage, isSheetIdSuppliedAndValid } from './query-params'
@@ -67,6 +67,9 @@ export default defineComponent({
         console.error('Error during getDlduData', err)
         if (err instanceof ForbiddenError) {
           this.errors.add('No permission to access data from Google Sheets.')
+        } else if (err instanceof BadRequestError) {
+          this.errors.add('Couldn\'t retrieve data from Google Sheets.')
+          this.errors.add('You are probably using an old and no longer supported sheet structure. Go through the setup steps again.')
         } else {
           this.errors.add('Couldn\'t retrieve data from Google Sheets.')
         }

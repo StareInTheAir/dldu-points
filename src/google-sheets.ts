@@ -1,4 +1,4 @@
-import { FetchFailedError, FetchStatusError, ForbiddenError, JsonParsingFailedError, JsonValidationFailedError, UnauthorizedError } from './errors'
+import { BadRequestError, FetchFailedError, FetchStatusError, ForbiddenError, JsonParsingFailedError, JsonValidationFailedError, UnauthorizedError } from './errors'
 import { DarkSoulsBoss, DarkSoulsLevel, DlduData } from './types'
 import { getSheetsApiUrl } from './urls'
 import { GoogleSheetsDlduData, validateGoogleSheetsDlduData } from './validate'
@@ -14,7 +14,9 @@ async function getDlduData (): Promise<DlduData> {
   }
 
   const status = response.status
-  if (status === 401) {
+  if (status === 400) {
+    throw new BadRequestError('sheets')
+  } else if (status === 401) {
     throw new UnauthorizedError('api key expired')
   } else if (status === 403) {
     throw new ForbiddenError('sheets')

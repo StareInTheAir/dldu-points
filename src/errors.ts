@@ -30,6 +30,13 @@ class FetchStatusError extends Error {
   }
 }
 
+class BadRequestError extends FetchStatusError {
+  constructor (message: string) {
+    super(message, 400)
+    this.name = 'UnauthorizedError'
+  }
+}
+
 class UnauthorizedError extends FetchStatusError {
   constructor (message: string) {
     super(message, 401)
@@ -49,6 +56,7 @@ export {
   JsonParsingFailedError,
   FetchFailedError,
   FetchStatusError,
+  BadRequestError,
   UnauthorizedError,
   ForbiddenError
 }
