@@ -31,6 +31,10 @@ export default defineComponent({
     secondsPerPage: {
       type: Number,
       required: true
+    },
+    showAboutPanelEvery: {
+      type: Number,
+      default: 15
     }
   },
 
@@ -39,7 +43,8 @@ export default defineComponent({
       componentHeight: 0,
       startIndex: 0,
       lastIntervalHandle: undefined as number | undefined,
-      elementCount: 0
+      elementCount: 0,
+      rollOverCounter: 0
     }
   },
 
@@ -81,8 +86,11 @@ export default defineComponent({
       return hiddenList
     },
 
-    aboutIndex (): number {
-      return this.elementCount - 1
+    aboutHidden (): boolean {
+      // The AboutPanel is always the last element
+      const hiddenBasedOnElementHidden = this.elementHidden[this.elementCount - 1]
+      const hiddenBasedOnRollover = this.rollOverCounter !== 0
+      return hiddenBasedOnElementHidden || hiddenBasedOnRollover
     }
   },
 
@@ -133,7 +141,13 @@ export default defineComponent({
     },
 
     nextPage (): void {
-      this.startIndex = this.endIndex + 1 < this.elementCount ? this.endIndex + 1 : 0
+      const nextIndex = this.endIndex + 1
+      if (nextIndex < this.elementCount) {
+        this.startIndex = nextIndex
+      } else {
+        this.startIndex = 0
+        this.rollOverCounter = (this.rollOverCounter + 1) % this.showAboutPanelEvery
+      }
     }
   }
 })
@@ -150,7 +164,7 @@ export default defineComponent({
     />
     <AboutPanel
       ref="element_about"
-      v-fake-hide="elementHidden[aboutIndex]"
+      v-fake-hide="aboutHidden"
      />
   </div>
 </template>
