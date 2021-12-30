@@ -18,7 +18,7 @@ export default defineComponent({
   },
 
   methods: {
-    positionVideo () {
+    positionVideo (): void {
       const animationPosition = document.querySelector('.animationPosition')
       if (animationPosition == null) {
         return
@@ -35,7 +35,7 @@ export default defineComponent({
       video.style.left = `${pointsX - videoX}px`
     },
 
-    async play () {
+    async play (): Promise<void> {
       const video = this.$refs.animation as HTMLMediaElement | undefined
       if (video != null) {
         video.currentTime = 0

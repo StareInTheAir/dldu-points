@@ -11,7 +11,7 @@ export default defineComponent({
     }
   },
   computed: {
-    className () {
+    className (): string {
       return this.boss.beaten ? 'beaten' : 'alive'
     }
   }

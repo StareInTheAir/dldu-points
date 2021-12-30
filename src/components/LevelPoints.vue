@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { DarkSoulsLevel } from '../types'
+import { DarkSoulsBoss, DarkSoulsLevel } from '../types'
 import BossPoints from './BossPoints.vue'
 import { achievedLevelPoints, totalLevelPoints } from '../points'
 
@@ -16,16 +16,16 @@ export default defineComponent({
     }
   },
   computed: {
-    totalPoints () {
+    totalPoints (): number {
       return totalLevelPoints(this.level)
     },
-    achievedPoints () {
+    achievedPoints (): number {
       return achievedLevelPoints(this.level)
     },
-    levelInProgress () {
+    levelInProgress (): boolean {
       return this.achievedPoints > 0 && this.achievedPoints < this.totalPoints
     },
-    filteredBosses() {
+    filteredBosses (): DarkSoulsBoss[] {
       if (this.levelInProgress) {
         return this.level.bosses
       } else {

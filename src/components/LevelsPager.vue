@@ -34,7 +34,7 @@ export default defineComponent({
     }
   },
 
-  data: function () {
+  data () {
     return {
       componentHeight: Infinity,
       startIndex: 0,
@@ -96,7 +96,7 @@ export default defineComponent({
     }
   },
 
-  mounted: function () {
+  mounted () {
     // Only when in mounted state, refs are available
     const container = this.$refs.container as HTMLDivElement
 
@@ -108,16 +108,16 @@ export default defineComponent({
   },
 
   methods: {
-    setComponentHeight: function () {
+    setComponentHeight (): void {
       const container = this.$refs.container as HTMLDivElement | undefined
       this.componentHeight = container != null ? container.clientHeight : Infinity
     },
 
-    setElementCount: function () {
+    setElementCount (): void {
       this.elementCount = this.getElementRefs().length
     },
 
-    getElementRefs: function (): HtmlRef[] {
+    getElementRefs (): HtmlRef[] {
       const refs = this.$refs
       const list: HtmlRef[] = []
       for (const key in refs) {
@@ -132,7 +132,7 @@ export default defineComponent({
       return list
     },
 
-    nextPage: function () {
+    nextPage (): void {
       this.startIndex = this.endIndex + 1 < this.elementCount ? this.endIndex + 1 : 0
     }
   }

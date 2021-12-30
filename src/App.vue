@@ -18,7 +18,7 @@ export default defineComponent({
     PointsAnimation
   },
 
-  data: () => {
+  data () {
     return {
       dlduData: undefined as DlduData | undefined,
       errors: new Set<string>(),
@@ -27,14 +27,14 @@ export default defineComponent({
   },
 
   computed: {
-    totalPoints () {
+    totalPoints (): number {
       if (this.dlduData == null) {
         return 0
       }
       return totalRunPoints(this.dlduData)
     },
 
-    achievedPoints () {
+    achievedPoints (): number {
       if (this.dlduData == null) {
         return 0
       }
@@ -51,7 +51,7 @@ export default defineComponent({
   },
 
   methods: {
-    async getData () {
+    async getData (): Promise<void> {
       try {
         const newDlduData = await getDlduData()
         if (this.didAchievedPointsChange(newDlduData)) {
@@ -73,7 +73,7 @@ export default defineComponent({
       }
     },
 
-    async scheduleGetData () {
+    async scheduleGetData (): Promise<void> {
       await this.getData()
       setInterval(async () => { await this.getData() }, 9_901)
     },

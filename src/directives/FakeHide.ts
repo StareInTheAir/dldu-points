@@ -43,7 +43,7 @@ const FakeHideDirective: ObjectDirective<HTMLElement, boolean> = {
       fadeIn(el)
       setTimeout(hideElement, ANIMATION_DURATION_MS, el)
     } else {
-      setTimeout(function () {
+      setTimeout(() => {
         unhideElement(el)
         fadeOut(el)
       }, ANIMATION_DURATION_MS + ANIMATION_PAUSE_MS)
