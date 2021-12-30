@@ -24,4 +24,3 @@ pnpm-debug.log*
 # Project specific files
 /*.key
 /todo.md
-*.temp.ts
