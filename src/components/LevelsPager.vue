@@ -36,7 +36,7 @@ export default defineComponent({
 
   data () {
     return {
-      componentHeight: Infinity,
+      componentHeight: 0,
       startIndex: 0,
       lastIntervalHandle: undefined as number | undefined,
       elementCount: 0
@@ -57,7 +57,7 @@ export default defineComponent({
       this.levels.keys()
 
       const elementRefs = this.getElementRefs()
-      let end = 0
+      let end = -1
       let filledHeight = 0
       for (const [index, ref] of elementRefs.slice(startIndex).entries()) {
         if (filledHeight + ref.$el.clientHeight < componentHeight) {
