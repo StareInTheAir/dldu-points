@@ -5,17 +5,15 @@ const ANIMATION_DURATION_CSS_STRING = `${ANIMATION_DURATION_MS / 1_000}s`
 const ANIMATION_PAUSE_MS = 314
 
 function fadeIn (el: HTMLElement): void {
-  el.style.opacity = '0'
+  el.style.opacity = '1'
 }
 
 function fadeOut (el: HTMLElement): void {
-  el.style.opacity = '1'
+  el.style.opacity = '0'
 }
 
 function setupOpacityTranstion (el: HTMLElement): void {
   fadeOut(el) // doesn't fade out, since transitionProperty is not set yet
-  // Cubic ease-in
-  // el.style.transitionTimingFunction = 'cubic-bezier(.55,.06,.68,.19)'
   el.style.transitionTimingFunction = 'ease-in'
   el.style.transitionProperty = 'opacity'
   el.style.transitionDuration = ANIMATION_DURATION_CSS_STRING
@@ -40,12 +38,14 @@ const FakeHideDirective: ObjectDirective<HTMLElement, boolean> = {
 
   updated (el, binding) {
     if (binding.value) {
-      fadeIn(el)
+      // el should be fake hidden
+      fadeOut(el)
       setTimeout(hideElement, ANIMATION_DURATION_MS, el)
     } else {
+      // el should visible
       setTimeout(() => {
         unhideElement(el)
-        fadeOut(el)
+        fadeIn(el)
       }, ANIMATION_DURATION_MS + ANIMATION_PAUSE_MS)
     }
   }
