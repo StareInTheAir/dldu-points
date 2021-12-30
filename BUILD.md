@@ -1,6 +1,6 @@
 # Build instructions
 
-These instructions will let you build dldu-points yourself, if you want to host it yourself.
+These instructions will help you build dldu-points, if you want to host it yourself.
 
 ## API key
 
@@ -17,7 +17,7 @@ A Google Cloud Platform API key is required to access data from Google Sheets. G
 
 ## Build with docker
 
-To build a directly serve this app run:
+To build a directly serve this app, git clone this repository and then run:
 
 ```shell
 docker build \
