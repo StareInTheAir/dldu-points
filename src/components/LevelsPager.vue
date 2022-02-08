@@ -7,9 +7,7 @@ import FakeHideDirective from '../directives/FakeHide'
 import AboutPanel from './AboutPanel.vue'
 import debounce from 'lodash.debounce'
 
-interface HtmlRef {
-  $el: HTMLElement
-}
+const KEY_ABOUT_ELEMENT = 5886043
 
 export default defineComponent({
   name: 'LevelsPager',
@@ -43,12 +41,16 @@ export default defineComponent({
       componentHeight: 0,
       startIndex: 0,
       lastIntervalHandle: undefined as number | undefined,
-      elementCount: 0,
-      rollOverCounter: 0
+      rollOverCounter: 0,
+      elementRefs: {} as Record<number, HTMLElement>
     }
   },
 
   computed: {
+    elementCount (): number {
+      return Object.keys(this.elementRefs).length
+    },
+
     endIndex (): number {
       // For Vues tracking when to recompute this property to work,
       // we need to access all other properties used in the computation,
@@ -61,13 +63,13 @@ export default defineComponent({
       // If a level changes, the endIndex could also change.
       this.levels.keys()
 
-      const elementRefs = this.getElementRefs()
+      const elementRefs = this.elementRefs
       let end = -1
       let filledHeight = 0
-      for (const [index, ref] of elementRefs.slice(startIndex).entries()) {
-        if (filledHeight + ref.$el.clientHeight <= componentHeight) {
-          filledHeight += ref.$el.clientHeight
-          end = startIndex + index
+      for (const [index, ref] of Object.entries(elementRefs).slice(startIndex)) {
+        if (filledHeight + ref.clientHeight <= componentHeight) {
+          filledHeight += ref.clientHeight
+          end = startIndex + parseInt(index)
         } else {
           break
         }
@@ -88,7 +90,7 @@ export default defineComponent({
 
     aboutHidden (): boolean {
       // The AboutPanel is always the last element
-      const hiddenBasedOnElementHidden = this.elementHidden[this.elementCount - 1]
+      const hiddenBasedOnElementHidden = this.elementHidden[this.elementHidden.length - 1]
       const hiddenBasedOnRollover = this.rollOverCounter !== 0
       return hiddenBasedOnElementHidden || hiddenBasedOnRollover
     }
@@ -110,34 +112,28 @@ export default defineComponent({
 
     // this.setComponentHeight is also called immediately after starting observing
     new ResizeObserver(debounce(this.setComponentHeight, 300)).observe(container)
+  },
 
-    this.setElementCount()
-    new MutationObserver(this.setElementCount).observe(container, { childList: true })
+  beforeUpdate() {
+    this.elementRefs = [];
   },
 
   methods: {
+    setLevelsRef (index: number, ref: any): void {
+      this.elementRefs[index] = ref.$el
+    },
+
+    setLevelsRefPartial (index: number): (ref: any) => void {
+      return (ref: any) => this.setLevelsRef(index, ref)
+    },
+
+    setAboutRef (ref: any): void {
+      this.elementRefs[KEY_ABOUT_ELEMENT] = ref.$el
+    },
+
     setComponentHeight (): void {
       const container = this.$refs.container as HTMLDivElement | undefined
       this.componentHeight = container != null ? container.clientHeight : Infinity
-    },
-
-    setElementCount (): void {
-      this.elementCount = this.getElementRefs().length
-    },
-
-    getElementRefs (): HtmlRef[] {
-      const refs = this.$refs
-      const list: HtmlRef[] = []
-      for (const key in refs) {
-        if (key.startsWith('element')) {
-          const ref = refs[key] as HtmlRef | null
-          // ref can be null when it was removed from the DOM
-          if (ref != null) {
-            list.push(ref)
-          }
-        }
-      }
-      return list
     },
 
     nextPage (): void {
@@ -158,12 +154,12 @@ export default defineComponent({
     <LevelPoints
       v-for="[i, level] in levels.entries()"
       :key="level.name"
-      :ref="`element${i}`"
+      :ref="setLevelsRefPartial(i)"
       :level="level"
       v-fake-hide="elementHidden[i]"
     />
     <AboutPanel
-      ref="element_about"
+      :ref="setAboutRef"
       v-fake-hide="aboutHidden"
      />
   </div>
