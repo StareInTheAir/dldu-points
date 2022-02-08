@@ -9,7 +9,7 @@
     "lint": "src/run-standard.sh"
   },
   "dependencies": {
-    "ajv": "^8.8.2",
+    "ajv": "^8.10.0",
     "lodash.debounce": "^4.0.8",
     "vue": "3.2.24"
   },
@@ -17,9 +17,9 @@
     "@types/lodash.debounce": "^4.0.6",
     "@vitejs/plugin-vue": "^1.10.2",
     "ts-standard": "^11.0.0",
-    "typescript": "^4.5.4",
-    "vite": "^2.7.10",
-    "vue-tsc": "^0.30.1"
+    "typescript": "^4.5.5",
+    "vite": "^2.7.13",
+    "vue-tsc": "^0.31.2"
   },
   "ts-standard": {
     "ignore": [
