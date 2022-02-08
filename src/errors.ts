@@ -33,7 +33,7 @@ class FetchStatusError extends Error {
 class BadRequestError extends FetchStatusError {
   constructor (message: string) {
     super(message, 400)
-    this.name = 'UnauthorizedError'
+    this.name = 'BadRequestError'
   }
 }
 
