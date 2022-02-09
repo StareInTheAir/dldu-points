@@ -154,7 +154,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div ref="container">
+  <div ref="container" class="container">
     <LevelPoints
       v-for="[i, level] in levels.entries()"
       :key="level.name"
@@ -168,3 +168,10 @@ export default defineComponent({
      />
   </div>
 </template>
+
+
+<style scoped>
+.container {
+  overflow: hidden;
+}
+</style>
