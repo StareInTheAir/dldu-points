@@ -40,32 +40,31 @@ export default defineComponent({
 
   data () {
     return {
-      componentHeight: 0,
       startIndex: 0,
       intervalIdNextPage: undefined as number | undefined,
-      elementCount: 0,
-      rollOverCounter: 0
+      rollOverCounter: 0,
+      pagerSizeChangedEventData: true,
+      resizeObserver: undefined as ResizeObserver | undefined
     }
   },
 
   computed: {
     endIndex (): number {
+      // endIndex depends on the size of the container and each child.
+      // We access this.pagerSizeChangedEventData here to be recomputed, when any size changes.
+      this.pagerSizeChangedEventData;
+
       // For Vues tracking when to recompute this property to work,
       // we need to access all other properties used in the computation,
-      // even when this.getElementRefs().length === 0. So we read componentHeight before the loop.
-      // When endIndex is computed the first time, this.getElementRefs() still returns an empty list,
-      // so when it's first computed, we would never read this.componentHeight.
-      const componentHeight = this.componentHeight
+      // even a loop body is not executed.
       const startIndex = this.startIndex
-      // Access this.levels because endIndex depends on the height of each level.
-      // If a level changes, the endIndex could also change.
-      this.levels.keys()
 
       const elementRefs = this.getElementRefs()
       let end = -1
       let filledHeight = 0
+      const containerHeight = this.getContainerHeight()
       for (const [index, ref] of elementRefs.slice(startIndex).entries()) {
-        if (filledHeight + ref.$el.clientHeight <= componentHeight) {
+        if (filledHeight + ref.$el.clientHeight <= containerHeight) {
           filledHeight += ref.$el.clientHeight
           end = startIndex + index
         } else {
@@ -76,7 +75,7 @@ export default defineComponent({
     },
 
     elementHidden (): boolean[] {
-      const elementCount = this.elementCount
+      const elementCount = this.getElementCount()
       const startIndex = this.startIndex
       const endIndex = this.endIndex
       const hiddenList = Array<boolean>(elementCount)
@@ -88,7 +87,7 @@ export default defineComponent({
 
     aboutHidden (): boolean {
       // The AboutPanel is always the last element
-      const hiddenBasedOnElementHidden = this.elementHidden[this.elementCount - 1]
+      const hiddenBasedOnElementHidden = this.elementHidden[this.elementHidden.length - 1]
       const hiddenBasedOnRollover = this.rollOverCounter !== 0
       return hiddenBasedOnElementHidden || hiddenBasedOnRollover
     }
@@ -105,24 +104,39 @@ export default defineComponent({
   },
 
   mounted () {
+    const debouncedFirePagerSizeChangedEvent = debounce(() => this.firePagerChangedEvent(), 100)
+    this.resizeObserver = new ResizeObserver(debouncedFirePagerSizeChangedEvent);
+
     // Only when in mounted state, refs are available
     const container = this.$refs.container as HTMLDivElement
-
-    // this.setComponentHeight is also called immediately after starting observing
-    new ResizeObserver(debounce(this.setComponentHeight, 300)).observe(container)
-
-    this.setElementCount()
-    new MutationObserver(this.setElementCount).observe(container, { childList: true })
+    new MutationObserver(this.registerResizeObserver).observe(container, { childList: true })
+    // MutationObserver callback is not immediatelly called, so we call it initially manually once
+    this.registerResizeObserver()
   },
 
   methods: {
-    setComponentHeight (): void {
-      const container = this.$refs.container as HTMLDivElement | undefined
-      this.componentHeight = container != null ? container.clientHeight : Infinity
+    registerResizeObserver (): void {
+      const resizeObserver = this.resizeObserver
+      if (resizeObserver != null) {
+        resizeObserver.disconnect()
+
+        // ResizeObserver callback is also called immediately after starting observing
+        const container = this.$refs.container as HTMLDivElement
+        resizeObserver.observe(container)
+
+        for(const elementRef of this.getElementRefs()) {
+          resizeObserver.observe(elementRef.$el)
+        }
+      }
     },
 
-    setElementCount (): void {
-      this.elementCount = this.getElementRefs().length
+    firePagerChangedEvent (): void {
+      this.pagerSizeChangedEventData = !this.pagerSizeChangedEventData
+    },
+
+    getContainerHeight (): number {
+      const container = this.$refs.container as HTMLDivElement | undefined
+      return container != null ? container.clientHeight : Infinity
     },
 
     getElementRefs (): HtmlRef[] {
@@ -140,9 +154,13 @@ export default defineComponent({
       return list
     },
 
+    getElementCount (): number {
+      return this.getElementRefs().length
+    },
+
     nextPage (): void {
       const nextIndex = this.endIndex + 1
-      if (nextIndex < this.elementCount) {
+      if (nextIndex < this.getElementCount()) {
         this.startIndex = nextIndex
       } else {
         this.startIndex = 0
