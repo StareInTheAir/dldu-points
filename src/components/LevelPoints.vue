@@ -46,12 +46,6 @@ export default defineComponent({
     <span class="points">
       {{ achievedPoints }}/{{ totalPoints }}
     </span>
-    <img
-      v-if="bossesVisible"
-      src="../assets/line.svg"
-      alt="Underline of level name"
-      class="underline"
-    />
     <BossPoints
       v-for="boss in filteredBosses"
       :key="level.name + boss.name"
