@@ -5,9 +5,6 @@ import { DarkSoulsLevel } from '../types'
 import LevelPoints from './LevelPoints.vue'
 import FakeHideDirective from '../directives/FakeHide'
 import AboutPanel from './AboutPanel.vue'
-import debounce from 'lodash.debounce'
-
-const KEY_ABOUT_ELEMENT = 5886043
 
 export default defineComponent({
   name: 'LevelsPager',
@@ -38,18 +35,15 @@ export default defineComponent({
 
   data () {
     return {
-      componentHeight: 0,
       startIndex: 0,
       lastIntervalHandle: undefined as number | undefined,
       rollOverCounter: 0,
-      elementRefs: {} as Record<number, HTMLElement>
+      containerHeight: Infinity,
+      pagerElements: new Array<HTMLElement>()
     }
   },
 
   computed: {
-    elementCount (): number {
-      return Object.keys(this.elementRefs).length
-    },
 
     endIndex (): number {
       // For Vues tracking when to recompute this property to work,
@@ -57,19 +51,19 @@ export default defineComponent({
       // even when this.getElementRefs().length === 0. So we read componentHeight before the loop.
       // When endIndex is computed the first time, this.getElementRefs() still returns an empty list,
       // so when it's first computed, we would never read this.componentHeight.
-      const componentHeight = this.componentHeight
+      const containerHeight = this.containerHeight
       const startIndex = this.startIndex
       // Access this.levels because endIndex depends on the height of each level.
       // If a level changes, the endIndex could also change.
       this.levels.keys()
 
-      const elementRefs = this.elementRefs
+      const pagerElements = this.pagerElements
       let end = -1
       let filledHeight = 0
-      for (const [index, ref] of Object.entries(elementRefs).slice(startIndex)) {
-        if (filledHeight + ref.clientHeight <= componentHeight) {
+      for (const [index, ref] of pagerElements.slice(startIndex).entries()) {
+        if (filledHeight + ref.clientHeight <= containerHeight) {
           filledHeight += ref.clientHeight
-          end = startIndex + parseInt(index)
+          end = startIndex + index
         } else {
           break
         }
@@ -78,11 +72,11 @@ export default defineComponent({
     },
 
     elementHidden (): boolean[] {
-      const elementCount = this.elementCount
+      const pagerElementCount = this.pagerElements.length
       const startIndex = this.startIndex
       const endIndex = this.endIndex
-      const hiddenList = Array<boolean>(elementCount)
-      for (let index = 0; index < elementCount; index += 1) {
+      const hiddenList = Array<boolean>(pagerElementCount)
+      for (let index = 0; index < pagerElementCount; index += 1) {
         hiddenList[index] = index < startIndex || index > endIndex
       }
       return hiddenList
@@ -106,39 +100,26 @@ export default defineComponent({
     }
   },
 
-  mounted () {
-    // Only when in mounted state, refs are available
-    const container = this.$refs.container as HTMLDivElement
-
-    // this.setComponentHeight is also called immediately after starting observing
-    new ResizeObserver(debounce(this.setComponentHeight, 300)).observe(container)
-  },
-
   beforeUpdate () {
-    this.elementRefs = {}
+    this.pagerElements = []
   },
 
   methods: {
-    setLevelsRef (index: number, ref: any): void {
-      this.elementRefs[index] = ref.$el
+    setContainerElement (directElement: any): void {
+      const el: HTMLElement | null = directElement
+      this.containerHeight = el != null ? el.clientHeight : Infinity
     },
 
-    setLevelsRefPartial (index: number): (ref: any) => void {
-      return (ref: any) => this.setLevelsRef(index, ref)
-    },
-
-    setAboutRef (ref: any): void {
-      this.elementRefs[KEY_ABOUT_ELEMENT] = ref.$el
-    },
-
-    setComponentHeight (): void {
-      const container = this.$refs.container as HTMLDivElement | undefined
-      this.componentHeight = container != null ? container.clientHeight : Infinity
+    setPagerElement (ref: any): void {
+      const el: HTMLElement | null = ref.$el
+      if (el != null) {
+        this.pagerElements.push(el)
+      }
     },
 
     nextPage (): void {
       const nextIndex = this.endIndex + 1
-      if (nextIndex < this.elementCount) {
+      if (nextIndex < this.pagerElements.length) {
         this.startIndex = nextIndex
       } else {
         this.startIndex = 0
@@ -150,16 +131,16 @@ export default defineComponent({
 </script>
 
 <template>
-  <div ref="container">
+  <div :ref="setContainerElement">
     <LevelPoints
       v-for="[i, level] in levels.entries()"
       :key="level.name"
-      :ref="setLevelsRefPartial(i)"
+      :ref="setPagerElement"
       :level="level"
       v-fake-hide="elementHidden[i]"
     />
     <AboutPanel
-      :ref="setAboutRef"
+      :ref="setPagerElement"
       v-fake-hide="aboutHidden"
      />
   </div>
