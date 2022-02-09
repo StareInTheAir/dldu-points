@@ -3,6 +3,7 @@ import { ObjectDirective } from 'vue'
 const ANIMATION_DURATION_MS = 314
 const ANIMATION_DURATION_CSS_STRING = `${ANIMATION_DURATION_MS / 1_000}s`
 const ANIMATION_PAUSE_MS = 314
+const ATTRIBUTE_NAME_LAST_TIMEOUT_ID = 'dldu-hide-timeout-id'
 
 function fadeIn (el: HTMLElement): void {
   el.style.opacity = '1'
@@ -29,6 +30,15 @@ function unhideElement (el: HTMLElement): void {
   el.style.top = '0'
 }
 
+function clearAndSetTimeout (handler: Function, timeout: number, el: HTMLElement): void {
+  const lastTimeoutId = el.getAttribute(ATTRIBUTE_NAME_LAST_TIMEOUT_ID)
+  if (lastTimeoutId != null) {
+    clearTimeout(parseInt(lastTimeoutId))
+  }
+  const newTimeoutId = setTimeout(handler, timeout, el)
+  el.setAttribute(ATTRIBUTE_NAME_LAST_TIMEOUT_ID, `${newTimeoutId}`)
+}
+
 const FakeHideDirective: ObjectDirective<HTMLElement, boolean> = {
   mounted (el) {
     setupOpacityTranstion(el)
@@ -40,13 +50,13 @@ const FakeHideDirective: ObjectDirective<HTMLElement, boolean> = {
     if (binding.value) {
       // el should be fake hidden
       fadeOut(el)
-      setTimeout(hideElement, ANIMATION_DURATION_MS, el)
+      clearAndSetTimeout(hideElement, ANIMATION_DURATION_MS, el)
     } else {
       // el should visible
-      setTimeout(() => {
+      clearAndSetTimeout((el: HTMLElement) => {
         unhideElement(el)
         fadeIn(el)
-      }, ANIMATION_DURATION_MS + ANIMATION_PAUSE_MS)
+      }, ANIMATION_DURATION_MS + ANIMATION_PAUSE_MS, el)
     }
   }
 }
