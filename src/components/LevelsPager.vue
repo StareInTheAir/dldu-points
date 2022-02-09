@@ -42,7 +42,7 @@ export default defineComponent({
     return {
       componentHeight: 0,
       startIndex: 0,
-      lastIntervalHandle: undefined as number | undefined,
+      intervalIdNextPage: undefined as number | undefined,
       elementCount: 0,
       rollOverCounter: 0
     }
@@ -98,8 +98,8 @@ export default defineComponent({
     secondsPerPage: {
       immediate: true,
       handler () {
-        clearInterval(this.lastIntervalHandle)
-        this.lastIntervalHandle = setInterval(this.nextPage, this.secondsPerPage * 1_000)
+        clearInterval(this.intervalIdNextPage)
+        this.intervalIdNextPage = setInterval(this.nextPage, this.secondsPerPage * 1_000)
       }
     }
   },

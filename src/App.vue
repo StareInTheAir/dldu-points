@@ -22,7 +22,8 @@ export default defineComponent({
     return {
       dlduData: undefined as DlduData | undefined,
       errors: new Set<string>(),
-      secondsPerPage: getSecondsPerPage() ?? 10
+      secondsPerPage: getSecondsPerPage() ?? 10,
+      timeoutIdSetDlduData: undefined as number | undefined
     }
   },
 
@@ -56,7 +57,8 @@ export default defineComponent({
         const newDlduData = await getDlduData()
         if (this.didAchievedPointsChange(newDlduData)) {
           void (this.$refs.animation as any).play()
-          setTimeout(() => {
+          clearTimeout(this.timeoutIdSetDlduData)
+          this.timeoutIdSetDlduData = setTimeout(() => {
             this.dlduData = newDlduData
           }, 1_000)
         } else {
