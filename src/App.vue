@@ -146,6 +146,7 @@ body {
 }
 .pager {
   flex: 1;
+  overflow: hidden;
 }
 .total, .loading {
   text-align: end;
