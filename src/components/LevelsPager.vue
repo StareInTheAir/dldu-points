@@ -115,7 +115,7 @@ export default defineComponent({
   },
 
   beforeUpdate () {
-    this.elementRefs = []
+    this.elementRefs = {}
   },
 
   methods: {
