@@ -114,8 +114,8 @@ export default defineComponent({
     new ResizeObserver(debounce(this.setComponentHeight, 300)).observe(container)
   },
 
-  beforeUpdate() {
-    this.elementRefs = [];
+  beforeUpdate () {
+    this.elementRefs = []
   },
 
   methods: {
