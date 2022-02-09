@@ -52,7 +52,7 @@ export default defineComponent({
     endIndex (): number {
       // endIndex depends on the size of the container and each child.
       // We access this.pagerSizeChangedEventData here to be recomputed, when any size changes.
-      this.pagerSizeChangedEventData;
+      this.pagerSizeChangedEventData.valueOf()
 
       // For Vues tracking when to recompute this property to work,
       // we need to access all other properties used in the computation,
@@ -105,7 +105,7 @@ export default defineComponent({
 
   mounted () {
     const debouncedFirePagerSizeChangedEvent = debounce(() => this.firePagerChangedEvent(), 100)
-    this.resizeObserver = new ResizeObserver(debouncedFirePagerSizeChangedEvent);
+    this.resizeObserver = new ResizeObserver(debouncedFirePagerSizeChangedEvent)
 
     // Only when in mounted state, refs are available
     const container = this.$refs.container as HTMLDivElement
@@ -124,7 +124,7 @@ export default defineComponent({
         const container = this.$refs.container as HTMLDivElement
         resizeObserver.observe(container)
 
-        for(const elementRef of this.getElementRefs()) {
+        for (const elementRef of this.getElementRefs()) {
           resizeObserver.observe(elementRef.$el)
         }
       }
