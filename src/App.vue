@@ -136,6 +136,8 @@ body {
   background-color: #222;
   font-family: "EBGaramond", serif;
   color: #fff;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 2px #000;
   display: flex;
   flex-direction: column;
   overflow: hidden;
