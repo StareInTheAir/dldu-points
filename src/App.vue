@@ -136,8 +136,14 @@ body {
   background-color: #222;
   font-family: "EBGaramond", serif;
   color: #fff;
-  paint-order: stroke fill;
-  -webkit-text-stroke: 2px #000;
+  text-shadow:
+    1px 0px #000,
+    0.540302px 0.841471px #000,
+    -0.416147px 0.909297px #000,
+    -0.989993px 0.14112px #000,
+    -0.653644px -0.756803px #000,
+    0.283662px -0.958924px #000,
+    0.96017px -0.279416px #000;
   display: flex;
   flex-direction: column;
   overflow: hidden;
