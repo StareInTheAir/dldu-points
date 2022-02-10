@@ -8,6 +8,7 @@ import { getDlduData } from './google-sheets'
 import { achievedRunPoints, totalRunPoints } from './points'
 import { getSecondsPerPage, isSheetIdSuppliedAndValid } from './query-params'
 import { DlduData } from './types'
+import ProgressBar from './components/ProgressBar.vue'
 
 export default defineComponent({
   name: 'App',
@@ -15,8 +16,9 @@ export default defineComponent({
   components: {
     LevelsPager,
     AboutPanel,
-    PointsAnimation
-  },
+    PointsAnimation,
+    ProgressBar
+},
 
   data () {
     return {
@@ -115,6 +117,9 @@ export default defineComponent({
     <p class="total">
       Gesamtpunkte: <span class="animationPosition">{{ achievedPoints }}</span>/{{ totalPoints }}
     </p>
+    <ProgressBar
+      :levels="dlduData.levels"
+    />
     <LevelsPager
       :levels="dlduData.levels"
       :secondsPerPage="secondsPerPage"
