@@ -14,7 +14,7 @@ export default defineComponent({
     }
   },
 
-  data() {
+  data () {
     return {
       canvas: undefined as HTMLCanvasElement | undefined,
       context: null as CanvasRenderingContext2D | null
@@ -24,24 +24,24 @@ export default defineComponent({
   methods: {
     setupCanvas () {
       if (this.canvas == null || this.context == null) {
-        return;
+        return
       }
 
       const dpr = window.devicePixelRatio
-      var rect = this.canvas.getBoundingClientRect()
+      const rect = this.canvas.getBoundingClientRect()
       this.canvas.width = rect.width * dpr
       this.canvas.height = rect.height * dpr
       this.context.scale(dpr, dpr)
     },
 
-    drawProgressBar() {
+    drawProgressBar () {
       if (this.canvas == null || this.context == null) {
-        return;
+        return
       }
 
       const width = this.canvas.clientWidth
       const height = this.canvas.clientHeight
-      const totalPoints = totalRunPoints({levels: this.levels})
+      const totalPoints = totalRunPoints({ levels: this.levels })
       const pixelsPerPoints = width / totalPoints
       let drawnPoints = 0
 
@@ -75,7 +75,7 @@ export default defineComponent({
     if (this.canvas != null) {
       this.context = this.canvas.getContext('2d')
 
-      const onResize = () => {
+      const onResize: () => void = () => {
         this.setupCanvas()
         this.drawProgressBar()
       }

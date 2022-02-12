@@ -18,7 +18,7 @@ export default defineComponent({
     AboutPanel,
     PointsAnimation,
     ProgressBar
-},
+  },
 
   data () {
     return {
