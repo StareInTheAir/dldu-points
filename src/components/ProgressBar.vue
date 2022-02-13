@@ -63,19 +63,28 @@ export default defineComponent({
       }
 
       this.context.save()
-      const totalPoints = totalRunPoints({ levels: this.levels })
-      this.context.scale(width / totalPoints, 1)
 
+      const gradient = this.context.createLinearGradient(0, 0, 0, height)
+      gradient.addColorStop(0, '#527262')
+      gradient.addColorStop(.56, '#324b3c')
+      gradient.addColorStop(.70, '#324b3c')
+      gradient.addColorStop(1, '#3d574d')
+      this.context.fillStyle = gradient
+
+      const totalPoints = totalRunPoints({ levels: this.levels })
+      const pixelsPerPoint = width / totalPoints
+
+      let drawnPixels = 0
       let drawnPoints = 0
       for (const level of this.levels) {
         for (const boss of level.bosses) {
-          if (boss.beaten) {
-            this.context.fillStyle = 'green'
-          } else {
-            this.context.fillStyle = 'gray'
-          }
-          this.context.fillRect(drawnPoints, 0, boss.points, height)
           drawnPoints += boss.points
+          const targetY = drawnPoints * pixelsPerPoint
+          const width = Math.round(targetY) - drawnPixels
+          if (boss.beaten) {
+            this.context.fillRect(drawnPixels, 0, width, height)
+          }
+          drawnPixels += width
         }
       }
 
