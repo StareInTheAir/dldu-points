@@ -64,11 +64,18 @@ You can share access to the Google sheet with moderators and trusted viewers, so
 
 ## Configuration options
 
+
 ### Seconds per page
 
 By default each page is displayed 10 seconds. This delay can be changed by adding an additional query parameter to the URL. Append `&secondsPerPage=5` to the URL to half the display time of each page:
 
 <img alt="Screenshot of OBS browser source windows with secondsPerPage parameter highlighted" src="docs/07-seconds-per-page.png" width="350" />
+
+### Progress bar
+
+A progress bar that visualizes how many points where already achiveved can be shown in addition. Each boss has its own position in the progress bar, i.e. early bosses appears on the left and later ones on the right. The bar is not shown by default. Append `&showProgressBar` to the URL to enable it (same location as with seconds per page):
+
+<img alt="Screenshot of the progress bar with early bosses beaten visualized as green sections" src="docs/09-progress-bar.png" width="350" />
 
 ### Text size
 
