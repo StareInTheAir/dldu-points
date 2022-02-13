@@ -6,7 +6,7 @@ import PointsAnimation from './components/PointsAnimation.vue'
 import { BadRequestError, ForbiddenError } from './errors'
 import { getDlduData } from './google-sheets'
 import { achievedRunPoints, totalRunPoints } from './points'
-import { getSecondsPerPage, isSheetIdSuppliedAndValid } from './query-params'
+import { getSecondsPerPage, isSheetIdSuppliedAndValid, isShowProgressSupplied } from './query-params'
 import { DlduData } from './types'
 import ProgressBar from './components/ProgressBar.vue'
 
@@ -25,6 +25,7 @@ export default defineComponent({
       dlduData: undefined as DlduData | undefined,
       errors: new Set<string>(),
       secondsPerPage: getSecondsPerPage() ?? 10,
+      showProgressBar: isShowProgressSupplied(),
       timeoutIdSetDlduData: undefined as number | undefined
     }
   },
@@ -118,6 +119,7 @@ export default defineComponent({
       Gesamtpunkte: <span class="animationPosition">{{ achievedPoints }}</span>/{{ totalPoints }}
     </p>
     <ProgressBar
+      v-if="showProgressBar"
       class="progress"
       :levels="dlduData.levels"
     />

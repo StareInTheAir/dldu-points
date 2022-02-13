@@ -35,4 +35,8 @@ function getSecondsPerPage (): number | undefined {
   return getIntParam('secondsPerPage')
 }
 
-export { isSheetIdSuppliedAndValid, getSheetId, getSecondsPerPage }
+function isShowProgressSupplied (): boolean {
+  return urlParams.get('showProgressBar') != null
+}
+
+export { isSheetIdSuppliedAndValid, getSheetId, getSecondsPerPage, isShowProgressSupplied }
