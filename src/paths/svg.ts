@@ -1,6 +1,5 @@
 import svgTopString from './top.svg?raw'
-import svgEndString from './end.svg?raw'
-import svgSeparatorString from './separator.svg?raw'
+import svgCornerString from './corner.svg?raw'
 
 interface PathWithViewBox {
   path: Path2D
@@ -20,5 +19,4 @@ function parseSvg (svgContent: string): PathWithViewBox {
 }
 
 export const SVG_TOP = parseSvg(svgTopString)
-export const SVG_END = parseSvg(svgEndString)
-export const SVG_SEPARATOR = parseSvg(svgSeparatorString)
+export const SVG_CORNER = parseSvg(svgCornerString)

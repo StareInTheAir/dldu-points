@@ -1,8 +1,8 @@
 <script lang="ts">
 import debounce from 'lodash.debounce'
 import { defineComponent, PropType } from 'vue'
-import { SVG_END, SVG_SEPARATOR, SVG_TOP } from '../paths/svg'
-import { totalLevelPoints, totalRunPoints } from '../points'
+import { SVG_CORNER, SVG_TOP } from '../paths/svg'
+import { totalRunPoints } from '../points'
 import { DarkSoulsLevel } from '../types'
 
 export default defineComponent({
@@ -44,49 +44,17 @@ export default defineComponent({
 
       this.context.save()
 
-      const hOffset = SVG_END.viewBox.width / 2
-      const vOffset = SVG_TOP.viewBox.height / 2
+      const hOffset = SVG_CORNER.viewBox.width / 2
+      const vOffset = SVG_CORNER.viewBox.height / 2
       this.context.translate(hOffset, vOffset)
 
       const widthForProgressBar = this.canvas.width - 2 * hOffset
       const heightForProgressBar = this.canvas.height - 2 * vOffset
       this.drawProgressBar(widthForProgressBar, heightForProgressBar)
-      // this.drawLevelSeparators(widthForProgressBar, heightForProgressBar)
 
       this.context.restore()
 
       this.drawBorder()
-    },
-
-    drawLevelSeparators (width: number, height: number) {
-      if (this.canvas == null || this.context == null) {
-        return
-      }
-      this.context.save()
-
-      this.context.fillStyle = 'black'
-
-      const totalPoints = totalRunPoints({ levels: this.levels })
-      // this.context.scale(width / totalPoints, 1)
-
-      // Normalize SVG_SEPARATOR width to be 1
-      // this.context.scale(1 / SVG_SEPARATOR.viewBox.width, 1)
-
-      // Move to center of separator
-      this.context.translate(-SVG_SEPARATOR.viewBox.width / 2, 0)
-
-      // Draw separators vertically centered
-      this.context.translate(0, (height - SVG_SEPARATOR.viewBox.height) / 2)
-
-      // Draw separator between two levels
-      this.context.translate(0.5, 0)
-
-      for (const level of this.levels.slice(0, this.levels.length - 2)) {
-        const levelPoints = totalLevelPoints(level)
-        this.context.translate(levelPoints, 0)
-        this.context.fill(SVG_SEPARATOR.path)
-      }
-      this.context.restore()
     },
 
     drawProgressBar (width: number, height: number) {
@@ -96,7 +64,7 @@ export default defineComponent({
 
       this.context.save()
       const totalPoints = totalRunPoints({ levels: this.levels })
-      // this.context.scale(width / totalPoints, 1)
+      this.context.scale(width / totalPoints, 1)
 
       let drawnPoints = 0
       for (const level of this.levels) {
@@ -119,35 +87,88 @@ export default defineComponent({
         return
       }
 
+      function rotate (context: CanvasRenderingContext2D, viewBox: DOMRect, degrees: number): void {
+        context.translate(viewBox.width / 2, viewBox.height / 2)
+        context.rotate(degrees * Math.PI / 180)
+        context.translate(-viewBox.width / 2, -viewBox.height / 2)
+      }
+
       this.context.save()
       this.context.fillStyle = 'black'
 
-      const endScaleFactor = this.canvas.clientHeight / SVG_END.viewBox.height
-      this.context.scale(1, endScaleFactor)
-
+      // Draw lower left corner
       this.context.save()
-      this.context.translate(SVG_END.viewBox.width / 2, SVG_END.viewBox.height / 2)
-      this.context.rotate(Math.PI)
-      this.context.translate(-SVG_END.viewBox.width / 2, -SVG_END.viewBox.height / 2)
-      this.context.fill(SVG_END.path)
+      this.context.translate(0, this.canvas.height - SVG_CORNER.viewBox.height)
+      this.context.fill(SVG_CORNER.path)
       this.context.restore()
 
+      // Draw top left corner
       this.context.save()
-      this.context.translate(this.canvas.width - SVG_END.viewBox.width, 0)
-      this.context.fill(SVG_END.path)
+      rotate(this.context, SVG_CORNER.viewBox, 90)
+      this.context.fill(SVG_CORNER.path)
       this.context.restore()
 
+      // Draw top right corner
       this.context.save()
-      this.context.translate(SVG_END.viewBox.width, 0)
-      this.context.fill(SVG_TOP.path)
+      this.context.translate(this.canvas.width - SVG_CORNER.viewBox.width, 0)
+      rotate(this.context, SVG_CORNER.viewBox, 180)
+      this.context.fill(SVG_CORNER.path)
       this.context.restore()
 
+      // Draw lower right corner
       this.context.save()
-      this.context.translate(SVG_END.viewBox.width, SVG_END.viewBox.height - SVG_TOP.viewBox.height)
-      this.context.translate(SVG_TOP.viewBox.width / 2, SVG_TOP.viewBox.height / 2)
-      this.context.rotate(Math.PI)
-      this.context.translate(-SVG_TOP.viewBox.width / 2, -SVG_TOP.viewBox.height / 2)
-      this.context.fill(SVG_TOP.path)
+      this.context.translate(this.canvas.width - SVG_CORNER.viewBox.width, this.canvas.height - SVG_CORNER.viewBox.height)
+      rotate(this.context, SVG_CORNER.viewBox, 270)
+      this.context.fill(SVG_CORNER.path)
+      this.context.restore()
+
+      // Draw horizontal borders
+      this.context.save()
+      // Don't draw over corners => clip to region between corners
+      this.context.beginPath()
+      this.context.rect(SVG_CORNER.viewBox.width, 0, this.canvas.width - 2 * SVG_CORNER.viewBox.width, this.canvas.height)
+      this.context.clip()
+      for (let tile = 0; tile < Math.ceil(this.canvas.width / SVG_TOP.viewBox.width); tile += 1) {
+        // Draw top border
+        this.context.save()
+        this.context.translate(tile * SVG_TOP.viewBox.width, 0)
+        this.context.fill(SVG_TOP.path)
+        this.context.restore()
+
+        // Draw bottom border
+        this.context.save()
+        this.context.translate(tile * SVG_TOP.viewBox.width, this.canvas.height - SVG_TOP.viewBox.height)
+        rotate(this.context, SVG_TOP.viewBox, 180)
+        this.context.fill(SVG_TOP.path)
+        this.context.restore()
+      }
+      this.context.restore()
+
+      // Draw vertical borders
+      this.context.save()
+      // Don't draw over corners => clip to region between corners
+      this.context.beginPath()
+      this.context.rect(0, SVG_CORNER.viewBox.height, this.canvas.width, this.canvas.height - 2 * SVG_CORNER.viewBox.height)
+      this.context.clip()
+      for (let tile = 0; tile < Math.ceil(this.canvas.height / SVG_TOP.viewBox.width); tile += 1) {
+        // Draw right border
+        this.context.save()
+        this.context.translate(this.canvas.width - SVG_TOP.viewBox.height, tile * SVG_TOP.viewBox.width)
+        rotate(this.context, SVG_TOP.viewBox, 90)
+        // Correct origin after rotation, so that border is at top left and not center
+        this.context.translate(-(SVG_TOP.viewBox.height - SVG_TOP.viewBox.width) / 2, (SVG_TOP.viewBox.width - SVG_TOP.viewBox.height) / 2)
+        this.context.fill(SVG_TOP.path)
+        this.context.restore()
+
+        // Draw left border
+        this.context.save()
+        this.context.translate(0, tile * SVG_TOP.viewBox.width)
+        rotate(this.context, SVG_TOP.viewBox, 270)
+        // Correct origin after rotation, so that border is at top left and not center
+        this.context.translate((SVG_TOP.viewBox.height - SVG_TOP.viewBox.width) / 2, -(SVG_TOP.viewBox.width - SVG_TOP.viewBox.height) / 2)
+        this.context.fill(SVG_TOP.path)
+        this.context.restore()
+      }
       this.context.restore()
 
       this.context.restore()
