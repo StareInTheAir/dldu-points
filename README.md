@@ -34,6 +34,7 @@ A deployed and hosted version of the website exists, but it isn't public. Contac
 - Insert your sheet id into the URL: `https://CENSORED_DOMAIN.com/?sheetId=YOUR_SHEET_ID_HERE`
 - Create a new browser source and use the URL you just created.
 - Set the width to 350 and the height to 500. Width and height can be adjusted to your needs. The website automatically uses all available space.
+- Check `Shutdown source when not visible` to save resources.
 
 <img alt="Screenshot of OBS browser source window with all textfields filled" src="docs/06-browser-source.png" width="350" />
 
