@@ -2,7 +2,7 @@
 import debounce from 'lodash.debounce'
 import { defineComponent, PropType } from 'vue'
 import { SVG_CORNER, SVG_TOP } from '../paths/svg'
-import { totalLevelPoints, totalRunPoints } from '../points'
+import { totalRunPoints } from '../points'
 import { DarkSoulsLevel } from '../types'
 
 export default defineComponent({
@@ -51,7 +51,6 @@ export default defineComponent({
       const widthForProgressBar = this.canvas.width - 2 * hOffset
       const heightForProgressBar = this.canvas.height - 2 * vOffset
       this.drawProgressBar(widthForProgressBar, heightForProgressBar)
-      this.drawLevelSeparators(widthForProgressBar, heightForProgressBar)
 
       this.context.restore()
 
@@ -89,28 +88,6 @@ export default defineComponent({
         }
       }
 
-      this.context.restore()
-    },
-
-
-    drawLevelSeparators (width: number, height: number) {
-      if (this.canvas == null || this.context == null) {
-        return
-      }
-      this.context.save()
-
-      this.context.fillStyle = '#000'
-
-      const totalPoints = totalRunPoints({ levels: this.levels })
-      const pixelsPerPoint = width / totalPoints
-
-      // Try to paint separator between to points
-      let previousPoints = 0.5
-
-      for (const level of this.levels.slice(0, this.levels.length - 2)) {
-        previousPoints += totalLevelPoints(level)
-        this.context.fillRect(Math.round(previousPoints * pixelsPerPoint), 0, 1, height)
-      }
       this.context.restore()
     },
 
