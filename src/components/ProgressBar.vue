@@ -28,11 +28,8 @@ export default defineComponent({
         return
       }
 
-      // const dpr = window.devicePixelRatio
-      const dpr = 1
-      this.canvas.width = this.canvas.clientWidth * dpr
-      this.canvas.height = this.canvas.clientHeight * dpr
-      // this.context.scale(dpr, dpr)
+      this.canvas.width = this.canvas.clientWidth
+      this.canvas.height = this.canvas.clientHeight
     },
 
     draw () {
@@ -69,8 +66,8 @@ export default defineComponent({
 
       const gradient = this.context.createLinearGradient(0, 0, 0, height)
       gradient.addColorStop(0, '#527262')
-      gradient.addColorStop(.56, '#324b3c')
-      gradient.addColorStop(.70, '#324b3c')
+      gradient.addColorStop(0.56, '#324b3c')
+      gradient.addColorStop(0.70, '#324b3c')
       gradient.addColorStop(1, '#3d574d')
       this.context.fillStyle = gradient
 
