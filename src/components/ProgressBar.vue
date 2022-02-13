@@ -64,6 +64,9 @@ export default defineComponent({
 
       this.context.save()
 
+      this.context.fillStyle = '#00000066'
+      this.context.fillRect(0, 0, width, height)
+
       const gradient = this.context.createLinearGradient(0, 0, 0, height)
       gradient.addColorStop(0, '#527262')
       gradient.addColorStop(.56, '#324b3c')
