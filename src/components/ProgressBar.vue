@@ -103,18 +103,26 @@ export default defineComponent({
       }
 
       this.context.save()
-      this.context.fillStyle = 'black'
+
+      // Black fill
+      this.context.fillStyle = '#000'
+
+      // with small white storke
+      this.context.strokeStyle = '#fff'
+      this.context.lineWidth = 0.3
 
       // Draw lower left corner
       this.context.save()
       this.context.translate(0, this.canvas.height - SVG_CORNER.viewBox.height)
       this.context.fill(SVG_CORNER.path)
+      this.context.stroke(SVG_CORNER.path)
       this.context.restore()
 
       // Draw top left corner
       this.context.save()
       rotate(this.context, SVG_CORNER.viewBox, 90)
       this.context.fill(SVG_CORNER.path)
+      this.context.stroke(SVG_CORNER.path)
       this.context.restore()
 
       // Draw top right corner
@@ -122,6 +130,7 @@ export default defineComponent({
       this.context.translate(this.canvas.width - SVG_CORNER.viewBox.width, 0)
       rotate(this.context, SVG_CORNER.viewBox, 180)
       this.context.fill(SVG_CORNER.path)
+      this.context.stroke(SVG_CORNER.path)
       this.context.restore()
 
       // Draw lower right corner
@@ -129,6 +138,7 @@ export default defineComponent({
       this.context.translate(this.canvas.width - SVG_CORNER.viewBox.width, this.canvas.height - SVG_CORNER.viewBox.height)
       rotate(this.context, SVG_CORNER.viewBox, 270)
       this.context.fill(SVG_CORNER.path)
+      this.context.stroke(SVG_CORNER.path)
       this.context.restore()
 
       // Draw horizontal borders
@@ -142,6 +152,7 @@ export default defineComponent({
         this.context.save()
         this.context.translate(tile * SVG_TOP.viewBox.width, 0)
         this.context.fill(SVG_TOP.path)
+        this.context.stroke(SVG_TOP.path)
         this.context.restore()
 
         // Draw bottom border
@@ -149,6 +160,7 @@ export default defineComponent({
         this.context.translate(tile * SVG_TOP.viewBox.width, this.canvas.height - SVG_TOP.viewBox.height)
         rotate(this.context, SVG_TOP.viewBox, 180)
         this.context.fill(SVG_TOP.path)
+        this.context.stroke(SVG_TOP.path)
         this.context.restore()
       }
       this.context.restore()
@@ -167,6 +179,7 @@ export default defineComponent({
         // Correct origin after rotation, so that border is at top left and not center
         this.context.translate(-(SVG_TOP.viewBox.height - SVG_TOP.viewBox.width) / 2, (SVG_TOP.viewBox.width - SVG_TOP.viewBox.height) / 2)
         this.context.fill(SVG_TOP.path)
+        this.context.stroke(SVG_TOP.path)
         this.context.restore()
 
         // Draw left border
@@ -176,6 +189,7 @@ export default defineComponent({
         // Correct origin after rotation, so that border is at top left and not center
         this.context.translate((SVG_TOP.viewBox.height - SVG_TOP.viewBox.width) / 2, -(SVG_TOP.viewBox.width - SVG_TOP.viewBox.height) / 2)
         this.context.fill(SVG_TOP.path)
+        this.context.stroke(SVG_TOP.path)
         this.context.restore()
       }
       this.context.restore()
