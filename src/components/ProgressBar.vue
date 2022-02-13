@@ -74,7 +74,7 @@ export default defineComponent({
           } else {
             this.context.fillStyle = 'gray'
           }
-          this.context.fillRect(drawnPoints, 0, drawnPoints + boss.points, height)
+          this.context.fillRect(drawnPoints, 0, boss.points, height)
           drawnPoints += boss.points
         }
       }
