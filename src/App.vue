@@ -170,7 +170,7 @@ body {
   margin-top: 20px;
 }
 .progress {
-  height: 64px;
+  height: 48px;
 }
 .errors {
   text-align: end;
