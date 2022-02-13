@@ -118,6 +118,7 @@ export default defineComponent({
       Gesamtpunkte: <span class="animationPosition">{{ achievedPoints }}</span>/{{ totalPoints }}
     </p>
     <ProgressBar
+      class="progress"
       :levels="dlduData.levels"
     />
     <LevelsPager
@@ -167,6 +168,9 @@ body {
   font-weight: 600;
   font-size: 200%;
   margin-top: 20px;
+}
+.progress {
+  height: 64px;
 }
 .errors {
   text-align: end;
