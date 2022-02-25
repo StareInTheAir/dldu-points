@@ -57,7 +57,7 @@ function googleDataToDlduData (googleData: GoogleSheetsDlduData): DlduData {
     const type = row[0].trim()
     const name = row[1].trim()
     const points = parseInt(row[2].trim())
-    const checked = row[3] === 'TRUE'
+    const checked = row[3] === 'TRUE' || row[4] === 'TRUE'
 
     if (type === 'level') {
       if (name.length === 0) {
