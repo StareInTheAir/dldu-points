@@ -32,6 +32,9 @@ export default defineComponent({
       } else {
         return []
       }
+    },
+    isIncomplete (): boolean {
+      return this.achievedPoints !== this.totalPoints
     }
   }
 })
@@ -43,7 +46,7 @@ export default defineComponent({
     <span class="name">
       {{ level.name }}
     </span>
-    <span class="points">
+    <span class="points" :class="{ incomplete: isIncomplete }">
       {{ achievedPoints }}/{{ totalPoints }}
     </span>
     <BossPoints
@@ -78,9 +81,7 @@ export default defineComponent({
 .points {
   text-align: start;
 }
-.underline {
-  width: 100%;
-  height: 4px;
-  grid-column: span 2;
+.incomplete {
+  color: rgba(255, 255, 255, 0.5);
 }
 </style>
