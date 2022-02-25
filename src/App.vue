@@ -5,9 +5,9 @@ import AboutPanel from './components/AboutPanel.vue'
 import PointsAnimation from './components/PointsAnimation.vue'
 import { BadRequestError, ForbiddenError } from './errors'
 import { getDlduData } from './google-sheets'
-import { achievedRunPoints, totalRunPoints } from './points'
-import { getSecondsPerPage, isSheetIdSuppliedAndValid, isShowProgressSupplied } from './query-params'
-import { DlduData } from './types'
+import { achievedLevelPoints, achievedRunPoints, totalRunPoints } from './points'
+import { getSecondsPerPage, isHideLevelsWithNoPointsSupplied, isSheetIdSuppliedAndValid, isShowProgressSupplied } from './query-params'
+import { DlduData, DarkSoulsLevel } from './types'
 import ProgressBar from './components/ProgressBar.vue'
 
 export default defineComponent({
@@ -26,6 +26,7 @@ export default defineComponent({
       errors: new Set<string>(),
       secondsPerPage: getSecondsPerPage() ?? 10,
       showProgressBar: isShowProgressSupplied(),
+      hideLevelsWithNoPoints: isHideLevelsWithNoPointsSupplied(),
       timeoutIdSetDlduData: undefined as number | undefined
     }
   },
@@ -43,6 +44,23 @@ export default defineComponent({
         return 0
       }
       return achievedRunPoints(this.dlduData)
+    },
+
+    allLevels (): DarkSoulsLevel[] {
+      if (this.dlduData == null) {
+        return []
+      }
+      return this.dlduData.levels
+    },
+
+    filteredLevels (): DarkSoulsLevel[] {
+      if (this.dlduData == null) {
+        return []
+      }
+      if (this.hideLevelsWithNoPoints) {
+        return this.dlduData.levels.filter((level) => achievedLevelPoints(level) !== 0)
+      }
+      return this.dlduData.levels
     }
   },
 
@@ -121,10 +139,10 @@ export default defineComponent({
     <ProgressBar
       v-if="showProgressBar"
       class="progress"
-      :levels="dlduData.levels"
+      :levels="allLevels"
     />
     <LevelsPager
-      :levels="dlduData.levels"
+      :levels="filteredLevels"
       :secondsPerPage="secondsPerPage"
       class="pager"
     />

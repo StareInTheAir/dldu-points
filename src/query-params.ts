@@ -39,4 +39,8 @@ function isShowProgressSupplied (): boolean {
   return urlParams.get('showProgressBar') != null
 }
 
-export { isSheetIdSuppliedAndValid, getSheetId, getSecondsPerPage, isShowProgressSupplied }
+function isHideLevelsWithNoPointsSupplied (): boolean {
+  return urlParams.get('hideLevelsWithNoPoints') != null
+}
+
+export { isSheetIdSuppliedAndValid, getSheetId, getSecondsPerPage, isShowProgressSupplied, isHideLevelsWithNoPointsSupplied }
