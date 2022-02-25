@@ -12,7 +12,7 @@ https://youtu.be/yrKhPNEN7qU
 
 ## Google Docs setup
 
-- Open the [template Google Docs sheet](https://docs.google.com/spreadsheets/d/1_Tn673N1v82LwOvFGkrqM5unOFDev61IUvkAHs8Z7V0).
+- Open the [template Google Docs sheet](https://docs.google.com/spreadsheets/d/1WdxwX-zDKJikdGAqnbnBa7McvssiBd70TqeyY1R0y0o).
 - Select `File` → `Make a copy`
 
 <img alt="Screenshot of make a copy menu item in Google Docs" src="docs/01-make-a-copy.png" width="350" />
@@ -31,7 +31,7 @@ https://youtu.be/yrKhPNEN7qU
 
 A deployed and hosted version of the website exists, but it isn't public. Contact stareintheair#7130 on Discord to request access.
 
-- Insert your sheet id into the URL: `https://CENSORED_DOMAIN.com/?sheetId=YOUR_SHEET_ID_HERE`
+- Insert your sheet id into the URL I will send you.
 - Create a new browser source and use the URL you just created.
 - Set the width to 350 and the height to 500. Width and height can be adjusted to your needs. The website automatically uses all available space.
 - Check `Shutdown source when not visible` to save resources.
