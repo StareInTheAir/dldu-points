@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-indent */
+
 async function getApiKeyHash (): Promise<string> {
   const textEncoder = new TextEncoder()
   const apiKeyBytes = textEncoder.encode(API_KEY)
