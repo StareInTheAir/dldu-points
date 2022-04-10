@@ -29,7 +29,7 @@ https://youtu.be/yrKhPNEN7qU
 
 ## OBS setup
 
-A deployed and hosted version of the website exists, but it isn't public. Contact stareintheair#7130 on Discord to request access.
+A deployed and hosted version of the website exists, but it isn't public. Contact stareintheair#7130 on Discord to request access. I do spreak German 😉
 
 - Insert your sheet id into the URL I will send you.
 - Create a new browser source and use the URL you just created.
@@ -101,3 +101,11 @@ The text size can be increased and decreased if necessary. This is better than s
 ### Left aligned layout
 
 The default layout is designed to be placed on the right side of the screen. If you want to put it on the left, use the following CSS body style to switch the columns: `direction: rtl;` Put in the same place as in the screenshot above.
+
+## Wanted contributions
+
+The following content contribution would be highly appreciated:
+
+- German translation (boss and level names) of the Dark Souls 1 template
+- A template for Dark Souls 3 in German and/or English
+- A template for Elden Ring in German and/or English
