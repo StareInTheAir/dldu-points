@@ -56,8 +56,8 @@ You can share access to the Google sheet with moderators and trusted viewers, so
 ### Levels
 
 - Bosses in a level will only be shown on the website if at least one boss, but not all bosses in that level were beaten.
-- You can force always showing bosses of a level, by checking the checkmark in the fourth column.
-- If you want the same behavior as in version 1, check the boxes of every level.
+- You can force always showing bosses of a level, by checking the checkmark in the fifth column.
+- If you want the same behavior as in version 1, check all the boxes in the fifth column.
 - New bosses can be added as a new row in the Google sheet and are automatically shown on the website. Make sure to set the type in the first column to `level`.
 - Levels with no bosses will be ignored.
 - The order of levels can be switched by reordering the rows.
