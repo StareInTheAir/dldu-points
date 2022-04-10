@@ -35,12 +35,12 @@ function getSecondsPerPage (): number | undefined {
   return getIntParam('secondsPerPage')
 }
 
-function isShowProgressSupplied (): boolean {
-  return urlParams.get('showProgressBar') != null
+function isHideProgressBarSupplied (): boolean {
+  return urlParams.get('hideProgressBar') != null
 }
 
 function isHideLevelsWithNoPointsSupplied (): boolean {
   return urlParams.get('hideLevelsWithNoPoints') != null
 }
 
-export { isSheetIdSuppliedAndValid, getSheetId, getSecondsPerPage, isShowProgressSupplied, isHideLevelsWithNoPointsSupplied }
+export { isSheetIdSuppliedAndValid, getSheetId, getSecondsPerPage, isHideProgressBarSupplied, isHideLevelsWithNoPointsSupplied }

@@ -38,6 +38,12 @@ A deployed and hosted version of the website exists, but it isn't public. Contac
 
 <img alt="Screenshot of OBS browser source window with all textfields filled" src="docs/06-browser-source.png" width="350" />
 
+### Progress bar
+
+A progress bar that visualizes how many points where already achiveved is shown below the total points. Each boss has its own position in the progress bar, i.e. early bosses appears on the left and later ones on the right:
+
+<img alt="Screenshot of the progress bar with early bosses beaten visualized as green sections" src="docs/09-progress-bar.png" width="350" />
+
 ## Structure of the Google sheet
 
 You can share access to the Google sheet with moderators and trusted viewers, so they can update the score live during the stream for you.
@@ -76,15 +82,13 @@ By default each page is displayed 10 seconds. This delay can be changed by addin
 
 <img alt="Screenshot of OBS browser source windows with secondsPerPage parameter highlighted" src="docs/07-seconds-per-page.png" width="350" />
 
-### Progress bar
+### Hide progress bar
 
-A progress bar that visualizes how many points where already achiveved can be shown in addition. Each boss has its own position in the progress bar, i.e. early bosses appears on the left and later ones on the right. The bar is not shown by default. Append `&showProgressBar` to the URL to enable it (same location as with seconds per page):
-
-<img alt="Screenshot of the progress bar with early bosses beaten visualized as green sections" src="docs/09-progress-bar.png" width="350" />
+To hide the green points progress bar, append `&hideProgressBar` to the URL (same location as with seconds per page).
 
 ### Hide levels with no points
 
-To only show levels with points and hide all levels with no points, add `&hideLevelsWithNoPoints` to the URL. When starting a new run, no levels will be visible until the first boss is beaten.
+To only show levels with points and hide all levels with no points, add `&hideLevelsWithNoPoints` to the URL (same location as with seconds per page). When starting a new run, no levels will be visible until the first boss is beaten.
 
 ### Text size
 

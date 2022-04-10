@@ -6,7 +6,7 @@ import PointsAnimation from './components/PointsAnimation.vue'
 import { BadRequestError, ForbiddenError } from './errors'
 import { getDlduData } from './google-sheets'
 import { achievedLevelPoints, achievedRunPoints, totalRunPoints } from './points'
-import { getSecondsPerPage, isHideLevelsWithNoPointsSupplied, isSheetIdSuppliedAndValid, isShowProgressSupplied } from './query-params'
+import { getSecondsPerPage, isHideLevelsWithNoPointsSupplied, isSheetIdSuppliedAndValid, isHideProgressBarSupplied } from './query-params'
 import { DlduData, DarkSoulsLevel } from './types'
 import ProgressBar from './components/ProgressBar.vue'
 
@@ -25,7 +25,7 @@ export default defineComponent({
       dlduData: undefined as DlduData | undefined,
       errors: new Set<string>(),
       secondsPerPage: getSecondsPerPage() ?? 10,
-      showProgressBar: isShowProgressSupplied(),
+      hideProgressBar: isHideProgressBarSupplied(),
       hideLevelsWithNoPoints: isHideLevelsWithNoPointsSupplied(),
       timeoutIdSetDlduData: undefined as number | undefined
     }
@@ -137,7 +137,7 @@ export default defineComponent({
       Gesamtpunkte: <span class="animationPosition">{{ achievedPoints }}</span>/{{ totalPoints }}
     </p>
     <ProgressBar
-      v-if="showProgressBar"
+      v-if="!hideProgressBar"
       class="progress"
       :levels="allLevels"
     />
