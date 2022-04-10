@@ -82,6 +82,10 @@ A progress bar that visualizes how many points where already achiveved can be sh
 
 <img alt="Screenshot of the progress bar with early bosses beaten visualized as green sections" src="docs/09-progress-bar.png" width="350" />
 
+### Hide levels with no points
+
+To only show levels with points and hide all levels with no points, add `&hideLevelsWithNoPoints` to the URL. When starting a new run, no levels will be visible until the first boss is beaten.
+
 ### Text size
 
 The text size can be increased and decreased if necessary. This is better than scaling the browser source itself, because it will keep the text sharp. Use the OBS custom CSS override to change the text size. Add `font-size: 1.3rem;` to the body style section as seen an the screenshot here:
