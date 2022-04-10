@@ -47,6 +47,6 @@ Builds the application. Output is available in the `dist` folder.
 
 ## Browser dev tools
 
-The [Vue devtools browser extension](https://devtools.vuejs.org/guide/installation.html) can be used to view a lot of the internals of dldu-points. You need to install the beta version of the extension (v6.x) because only this version works with Vue 3.
+The [Vue devtools browser extension](https://devtools.vuejs.org/guide/installation.html) can be used to view a lot of the internals of dldu-points.
 
 To open the Vue devtools, open the default browser devtools with `F12` and select the new Vue tab on the right.
