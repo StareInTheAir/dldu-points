@@ -52,12 +52,17 @@ You can share access to the Google sheet with moderators and trusted viewers, so
 - If a boss was beaten check the checkmark in the fourth column.
 - New bosses can be added as a new row in the Google sheet and are automatically shown on the website. Make sure to set the type in the first column to `boss`.
 - The order of bosses can be switched by reordering the rows.
+- Alive bosses will appear in gray.
+- Beaten bosses will appear in white.
+
 
 ### Levels
 
 - Bosses in a level will only be shown on the website if at least one boss, but not all bosses in that level were beaten.
 - You can force always showing bosses of a level, by checking the checkmark in the fifth column.
 - If you want the same behavior as in version 1, check all the boxes in the fifth column.
+- The points of a level will appear in gray, when bosses there are still alive.
+- The points of a level will appear in white, when all bosses there still beaten.
 - New bosses can be added as a new row in the Google sheet and are automatically shown on the website. Make sure to set the type in the first column to `level`.
 - Levels with no bosses will be ignored.
 - The order of levels can be switched by reordering the rows.
