@@ -3,6 +3,8 @@ FROM node:lts-alpine as build-stage
 ARG DLDU_POINTS_API_KEY
 ARG DLDU_POINTS_GIT_HASH
 
+ENV NODE_ENV=production
+
 WORKDIR /app
 COPY . .
 
