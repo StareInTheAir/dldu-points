@@ -7,10 +7,6 @@ import FakeHideDirective from '../directives/FakeHide'
 import AboutPanel from './AboutPanel.vue'
 import debounce from 'lodash.debounce'
 
-interface HtmlRef {
-  $el: HTMLElement
-}
-
 export default defineComponent({
   name: 'LevelsPager',
 
@@ -59,13 +55,13 @@ export default defineComponent({
       // even a loop body is not executed.
       const startIndex = this.startIndex
 
-      const elementRefs = this.getElementRefs()
+      const elements = this.getElements()
       let end = -1
       let filledHeight = 0
       const containerHeight = this.getContainerHeight()
-      for (const [index, ref] of elementRefs.slice(startIndex).entries()) {
-        if (filledHeight + ref.$el.clientHeight <= containerHeight) {
-          filledHeight += ref.$el.clientHeight
+      for (const [index, element] of elements.slice(startIndex).entries()) {
+        if (filledHeight + element.clientHeight <= containerHeight) {
+          filledHeight += element.clientHeight
           end = startIndex + index
         } else {
           break
@@ -124,8 +120,8 @@ export default defineComponent({
         const container = this.$refs.container as HTMLDivElement
         resizeObserver.observe(container)
 
-        for (const elementRef of this.getElementRefs()) {
-          resizeObserver.observe(elementRef.$el)
+        for (const element of this.getElements()) {
+          resizeObserver.observe(element)
         }
       }
     },
@@ -139,23 +135,17 @@ export default defineComponent({
       return container != null ? container.clientHeight : Infinity
     },
 
-    getElementRefs (): HtmlRef[] {
-      const refs = this.$refs
-      const list: HtmlRef[] = []
-      for (const key in refs) {
-        if (key.startsWith('element')) {
-          const ref = refs[key] as HtmlRef | null
-          // ref can be null when it was removed from the DOM
-          if (ref != null) {
-            list.push(ref)
-          }
-        }
+    getElements (): Element[] {
+      const containerRef = this.$refs.container as HTMLDivElement | undefined
+      if (containerRef != null) {
+        return Array.from(containerRef.children)
+      } else {
+        return []
       }
-      return list
     },
 
     getElementCount (): number {
-      return this.getElementRefs().length
+      return this.getElements().length
     },
 
     nextPage (): void {
@@ -176,12 +166,10 @@ export default defineComponent({
     <LevelPoints
       v-for="[i, level] in levels.entries()"
       :key="level.name"
-      :ref="`element${i}`"
       :level="level"
       v-fake-hide="elementHidden[i]"
     />
     <AboutPanel
-      ref="element_about"
       v-fake-hide="aboutHidden"
      />
   </div>
