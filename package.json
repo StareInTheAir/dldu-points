@@ -10,12 +10,12 @@
   },
   "dependencies": {
     "@types/lodash.debounce": "^4.0.6",
-    "@vitejs/plugin-vue": "^1.10.2",
+    "@vitejs/plugin-vue": "^2.3.1",
     "ajv": "^8.11.0",
     "lodash.debounce": "^4.0.8",
-    "vite": "^2.9.1",
-    "vue": "3.2.24",
-    "vue-tsc": "^0.34.2"
+    "vite": "^2.9.5",
+    "vue": "3.2.33",
+    "vue-tsc": "^0.34.6"
   },
   "devDependencies": {
     "ts-standard": "^11.0.0",
