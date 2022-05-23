@@ -18,7 +18,7 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"standard.vscode-standard",
-		"johnsoncodehk.volar"
+		"Vue.volar"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
