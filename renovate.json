@@ -3,7 +3,16 @@
   "extends": [
     "config:base",
     "group:all",
-    "schedule:weekends"
+    "schedule:weekends",
+    ":automergeMinor",
+    ":automergeBranch"
   ],
-  "timezone": "Europe/Berlin"
+  "lockFileMaintenance": {
+    "enabled": true,
+    "extends": [
+      "schedule:weekends"
+    ]
+  },
+  "timezone": "Europe/Berlin",
+  "ignoreTests": true
 }
