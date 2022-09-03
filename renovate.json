@@ -13,8 +13,6 @@
       "schedule:weekends"
     ]
   },
-  "timezone": "Europe/Berlin",
-  "ignoreTests": true,
   "packageRules": [
     {
       "matchPackageNames": [
@@ -25,5 +23,8 @@
       ],
       "groupName": "vite packages"
     }
-  ]
+  ],
+  "timezone": "Europe/Berlin",
+  "ignoreTests": true,
+  "stabilityDays": 5
 }
