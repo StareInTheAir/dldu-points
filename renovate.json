@@ -14,5 +14,16 @@
     ]
   },
   "timezone": "Europe/Berlin",
-  "ignoreTests": true
+  "ignoreTests": true,
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "vite"
+      ],
+      "matchPackagePatterns": [
+        "^@vitejs/"
+      ],
+      "groupName": "vite packages"
+    }
+  ]
 }
