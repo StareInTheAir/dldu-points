@@ -4,14 +4,13 @@
     "config:base",
     ":prHourlyLimitNone",
     "group:allNonMajor",
-    "schedule:weekends",
     ":automergeMinor",
     ":automergeBranch"
   ],
   "lockFileMaintenance": {
     "enabled": true,
-    "extends": [
-      "schedule:weekends"
+    "schedule": [
+      "at 09:00 on Saturday"
     ]
   },
   "packageRules": [
@@ -27,5 +26,8 @@
   ],
   "timezone": "Europe/Berlin",
   "ignoreTests": true,
-  "stabilityDays": 5
+  "stabilityDays": 5,
+  "schedule": [
+    "at 08:00 on Saturday"
+  ]
 }
