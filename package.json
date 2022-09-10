@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "@types/lodash.debounce": "4.0.7",
-    "@vitejs/plugin-vue": "3.0.3",
+    "@vitejs/plugin-vue": "3.1.0",
     "ajv": "8.11.0",
     "lodash.debounce": "4.0.8",
-    "vite": "3.0.9",
+    "vite": "3.1.0",
     "vue": "3.2.39",
     "vue-tsc": "0.40.13"
   },
