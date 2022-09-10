@@ -10,7 +10,7 @@
   "lockFileMaintenance": {
     "enabled": true,
     "schedule": [
-      "after 14:00 on Saturday"
+      "after 12:00 on Saturday"
     ]
   },
   "packageRules": [
@@ -28,6 +28,6 @@
   "ignoreTests": true,
   "stabilityDays": 5,
   "schedule": [
-    "before 14:00 on Saturday"
+    "before 12:00 on Saturday"
   ]
 }
