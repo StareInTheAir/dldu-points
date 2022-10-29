@@ -24,7 +24,7 @@ A Google Cloud Platform API key is required to access data from Google Sheets. T
 AIzaSyAqL193sdtj8fQpeHyoXIg0DOWiI6ujdSU
 ```
 
-This API key only works, when the application is run on `localhost:3000`. This is the default while developing.
+This API key only works, when the application is run on `localhost:5173`. This is the default while developing.
 
 You can also create your own key by following the instructions in [BUILD.md](BUILD.md#api-key).
 
@@ -34,7 +34,7 @@ Open the terminal inside VS Code using the `View` → `Terminal` action from the
 
 ### `npm run dev`
 
-Starts the application in development mode. The dev container extension automatically creates a port forwarding to the container and you can navigate to `http://localhost:3000` on your local machine to see the application running. Changes to the source code will be injected live into the running application. No manual reloads are required.
+Starts the application in development mode. The dev container extension automatically creates a port forwarding to the container and you can navigate to `http://localhost:5173` on your local machine to see the application running. Changes to the source code will be injected live into the running application. No manual reloads are required.
 
 ### `npm run lint`
 
