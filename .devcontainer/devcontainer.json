@@ -2,7 +2,7 @@
 // https://github.com/devcontainers/images/tree/main/src/javascript-node
 {
 	"name": "Node.js",
-	"image": "mcr.microsoft.com/devcontainers/javascript-node:16-bullseye",
+	"image": "mcr.microsoft.com/devcontainers/javascript-node:18",
 
 	"settings": {
 		"terminal.integrated.defaultProfile.linux": "zsh",
