@@ -7,14 +7,14 @@ const encoding = 'utf-8'
 
 let apiKey: string
 if (process.env.DLDU_POINTS_API_KEY != null) {
-  apiKey = `${process.env.DLDU_POINTS_API_KEY}`
+  apiKey = process.env.DLDU_POINTS_API_KEY
 } else {
   apiKey = readFileSync('api.key', { encoding })
 }
 
 let gitHash: string
 if (process.env.DLDU_POINTS_GIT_HASH != null) {
-  gitHash = `${process.env.DLDU_POINTS_GIT_HASH}`
+  gitHash = process.env.DLDU_POINTS_GIT_HASH
 } else {
   gitHash = execSync('git rev-parse --short HEAD', { encoding })
 }

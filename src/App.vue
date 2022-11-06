@@ -27,7 +27,7 @@ export default defineComponent({
       secondsPerPage: getSecondsPerPage() ?? 10,
       hideProgressBar: isHideProgressBarSupplied(),
       hideLevelsWithNoPoints: isHideLevelsWithNoPointsSupplied(),
-      timeoutIdSetDlduData: undefined as number | undefined
+      timeoutIdSetDlduData: undefined as NodeJS.Timeout | undefined
     }
   },
 
@@ -101,7 +101,7 @@ export default defineComponent({
 
     async scheduleGetData (): Promise<void> {
       await this.getData()
-      setInterval(async () => { await this.getData() }, 9_901)
+      setInterval(this.getData, 9_901)
     },
 
     didAchievedPointsChange (newData: DlduData): boolean {
@@ -143,15 +143,17 @@ export default defineComponent({
     />
     <LevelsPager
       :levels="filteredLevels"
-      :secondsPerPage="secondsPerPage"
+      :seconds-per-page="secondsPerPage"
       class="pager"
     />
     <PointsAnimation ref="animation" />
   </template>
-  <p v-else class="loading">
+  <p
+    v-else
+    class="loading"
+  >
     Loading
   </p>
-
 </template>
 
 <style>

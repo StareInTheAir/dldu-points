@@ -24,7 +24,8 @@ export default defineComponent({
     <p>
       <a
         href="https://github.com/StareInTheAir/dldu-points"
-        target="_blank">
+        target="_blank"
+      >
         github.com/StareInTheAir/dldu-points
       </a>
     </p>

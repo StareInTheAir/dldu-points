@@ -42,11 +42,17 @@ export default defineComponent({
 
 <template>
   <div class="grid">
-    <span v-if="bossesVisible" class="spacer" />
+    <span
+      v-if="bossesVisible"
+      class="spacer"
+    />
     <span class="name">
       {{ level.name }}
     </span>
-    <span class="points" :class="{ incomplete: isIncomplete }">
+    <span
+      class="points"
+      :class="{ incomplete: isIncomplete }"
+    >
       {{ achievedPoints }}/{{ totalPoints }}
     </span>
     <BossPoints
@@ -54,7 +60,10 @@ export default defineComponent({
       :key="level.name + boss.name"
       :boss="boss"
     />
-    <span v-if="bossesVisible" class="spacer" />
+    <span
+      v-if="bossesVisible"
+      class="spacer"
+    />
   </div>
 </template>
 

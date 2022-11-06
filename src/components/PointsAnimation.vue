@@ -47,8 +47,14 @@ export default defineComponent({
 </script>
 
 <template>
-  <video class="animation" ref="animation">
-    <source src="../assets/pop.webm" type="video/webm">
+  <video
+    ref="animation"
+    class="animation"
+  >
+    <source
+      src="../assets/pop.webm"
+      type="video/webm"
+    >
   </video>
 </template>
 

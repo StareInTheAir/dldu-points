@@ -22,6 +22,29 @@ export default defineComponent({
     }
   },
 
+  watch: {
+    levels: {
+      immediate: true,
+      handler () {
+        this.draw()
+      }
+    }
+  },
+
+  mounted () {
+    this.canvas = this.$refs.canvas as HTMLCanvasElement | undefined
+
+    if (this.canvas != null) {
+      this.context = this.canvas.getContext('2d')
+
+      const onResize: () => void = () => {
+        this.setupCanvas()
+        this.draw()
+      }
+      new ResizeObserver(debounce(onResize, 100)).observe(this.canvas)
+    }
+  },
+
   methods: {
     setupCanvas () {
       if (this.canvas == null || this.context == null) {
@@ -195,29 +218,6 @@ export default defineComponent({
       this.context.restore()
 
       this.context.restore()
-    }
-  },
-
-  watch: {
-    levels: {
-      immediate: true,
-      handler () {
-        this.draw()
-      }
-    }
-  },
-
-  mounted () {
-    this.canvas = this.$refs.canvas as HTMLCanvasElement | undefined
-
-    if (this.canvas != null) {
-      this.context = this.canvas.getContext('2d')
-
-      const onResize: () => void = () => {
-        this.setupCanvas()
-        this.draw()
-      }
-      new ResizeObserver(debounce(onResize, 100)).observe(this.canvas)
     }
   }
 })

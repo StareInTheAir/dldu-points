@@ -37,7 +37,7 @@ export default defineComponent({
   data () {
     return {
       startIndex: 0,
-      intervalIdNextPage: undefined as number | undefined,
+      intervalIdNextPage: undefined as NodeJS.Timer | undefined,
       rollOverCounter: 0,
       pagerSizeChangedEventData: true,
       resizeObserver: undefined as ResizeObserver | undefined
@@ -162,19 +162,21 @@ export default defineComponent({
 </script>
 
 <template>
-  <div ref="container" class="container">
+  <div
+    ref="container"
+    class="container"
+  >
     <LevelPoints
       v-for="[i, level] in levels.entries()"
       :key="level.name"
-      :level="level"
       v-fake-hide="elementHidden[i]"
+      :level="level"
     />
     <AboutPanel
       v-fake-hide="aboutHidden"
-     />
+    />
   </div>
 </template>
-
 
 <style scoped>
 .container {
