@@ -1,6 +1,3 @@
 {
-  "editor.tabSize": 2,
-  "standard.autoFixOnSave": true,
-  "standard.engine": "ts-standard",
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "editor.tabSize": 2
 }
