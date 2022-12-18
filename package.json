@@ -1,7 +1,8 @@
 {
   "name": "dldu-points",
-  "version": "2.2.2",
   "private": true,
+  "version": "2.2.2",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
