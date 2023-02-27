@@ -4,9 +4,10 @@
 	"name": "Node.js",
 	"image": "mcr.microsoft.com/devcontainers/javascript-node:18",
 
-	"settings": {
-		"terminal.integrated.defaultProfile.linux": "zsh",
-		"terminal.integrated.defaultProfile.osx": "/bin/zsh"
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"configureZshAsDefaultShell": "true"
+		}
 	},
 
 	// Configure tool-specific properties.
