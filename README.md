@@ -29,7 +29,7 @@ https://youtu.be/yrKhPNEN7qU
 
 ## OBS setup
 
-A deployed and hosted version of the website exists, but it isn't public. Contact stareintheair#7130 on Discord to request access. I do spreak German 😉
+A deployed and hosted version of the website exists, but it isn't public. Contact [stareintheair](https://discord.com/users/277888096757088256) on Discord to request access. I do spreak German 😉
 
 - Insert your sheet id into the URL I will send you.
 - Create a new browser source and use the URL you just created.
