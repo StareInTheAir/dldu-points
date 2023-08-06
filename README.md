@@ -1,111 +1,111 @@
 # dldu-points
 
-A web application that shows a total and a detailed score when playing a DLDU run on stream. It's made for being integrated into OBS as a browser source. A Google Docs sheet is used the data source and changing it automatically update the current score.
+A web application that displays a total and detailed score when playing a DLDU run on stream. It's designed to be integrated into OBS as a browser source. A Google Docs sheet is used as the data source and changing it automatically updates the current score.
 
 ## Demo
 
 https://youtu.be/yrKhPNEN7qU
 
 <a href="https://youtu.be/yrKhPNEN7qU">
-  <img alt="Screenshot of dldu-points overlayed over Dark Souls" src="docs/00-demo.jpg" width="600" />
+  <img alt="Screenshot of dldu-points overlaid on Dark Souls" src="docs/00-demo.jpg" width="600" />
 </a>
 
 ## Google Docs setup
 
-- Open the [template Google Docs sheet](https://docs.google.com/spreadsheets/d/1WdxwX-zDKJikdGAqnbnBa7McvssiBd70TqeyY1R0y0o).
+- Open the [Google Docs sheet template](https://docs.google.com/spreadsheets/d/1WdxwX-zDKJikdGAqnbnBa7McvssiBd70TqeyY1R0y0o).
 - Select `File` → `Make a copy`
 
-<img alt="Screenshot of make a copy menu item in Google Docs" src="docs/01-make-a-copy.png" width="350" />
+<img alt="Screenshot of the 'Make a copy' menu item in Google Docs" src="docs/01-make-a-copy.png" width="350" />
 
-- Set a file name and save it to your Google Drive.
-- Change your sheet to be viewable by anyone with the link. To do this, click to Share button in Google Docs at the top right and click this button:
+- Give the document a name and save it to your Google Drive.
+- Modify your sheet so that anyone with the link can view it. To do this, click the Share button in the top right corner of Google Docs, and then click this button:
 
 <img alt="Screenshot of the Google Docs share dialog with the 'Change to anyone with the link' button highlighted" src="docs/04-share-dialog.png" width="500" />
 
-- In the URL of your browsers address bar you will see the sheet id. You need that sheet ID during the OBS setup, so copy it now. It's the numbers and letters (and maybe symbols) between `spreadsheets/d/` and `/edit`:
+- You will see the sheet ID in your browser's address bar (in the URL). You will need this sheet ID during the OBS setup, so copy it now. It's the numbers and letters (and maybe symbols) between `spreadsheets/d/` and `/edit`:
 
-<img alt="Screenshot of browser address bar with sheet id highlighted and selected" src="docs/02-sheet-id.png" />
+<img alt="Screenshot of the browser address bar with the sheet ID highlighted and selected" src="docs/02-sheet-id.png" />
 
 
 ## OBS setup
 
-A deployed and hosted version of the website exists, but it isn't public. Contact [stareintheair](https://discord.com/users/277888096757088256) on Discord to request access. I do spreak German 😉
+A hosted version of the website exists, but it's not public. Contact [stareintheair](https://discord.com/users/277888096757088256) on Discord to request access. I do spreak German 😉
 
-- Insert your sheet id into the URL I will send you.
+- Paste your sheet id into the URL I will send you.
 - Create a new browser source and use the URL you just created.
-- Set the width to 350 and the height to 500. Width and height can be adjusted to your needs. The website automatically uses all available space.
+- Set the width to 350 and the height to 500. Width and height can be adjusted to your needs. The website will automatically use all available space.
 - Check `Shutdown source when not visible` to save resources.
 
-<img alt="Screenshot of OBS browser source window with all textfields filled" src="docs/06-browser-source.png" width="350" />
+<img alt="Screenshot of the OBS browser source window with all text fields filled in" src="docs/06-browser-source.png" width="350" />
 
 ### Progress bar
 
-A progress bar that visualizes how many points where already achiveved is shown below the total points. Each boss has its own position in the progress bar, i.e. early bosses appears on the left and later ones on the right:
+Below the total points is a progress bar that visualizes how many points have already been achieved. Each boss has its own position in the progress bar, i.e. early bosses appear on the left and later bosses on the right:
 
-<img alt="Screenshot of the progress bar with early bosses beaten visualized as green sections" src="docs/09-progress-bar.png" width="350" />
+<img alt="Screenshot of the progress bar with early bosses defeated visualized as green sections" src="docs/09-progress-bar.png" width="350" />
 
-## Structure of the Google sheet
+## Structure of the Google Sheet
 
-You can share access to the Google sheet with moderators and trusted viewers, so they can update the score live during the stream for you.
+You can share access to the Google Sheet with moderators or trusted viewers, so that they can update the score for you live during the stream.
 
 - All bosses defined below a level belong to that level.
-- Incomplete rows and rows with invalid values will be ignored by the website. Valid rows will still be displayed.
+- Incomplete rows and rows with invalid values will be ignored by the website. Valid rows are still displayed.
 
-<img alt="Screenshot of the Google sheet with a few bosses marked as beaten" src="docs/05-sheet-structure.png" width="350" />
+<img alt="Screenshot of the Google Sheet with some bosses marked as defeated" src="docs/05-sheet-structure.png" width="350" />
 
 ### Bosses
 
-- If a boss was beaten check the checkmark in the fourth column.
-- New bosses can be added as a new row in the Google sheet and are automatically shown on the website. Make sure to set the type in the first column to `boss`.
-- The order of bosses can be switched by reordering the rows.
-- Alive bosses will appear in gray.
-- Beaten bosses will appear in white.
+- When a boss is defeated, check the box in the fourth column.
+- New bosses can be added as a new row in the Google Sheet and will be automatically displayed on the website. Make sure the type in the first column is set to `boss`.
+- The order of the bosses can be changed by reordering the rows.
+- Living bosses appear in gray.
+- Defeated bosses appear in white.
 
 
 ### Levels
 
-- Bosses in a level will only be shown on the website if at least one boss, but not all bosses in that level were beaten.
-- You can force always showing bosses of a level, by checking the checkmark in the fifth column.
+- Bosses in a level will only appear on the website if at least one, but not all, of the bosses in that level have been defeated.
+- You can force the bosses of a level to always be displayed by checking the box in the fifth column.
 - If you want the same behavior as in version 1, check all the boxes in the fifth column.
-- The points of a level will appear in gray, when bosses there are still alive.
-- The points of a level will appear in white, when all bosses there still beaten.
-- New bosses can be added as a new row in the Google sheet and are automatically shown on the website. Make sure to set the type in the first column to `level`.
-- Levels with no bosses will be ignored.
-- The order of levels can be switched by reordering the rows.
+- The points of a level will be displayed in gray if at least one boss of that level is still alive.
+- The points of a level will be displayed in white if all the bosses in that level have been defeated.
+- New bosses can be added as a new row in the Google Sheet and will be automatically displayed on the website. Make sure the type in the first column is set to `level`.
+- Levels without bosses will be ignored.
+- The order of the levels can be changed by reordering the rows.
 
 ## Configuration options
 
 
 ### Seconds per page
 
-By default each page is displayed 10 seconds. This delay can be changed by adding an additional query parameter to the URL. Append `&secondsPerPage=5` to the URL to half the display time of each page:
+By default each page is displayed for 10 seconds. This delay can be changed by adding an additional query parameter to the URL. Append `&secondsPerPage=5` to the URL to halve the display time of each page:
 
-<img alt="Screenshot of OBS browser source windows with secondsPerPage parameter highlighted" src="docs/07-seconds-per-page.png" width="350" />
+<img alt="Screenshot of the OBS browser source window with the secondsPerPage parameter highlighted" src="docs/07-seconds-per-page.png" width="350" />
 
 ### Hide progress bar
 
-To hide the green points progress bar, append `&hideProgressBar` to the URL (same location as with seconds per page).
+To hide the green points progress bar, append `&hideProgressBar` to the URL (same location as seconds per page).
 
-### Hide levels with no points
+### Hide levels without points
 
-To only show levels with points and hide all levels with no points, add `&hideLevelsWithNoPoints` to the URL (same location as with seconds per page). When starting a new run, no levels will be visible until the first boss is beaten.
+To show only levels with points and hide all levels without points, add `&hideLevelsWithNoPoints` to the URL (same location as with seconds per page). When starting a new run, no levels will be visible until the first boss is defeated.
 
 ### Text size
 
-The text size can be increased and decreased if necessary. This is better than scaling the browser source itself, because it will keep the text sharp. Use the OBS custom CSS override to change the text size. Add `font-size: 1.3rem;` to the body style section as seen an the screenshot here:
+The text size can be increased or decreased if necessary. This is better than scaling the browser source itself, because it keeps the text sharp. Use the OBS custom CSS override to change the text size. Add `font-size: 1.3rem;` to the body style section as shown in the screenshot here:
 
-<img alt="Screenshot of OBS browser source windows with font-size CSS overwrite highlighted" src="docs/08-font-size.png" width="350" />
+<img alt="Screenshot of the OBS browser source window with font-size CSS override highlighted" src="docs/08-font-size.png" width="350" />
 
-`1rem` doesn't change the size, `0.8rem` decreases the size by 20 %, and `2rem` doubles it. The width and height of the browser source probably need to be adapted as well.
+`1rem` doesn't change the size, `0.8rem` reduces the size by 20%, and `2rem` doubles the size. The width and height of the browser source need to be adjusted as well.
 
 ### Left aligned layout
 
-The default layout is designed to be placed on the right side of the screen. If you want to put it on the left, use the following CSS body style to switch the columns: `direction: rtl;` Put in the same place as in the screenshot above.
+The default layout is designed to be placed on the right side of the screen. If you want to put it on the left side, use the following CSS body style to switch the columns: `direction: rtl;` Put it in the same place as in the screenshot above.
 
 ## Wanted contributions
 
 The following content contribution would be highly appreciated:
 
 - German translation (boss and level names) of the Dark Souls 1 template
-- A template for Dark Souls 3 in German and/or English
-- A template for Elden Ring in German and/or English
+- A Dark Souls 3 template in German and/or English
+- An Elden Ring template in German and/or English
