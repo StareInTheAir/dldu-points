@@ -46,19 +46,20 @@ export default defineComponent({
 
   computed: {
     endIndex (): number {
+      // For Vues tracking when to recompute this property to work,
+      // we need to access all other properties used in the computation.
+      // Even a for loop body is not executed.
+      const startIndex = this.startIndex
+      const elements = this.getElements()
+      const containerHeight = this.getContainerHeight()
+
       // endIndex depends on the size of the container and each child.
-      // We access this.pagerSizeChangedEventData here to be recomputed, when any size changes.
+      // this.pagerSizeChangedEventData is a fake data entry which is used
+      // to trigger a recompution of endIndex when the pager size changes.
       this.pagerSizeChangedEventData.valueOf()
 
-      // For Vues tracking when to recompute this property to work,
-      // we need to access all other properties used in the computation,
-      // even a loop body is not executed.
-      const startIndex = this.startIndex
-
-      const elements = this.getElements()
       let end = startIndex
       let filledHeight = 0
-      const containerHeight = this.getContainerHeight()
       for (const [index, element] of elements.slice(startIndex).entries()) {
         if (filledHeight + element.clientHeight <= containerHeight) {
           filledHeight += element.clientHeight
