@@ -56,7 +56,7 @@ export default defineComponent({
       const startIndex = this.startIndex
 
       const elements = this.getElements()
-      let end = -1
+      let end = startIndex
       let filledHeight = 0
       const containerHeight = this.getContainerHeight()
       for (const [index, element] of elements.slice(startIndex).entries()) {
