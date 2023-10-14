@@ -27,7 +27,7 @@ export default defineComponent({
       secondsPerPage: getSecondsPerPage() ?? 10,
       hideProgressBar: isHideProgressBarSupplied(),
       hideLevelsWithNoPoints: isHideLevelsWithNoPointsSupplied(),
-      timeoutIdSetDlduData: undefined as NodeJS.Timeout | undefined
+      timeoutIdSetDlduData: undefined as number | undefined
     }
   },
 
@@ -79,7 +79,7 @@ export default defineComponent({
         if (this.didAchievedPointsChange(newDlduData)) {
           void (this.$refs.animation as any).play()
           clearTimeout(this.timeoutIdSetDlduData)
-          this.timeoutIdSetDlduData = setTimeout(() => {
+          this.timeoutIdSetDlduData = window.setTimeout(() => {
             this.dlduData = newDlduData
           }, 1_000)
         } else {
@@ -101,7 +101,7 @@ export default defineComponent({
 
     async scheduleGetData (): Promise<void> {
       await this.getData()
-      setInterval(this.getData, 9_901)
+      window.setInterval(this.getData, 9_901)
     },
 
     didAchievedPointsChange (newData: DlduData): boolean {

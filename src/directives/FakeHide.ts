@@ -35,7 +35,7 @@ function clearAndSetTimeout (handler: Function, timeout: number, el: HTMLElement
   if (lastTimeoutId != null) {
     clearTimeout(parseInt(lastTimeoutId))
   }
-  const newTimeoutId = setTimeout(handler, timeout, el)
+  const newTimeoutId = window.setTimeout(handler, timeout, el)
   el.setAttribute(ATTRIBUTE_NAME_LAST_TIMEOUT_ID, `${newTimeoutId}`)
 }
 

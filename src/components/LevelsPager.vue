@@ -37,7 +37,7 @@ export default defineComponent({
   data () {
     return {
       startIndex: 0,
-      intervalIdNextPage: undefined as NodeJS.Timer | undefined,
+      intervalIdNextPage: undefined as number | undefined,
       rollOverCounter: 0,
       pagerSizeChangedEventData: true,
       resizeObserver: undefined as ResizeObserver | undefined
@@ -95,7 +95,7 @@ export default defineComponent({
       immediate: true,
       handler () {
         clearInterval(this.intervalIdNextPage)
-        this.intervalIdNextPage = setInterval(this.nextPage, this.secondsPerPage * 1_000)
+        this.intervalIdNextPage = window.setInterval(this.nextPage, this.secondsPerPage * 1_000)
       }
     }
   },
