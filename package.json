@@ -17,7 +17,7 @@
     "lodash.debounce": "4.0.8",
     "typescript": "5.2.2",
     "vite": "4.5.0",
-    "vue": "3.3.7",
+    "vue": "3.3.8",
     "vue-tsc": "1.8.22"
   },
   "devDependencies": {
