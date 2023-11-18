@@ -28,4 +28,5 @@ const googleSheetsDlduDataSchema: JTDSchemaType<GoogleSheetsDlduData> = {
 
 const validateGoogleSheetsDlduData = ajv.compile<GoogleSheetsDlduData>(googleSheetsDlduDataSchema)
 
-export { GoogleSheetsDlduData, validateGoogleSheetsDlduData }
+export type { GoogleSheetsDlduData }
+export { validateGoogleSheetsDlduData }

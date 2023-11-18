@@ -14,4 +14,4 @@ interface DlduData {
   levels: DarkSoulsLevel[]
 }
 
-export { DarkSoulsBoss, DarkSoulsLevel, DlduData }
+export type { DarkSoulsBoss, DarkSoulsLevel, DlduData }
