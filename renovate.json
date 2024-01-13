@@ -26,7 +26,6 @@
   ],
   "timezone": "Europe/Berlin",
   "ignoreTests": true,
-  "stabilityDays": 5,
   "schedule": [
     "before 12:00 on Saturday"
   ]
