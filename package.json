@@ -16,7 +16,7 @@
     "ajv": "8.12.0",
     "lodash.debounce": "4.0.8",
     "typescript": "5.4.4",
-    "vite": "5.2.7",
+    "vite": "5.2.8",
     "vue": "3.4.21",
     "vue-tsc": "2.0.10"
   },
