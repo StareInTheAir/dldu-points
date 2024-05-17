@@ -11,17 +11,17 @@
   },
   "dependencies": {
     "@types/lodash.debounce": "4.0.9",
-    "@types/node": "20.12.11",
+    "@types/node": "20.12.12",
     "@vitejs/plugin-vue": "5.0.4",
     "ajv": "8.13.0",
     "lodash.debounce": "4.0.8",
     "typescript": "5.4.5",
     "vite": "5.2.11",
     "vue": "3.4.27",
-    "vue-tsc": "2.0.17"
+    "vue-tsc": "2.0.19"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "1.10.2",
+    "@rushstack/eslint-patch": "1.10.3",
     "@vue/eslint-config-standard-with-typescript": "8.0.0"
   }
 }
