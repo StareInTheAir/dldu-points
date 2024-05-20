@@ -4,9 +4,9 @@
   "version": "2.2.4",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview",
+    "preview": "vite preview --host",
     "lint": "eslint --cache ."
   },
   "dependencies": {
