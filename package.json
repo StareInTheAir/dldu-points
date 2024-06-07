@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@types/lodash.debounce": "4.0.9",
-    "@types/node": "20.13.0",
+    "@types/node": "20.14.2",
     "@vitejs/plugin-vue": "5.0.5",
-    "ajv": "8.14.0",
+    "ajv": "8.16.0",
     "lodash.debounce": "4.0.8",
     "typescript": "5.4.5",
     "vite": "5.2.13",
