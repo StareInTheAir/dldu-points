@@ -13,7 +13,7 @@
     "@types/lodash.debounce": "4.0.9",
     "@types/node": "20.14.10",
     "@vitejs/plugin-vue": "5.0.5",
-    "ajv": "8.16.0",
+    "ajv": "8.17.1",
     "lodash.debounce": "4.0.8",
     "typescript": "5.5.3",
     "vite": "5.3.3",
