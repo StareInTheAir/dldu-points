@@ -17,8 +17,8 @@
     "lodash.debounce": "4.0.8",
     "typescript": "5.5.4",
     "vite": "5.3.4",
-    "vue": "3.4.33",
-    "vue-tsc": "2.0.28"
+    "vue": "3.4.34",
+    "vue-tsc": "2.0.29"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "1.10.3",
