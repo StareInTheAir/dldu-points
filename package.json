@@ -18,7 +18,7 @@
     "typescript": "5.7.2",
     "vite": "5.4.11",
     "vue": "3.5.13",
-    "vue-tsc": "2.1.10"
+    "vue-tsc": "2.2.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "1.10.4",
