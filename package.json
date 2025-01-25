@@ -22,6 +22,6 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "1.10.5",
-    "@vue/eslint-config-standard-with-typescript": "8.0.0"
+    "@vue/eslint-config-standard-with-typescript": "9.0.0"
   }
 }
