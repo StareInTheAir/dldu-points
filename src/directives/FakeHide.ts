@@ -30,7 +30,7 @@ function unhideElement (el: HTMLElement): void {
   el.style.top = '0'
 }
 
-function clearAndSetTimeout (handler: Function, timeout: number, el: HTMLElement): void {
+function clearAndSetTimeout (handler: (el: HTMLElement) => void, timeout: number, el: HTMLElement): void {
   const lastTimeoutId = el.getAttribute(ATTRIBUTE_NAME_LAST_TIMEOUT_ID)
   if (lastTimeoutId != null) {
     clearTimeout(parseInt(lastTimeoutId))

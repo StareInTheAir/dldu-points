@@ -77,7 +77,7 @@ export default defineComponent({
       try {
         const newDlduData = await getDlduData()
         if (this.didAchievedPointsChange(newDlduData)) {
-          void (this.$refs.animation as any).play()
+          void this.$refs.animation.play()
           clearTimeout(this.timeoutIdSetDlduData)
           this.timeoutIdSetDlduData = window.setTimeout(() => {
             this.dlduData = newDlduData
@@ -101,7 +101,7 @@ export default defineComponent({
 
     async scheduleGetData (): Promise<void> {
       await this.getData()
-      window.setInterval(this.getData, 9_901)
+      window.setInterval(() => this.getData(), 9_901)
     },
 
     didAchievedPointsChange (newData: DlduData): boolean {

@@ -1,4 +1,4 @@
-/* eslint-disable quote-props */
+/* eslint-disable @stylistic/quote-props */
 import Ajv, { type JTDSchemaType } from 'ajv/dist/jtd'
 const ajv = new Ajv()
 

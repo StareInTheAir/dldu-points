@@ -95,7 +95,7 @@ export default defineComponent({
       immediate: true,
       handler () {
         clearInterval(this.intervalIdNextPage)
-        this.intervalIdNextPage = window.setInterval(this.nextPage, this.secondsPerPage * 1_000)
+        this.intervalIdNextPage = window.setInterval(() => this.nextPage(), this.secondsPerPage * 1_000)
       }
     }
   },
@@ -106,7 +106,7 @@ export default defineComponent({
 
     // Only when in mounted state, refs are available
     const container = this.$refs.container as HTMLDivElement
-    new MutationObserver(this.registerResizeObserver).observe(container, { childList: true })
+    new MutationObserver(() => this.registerResizeObserver()).observe(container, { childList: true })
     // MutationObserver callback is not immediatelly called, so we call it initially manually once
     this.registerResizeObserver()
   },

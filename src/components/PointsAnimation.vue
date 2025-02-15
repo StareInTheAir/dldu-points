@@ -9,11 +9,11 @@ export default defineComponent({
     const body = document.querySelector('body')
     if (body != null) {
       // this.positionVideo is also called immediately after starting observing
-      new ResizeObserver(debounce(this.positionVideo, 1000)).observe(body)
+      new ResizeObserver(debounce(() => this.positionVideo(), 1000)).observe(body)
     }
     const animationPosition = document.querySelector('.animationPosition')
     if (animationPosition != null) {
-      new MutationObserver(this.positionVideo).observe(animationPosition, { childList: true })
+      new MutationObserver(() => this.positionVideo()).observe(animationPosition, { childList: true })
     }
   },
 
