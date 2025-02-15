@@ -1,5 +1,5 @@
 /* eslint-disable quote-props */
-import Ajv, { JTDSchemaType } from 'ajv/dist/jtd'
+import Ajv, { type JTDSchemaType } from 'ajv/dist/jtd'
 const ajv = new Ajv()
 
 interface GoogleSheetsDlduData {

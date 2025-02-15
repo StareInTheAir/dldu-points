@@ -1,7 +1,7 @@
 <script lang="ts">
 
-import { defineComponent, PropType } from 'vue'
-import { DarkSoulsLevel } from '../types'
+import { defineComponent, type PropType } from 'vue'
+import type { DarkSoulsLevel } from '../types'
 import LevelPoints from './LevelPoints.vue'
 import FakeHideDirective from '../directives/FakeHide'
 import AboutPanel from './AboutPanel.vue'

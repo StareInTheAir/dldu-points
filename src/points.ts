@@ -1,4 +1,4 @@
-import { DarkSoulsLevel, DlduData } from './types'
+import type { DarkSoulsLevel, DlduData } from './types'
 
 function totalLevelPoints (level: DarkSoulsLevel): number {
   return level.bosses.reduce((prev, current) => { return prev + current.points }, 0)

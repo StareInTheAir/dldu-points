@@ -7,7 +7,7 @@ import { BadRequestError, ForbiddenError } from './errors'
 import { getDlduData } from './google-sheets'
 import { achievedLevelPoints, achievedRunPoints, totalRunPoints } from './points'
 import { getSecondsPerPage, isHideLevelsWithNoPointsSupplied, isSheetIdSuppliedAndValid, isHideProgressBarSupplied } from './query-params'
-import { DlduData, DarkSoulsLevel } from './types'
+import type { DlduData, DarkSoulsLevel } from './types'
 import ProgressBar from './components/ProgressBar.vue'
 
 export default defineComponent({

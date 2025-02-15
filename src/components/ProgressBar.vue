@@ -1,9 +1,9 @@
 <script lang="ts">
 import debounce from 'lodash.debounce'
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, type PropType } from 'vue'
 import { SVG_CORNER, SVG_TOP } from '../paths/svg'
 import { totalRunPoints } from '../points'
-import { DarkSoulsLevel } from '../types'
+import type { DarkSoulsLevel } from '../types'
 
 export default defineComponent({
   name: 'ProgressBar',

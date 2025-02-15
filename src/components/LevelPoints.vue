@@ -1,6 +1,6 @@
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { DarkSoulsBoss, DarkSoulsLevel } from '../types'
+import { defineComponent, type PropType } from 'vue'
+import type { DarkSoulsBoss, DarkSoulsLevel } from '../types'
 import BossPoints from './BossPoints.vue'
 import { achievedLevelPoints, totalLevelPoints } from '../points'
 

@@ -1,4 +1,4 @@
-import { ObjectDirective } from 'vue'
+import type { ObjectDirective } from 'vue'
 
 const ANIMATION_DURATION_MS = 314
 const ANIMATION_DURATION_CSS_STRING = `${ANIMATION_DURATION_MS / 1_000}s`

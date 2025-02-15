@@ -1,7 +1,7 @@
 import { BadRequestError, FetchFailedError, FetchStatusError, ForbiddenError, JsonParsingFailedError, JsonValidationFailedError, UnauthorizedError } from './errors'
-import { DarkSoulsBoss, DarkSoulsLevel, DlduData } from './types'
+import type { DarkSoulsBoss, DarkSoulsLevel, DlduData } from './types'
 import { getSheetsApiUrl } from './urls'
-import { GoogleSheetsDlduData, validateGoogleSheetsDlduData } from './validate'
+import { type GoogleSheetsDlduData, validateGoogleSheetsDlduData } from './validate'
 
 async function getDlduData (): Promise<DlduData> {
   let response: Response
