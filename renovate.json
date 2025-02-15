@@ -1,7 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base",
+    "config:recommended",
     ":prHourlyLimitNone",
     "group:allNonMajor",
     ":automergeMinor",
@@ -16,10 +16,8 @@
   "packageRules": [
     {
       "matchPackageNames": [
-        "vite"
-      ],
-      "matchPackagePatterns": [
-        "^@vitejs/"
+        "vite",
+        "/^@vitejs//"
       ],
       "groupName": "vite packages"
     }
