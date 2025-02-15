@@ -19,7 +19,7 @@ if (process.env.DLDU_POINTS_GIT_HASH != null) {
   gitHash = execSync('git rev-parse --short HEAD', { encoding })
 }
 
-// https://vitejs.dev/config/
+// https://vite.dev/config/
 export default defineConfig({
   plugins: [
     vue()
