@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@types/lodash.debounce": "4.0.9",
-    "@types/node": "22.13.7",
+    "@types/node": "22.13.8",
     "@vue/eslint-config-standard-with-typescript": "9.0.0",
     "@vue/eslint-config-typescript": "14.4.0",
     "jiti": "2.4.2"
