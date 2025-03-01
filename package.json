@@ -14,14 +14,14 @@
     "@vue/tsconfig": "0.7.0",
     "ajv": "8.17.1",
     "lodash.debounce": "4.0.8",
-    "typescript": "5.7.3",
+    "typescript": "5.8.2",
     "vite": "6.2.0",
     "vue": "3.5.13",
-    "vue-tsc": "2.2.2"
+    "vue-tsc": "2.2.4"
   },
   "devDependencies": {
     "@types/lodash.debounce": "4.0.9",
-    "@types/node": "22.13.5",
+    "@types/node": "22.13.7",
     "@vue/eslint-config-standard-with-typescript": "9.0.0",
     "@vue/eslint-config-typescript": "14.4.0",
     "jiti": "2.4.2"
