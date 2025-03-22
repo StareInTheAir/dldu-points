@@ -10,7 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@vitejs/plugin-vue": "5.2.1",
+    "@vitejs/plugin-vue": "5.2.3",
     "@vue/tsconfig": "0.7.0",
     "ajv": "8.17.1",
     "lodash.debounce": "4.0.8",
