@@ -1,6 +1,6 @@
 # dldu-points
 
-A web application that displays a total and detailed score when playing a DLDU run on stream. It's designed to be integrated into OBS as a browser source. A Google Docs sheet is used as the data source and changing it automatically updates the current score.
+A web application that displays a total and detailed score during a DLDU run on stream. It is designed to integrate into OBS as a browser source. The application uses a Google Docs sheet as its data source, ensuring that any changes made to the sheet automatically update the score in real-time.
 
 ## Demo
 
@@ -17,21 +17,21 @@ https://youtu.be/yrKhPNEN7qU
 
 <img alt="Screenshot of the 'Make a copy' menu item in Google Docs" src="docs/01-make-a-copy.png" width="350" />
 
-- Give the document a name and save it to your Google Drive.
-- Modify your sheet so that anyone with the link can view it. To do this, click the Share button in the top right corner of Google Docs, and then click this button:
+- Name the document and save it to your Google Drive.
+- Adjust the sharing settings of your sheet so that anyone with the link can view it. To do this, click the Share button in the top-right corner of Google Docs, and then click this button:
 
 <img alt="Screenshot of the Google Docs share dialog with the 'Change to anyone with the link' button highlighted" src="docs/04-share-dialog.png" width="500" />
 
-- You will see the sheet ID in your browser's address bar (in the URL). You will need this sheet ID during the OBS setup, so copy it now. It's the numbers and letters (and maybe symbols) between `spreadsheets/d/` and `/edit`:
+- Locate the sheet ID in your browser's address bar (in the URL). You will need this sheet ID during the OBS setup, so copy it now. The sheet ID is the string of numbers, letters, and possibly symbols between `spreadsheets/d/` and `/edit`:
 
 <img alt="Screenshot of the browser address bar with the sheet ID highlighted and selected" src="docs/02-sheet-id.png" />
 
 
 ## OBS setup
 
-A hosted version of the website exists, but it's not public. Contact [stareintheair](https://discord.com/users/277888096757088256) on Discord to request access. I do speak German 😉
+A hosted version of the website is available but not public. Contact [stareintheair](https://discord.com/users/277888096757088256) on Discord to request access. I also speak German 😉
 
-- Paste your sheet id into the URL I will send you.
+- Paste your sheet ID into the URL I will provide.
 - Create a new browser source and use the URL you just created.
 - Set the width to 350 and the height to 500. Width and height can be adjusted to your needs. The website will automatically use all available space.
 - Check `Shutdown source when not visible` to save resources.
