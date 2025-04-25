@@ -17,11 +17,11 @@
     "typescript": "5.8.3",
     "vite": "6.3.3",
     "vue": "3.5.13",
-    "vue-tsc": "2.2.8"
+    "vue-tsc": "2.2.10"
   },
   "devDependencies": {
     "@types/lodash.debounce": "4.0.9",
-    "@types/node": "22.14.1",
+    "@types/node": "22.15.2",
     "@vue/eslint-config-standard-with-typescript": "9.2.0",
     "@vue/eslint-config-typescript": "14.5.0",
     "jiti": "2.4.2"
