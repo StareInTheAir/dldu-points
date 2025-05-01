@@ -14,11 +14,12 @@ https://youtu.be/yrKhPNEN7qU
 
 - Open one of the templates:
   - [Dark Souls 1 template](https://docs.google.com/spreadsheets/d/1WdxwX-zDKJikdGAqnbnBa7McvssiBd70TqeyY1R0y0o)
-  - [Dark Souls 2 template](https://docs.google.com/spreadsheets/d/1l-dXYYXkBUVKYW_Kd0p1ej9Nh_M342jcKzd_oVOxtX8)
-    - Not official and likely to change in the future.
-    - The [HoB team](https://soulkeepers.online/regelwerk/) sets the rules.
-    - Created by [platyboar](https://www.twitch.tv/platyboar). Thank you!
-    - If you have corrections, [message me on Discord](https://discord.com/users/277888096757088256) or open an [issue](../../issues)/[PR](../../pulls).
+  - [Dark Souls 2 Soulkeepers template](https://docs.google.com/spreadsheets/d/1l-dXYYXkBUVKYW_Kd0p1ej9Nh_M342jcKzd_oVOxtX8)
+    - Created by the [HoB team](https://soulkeepers.online/regelwerk/)
+    - Used in Soulkeepers season 1
+  - [Dark Souls 2 alternative template](https://docs.google.com/spreadsheets/d/1vGRYBNMsS9dg48kC6kD7JJEIJT3M6AHlroRzugD1Rrc)
+    - Created by [Platyboar](https://www.twitch.tv/platyboar). Thank you!
+    - More accurate than the Soulkeepers template
 
 - Select `File` → `Make a copy`
 
