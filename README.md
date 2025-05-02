@@ -14,12 +14,22 @@ https://youtu.be/yrKhPNEN7qU
 
 - Open one of the templates:
   - [Dark Souls 1 template](https://docs.google.com/spreadsheets/d/1WdxwX-zDKJikdGAqnbnBa7McvssiBd70TqeyY1R0y0o)
+    - English
+  - [Dark Souls 2 Soulkeepers template](https://docs.google.com/spreadsheets/d/1xumcVVFw5qhcQtjFj9XzG9vvmnBE0O5_hX-cNwMdeQU)
+    - Created by the [HoB team](https://soulkeepers.online/regelwerk/)
+    - German
+    - 349 total points
+    - Used in Soulkeepers season 1
+  - [Dark Souls 2 template](https://docs.google.com/spreadsheets/d/1vGRYBNMsS9dg48kC6kD7JJEIJT3M6AHlroRzugD1Rrc)
+    - Created by [Platyboar](https://www.twitch.tv/platyboar). Thank you!
+    - English
+    - 349 total points
+    - More accurate than the Soulkeepers template
   - [Dark Souls 2 Soulkeepers template](https://docs.google.com/spreadsheets/d/1l-dXYYXkBUVKYW_Kd0p1ej9Nh_M342jcKzd_oVOxtX8)
     - Created by the [HoB team](https://soulkeepers.online/regelwerk/)
-    - Used in Soulkeepers season 1
-  - [Dark Souls 2 alternative template](https://docs.google.com/spreadsheets/d/1vGRYBNMsS9dg48kC6kD7JJEIJT3M6AHlroRzugD1Rrc)
-    - Created by [Platyboar](https://www.twitch.tv/platyboar). Thank you!
-    - More accurate than the Soulkeepers template
+    - English
+    - 340 total points
+    - Used in the beginning of Soulkeepers season 1
 
 - Select `File` → `Make a copy`
 
