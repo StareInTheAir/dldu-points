@@ -13,24 +13,25 @@ https://youtu.be/yrKhPNEN7qU
 ## Google Docs setup
 
 - Open one of the templates:
-  - [Dark Souls 1 template](https://docs.google.com/spreadsheets/d/1WdxwX-zDKJikdGAqnbnBa7McvssiBd70TqeyY1R0y0o)
-    - English
+  - [Dark Souls 1 template English](https://docs.google.com/spreadsheets/d/1WdxwX-zDKJikdGAqnbnBa7McvssiBd70TqeyY1R0y0o)
   - Dark Souls 2 templates
-    - [Soulkeepers template German](https://docs.google.com/spreadsheets/d/1xumcVVFw5qhcQtjFj9XzG9vvmnBE0O5_hX-cNwMdeQU)
+    - [Dark Souls 2 Soulkeepers template German](https://docs.google.com/spreadsheets/d/1xumcVVFw5qhcQtjFj9XzG9vvmnBE0O5_hX-cNwMdeQU)
       - Created by the [HoB team](https://soulkeepers.online/regelwerk/)
       - 349 total points
       - Used in Soulkeepers season 1
-    - [Platyboar template English](https://docs.google.com/spreadsheets/d/1vGRYBNMsS9dg48kC6kD7JJEIJT3M6AHlroRzugD1Rrc)
+    - [Dark Souls 2 Platyboar template English](https://docs.google.com/spreadsheets/d/1vGRYBNMsS9dg48kC6kD7JJEIJT3M6AHlroRzugD1Rrc)
       - Created by [Platyboar](https://www.twitch.tv/platyboar). Thank you!
       - 349 total points
       - More accurate than the Soulkeepers template
-    - [Soulkeepers template English](https://docs.google.com/spreadsheets/d/1l-dXYYXkBUVKYW_Kd0p1ej9Nh_M342jcKzd_oVOxtX8)
+    - [Dark Souls 2 Soulkeepers template English](https://docs.google.com/spreadsheets/d/1l-dXYYXkBUVKYW_Kd0p1ej9Nh_M342jcKzd_oVOxtX8)
       - Created by the [HoB team](https://soulkeepers.online/regelwerk/)
       - 340 total points
       - Used in the beginning of Soulkeepers season 1
-  - [Dark Souls 3 template](https://docs.google.com/spreadsheets/d/1a832MD53BoqxVUqmvAs8SE0dQHIgLJT77QLwhIkCZOA)
-    - Created by [Platyboar](https://www.twitch.tv/platyboar). Thank you!
-    - English
+  - Dark Souls 3 templates
+    - [Dark Souls 3 template English](https://docs.google.com/spreadsheets/d/1a832MD53BoqxVUqmvAs8SE0dQHIgLJT77QLwhIkCZOA)
+      - Created by [Platyboar](https://www.twitch.tv/platyboar). Thank you!
+    - [Dark Souls 3 template German](https://docs.google.com/spreadsheets/d/1IbdkRi6rhO0xVe-whUaOkgWhlfckDh8TxlCymDwyiDU/)
+      - Created by [Platyboar](https://www.twitch.tv/platyboar). Thank you!
 
 - Select `File` → `Make a copy`
 
@@ -126,5 +127,3 @@ The default layout is designed to be placed on the right side of the screen. If 
 The following content contribution would be highly appreciated:
 
 - German translation (boss and level names) of the Dark Souls 1 template
-- A Dark Souls 3 template in German and/or English
-- An Elden Ring template in German and/or English
