@@ -13,14 +13,17 @@ https://youtu.be/yrKhPNEN7qU
 ## Google Docs setup
 
 - Open one of the templates:
-  - [Dark Souls 1 template English](https://docs.google.com/spreadsheets/d/1WdxwX-zDKJikdGAqnbnBa7McvssiBd70TqeyY1R0y0o)
+  - [Dark Souls 1 DLDU template English](https://docs.google.com/spreadsheets/d/1WdxwX-zDKJikdGAqnbnBa7McvssiBd70TqeyY1R0y0o)
+    - Created by me
+    - 304 total points
+    - Used in all seasons of DLDU
   - Dark Souls 2 templates
     - [Dark Souls 2 Soulkeepers template German](https://docs.google.com/spreadsheets/d/1xumcVVFw5qhcQtjFj9XzG9vvmnBE0O5_hX-cNwMdeQU)
       - Created by the [HoB team](https://soulkeepers.online/regelwerk/)
       - 349 total points
       - Used in Soulkeepers season 1
     - [Dark Souls 2 Platyboar template English](https://docs.google.com/spreadsheets/d/1vGRYBNMsS9dg48kC6kD7JJEIJT3M6AHlroRzugD1Rrc)
-      - Created by [Platyboar](https://www.twitch.tv/platyboar). Thank you!
+      - Contributed by [Platyboar](https://www.twitch.tv/platyboar). Thank you!
       - 349 total points
       - More accurate than the Soulkeepers template
     - [Dark Souls 2 Soulkeepers template English](https://docs.google.com/spreadsheets/d/1l-dXYYXkBUVKYW_Kd0p1ej9Nh_M342jcKzd_oVOxtX8)
@@ -28,10 +31,20 @@ https://youtu.be/yrKhPNEN7qU
       - 340 total points
       - Used in the beginning of Soulkeepers season 1
   - Dark Souls 3 templates
-    - [Dark Souls 3 template English](https://docs.google.com/spreadsheets/d/1a832MD53BoqxVUqmvAs8SE0dQHIgLJT77QLwhIkCZOA)
-      - Created by [Platyboar](https://www.twitch.tv/platyboar). Thank you!
-    - [Dark Souls 3 template German](https://docs.google.com/spreadsheets/d/1IbdkRi6rhO0xVe-whUaOkgWhlfckDh8TxlCymDwyiDU/)
-      - Created by [Platyboar](https://www.twitch.tv/platyboar). Thank you!
+    - [Dark Souls 3 Soulkeepers template German](https://docs.google.com/spreadsheets/d/1cmaPNng-xC8mU4xpEvf5ErETZkQsitIx3xRfpgrBOsc)
+      - Created by the [HoB team](https://soulkeepers.online/regelwerk/)
+      - 359 total points
+      - Used in Soulkeepers season 1
+    - [Dark Souls 3 Soulkeepers template English](https://docs.google.com/spreadsheets/d/1kUuvlwyp4e9X-Rw2cuwQF3L1jGJeE2gjzg5CWtg80P8)
+      - Created by the [HoB team](https://soulkeepers.online/regelwerk/)
+      - 359 total points
+      - Used in Soulkeepers season 1
+    - [Dark Souls 3 Platyboar template German](https://docs.google.com/spreadsheets/d/1IbdkRi6rhO0xVe-whUaOkgWhlfckDh8TxlCymDwyiDU/)
+      - Contributed by [Platyboar](https://www.twitch.tv/platyboar). Thank you!
+      - 389 total points
+    - [Dark Souls 3 Platyboar template English](https://docs.google.com/spreadsheets/d/1a832MD53BoqxVUqmvAs8SE0dQHIgLJT77QLwhIkCZOA)
+      - Contributed by [Platyboar](https://www.twitch.tv/platyboar). Thank you!
+      - 389 total points
 
 - Select `File` → `Make a copy`
 
