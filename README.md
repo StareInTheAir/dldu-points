@@ -13,10 +13,15 @@ https://youtu.be/yrKhPNEN7qU
 ## Google Docs setup
 
 - Open one of the templates:
-  - [Dark Souls 1 DLDU template English](https://docs.google.com/spreadsheets/d/1WdxwX-zDKJikdGAqnbnBa7McvssiBd70TqeyY1R0y0o)
-    - Created by me
-    - 304 total points
-    - Used in all seasons of DLDU
+  - Dark Souls 1 templates
+    - [Dark Souls 1 DLDU template German](https://docs.google.com/spreadsheets/d/1DXO5h_w7tQWbocV8spuq2j3x9f9SgPb0Pn1G6DrhW78)
+      - Translated by [Platyboar](https://www.twitch.tv/platyboar). Thank you!
+      - 304 total points
+      - Used in all seasons of DLDU
+    - [Dark Souls 1 DLDU template English](https://docs.google.com/spreadsheets/d/1WdxwX-zDKJikdGAqnbnBa7McvssiBd70TqeyY1R0y0o)
+      - Created by me
+      - 304 total points
+      - Used in all seasons of DLDU
   - Dark Souls 2 templates
     - [Dark Souls 2 Soulkeepers template German](https://docs.google.com/spreadsheets/d/1xumcVVFw5qhcQtjFj9XzG9vvmnBE0O5_hX-cNwMdeQU)
       - Created by the [HoB team](https://soulkeepers.online/regelwerk/)
@@ -128,9 +133,3 @@ The text size can be increased or decreased if necessary. This is better than sc
 ### Left aligned layout
 
 The default layout is designed to be placed on the right side of the screen. If you want to put it on the left side, use the following CSS body style to switch the columns: `direction: rtl;` Put it in the same place as in the screenshot above.
-
-## Wanted contributions
-
-The following content contribution would be highly appreciated:
-
-- German translation (boss and level names) of the Dark Souls 1 template
