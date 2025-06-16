@@ -122,6 +122,18 @@ To hide the green points progress bar, append `&hideProgressBar` to the URL (sam
 
 To show only levels with points and hide all levels without points, add `&hideLevelsWithNoPoints` to the URL (same location as with seconds per page). When starting a new run, no levels will be visible until the first boss is defeated.
 
+### Run name / total points label
+
+By default, the label next to the total points reads "Gesamtpunkte: ". You can change this text to anything you like. The easiest way is to select the browser source in OBS, then click the "Interact" button above:
+
+<img alt="Screenshot of the OBS browser source window with the secondsPerPage parameter highlighted" src="docs/11-total-points-label.png" width="350" />
+
+A new window will open showing only dldu-points. Click directly on the "Gesamtpunkte: " text to edit it:
+
+<img alt="Screenshot of OBS with the browser source highlighted. The 'Interact' button is shown above the list of sources" src="docs/10-browser-source-interact.png" width="350" />
+
+Alternatively, you can set the label from the start using a URL query parameter. Add `&totalLabel=Total%20points:%20` to your URL (same location as seconds per page). Replace all spaces with `%20` to avoid problems.
+
 ### Text size
 
 The text size can be increased or decreased if necessary. This is better than scaling the browser source itself, because it keeps the text sharp. Use the OBS custom CSS override to change the text size. Add `font-size: 1.3rem;` to the body style section as shown in the screenshot here:
