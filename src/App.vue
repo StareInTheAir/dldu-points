@@ -6,7 +6,7 @@ import PointsAnimation from './components/PointsAnimation.vue'
 import { BadRequestError, ForbiddenError } from './errors'
 import { getDlduData } from './google-sheets'
 import { achievedLevelPoints, achievedRunPoints, totalRunPoints } from './points'
-import { getSecondsPerPage, isHideLevelsWithNoPointsSupplied, isSheetIdSuppliedAndValid, isHideProgressBarSupplied } from './query-params'
+import { getSecondsPerPage, isHideLevelsWithNoPointsSupplied, isSheetIdSuppliedAndValid, isHideProgressBarSupplied, getTotalLabel } from './query-params'
 import type { DlduData, DarkSoulsLevel } from './types'
 import ProgressBar from './components/ProgressBar.vue'
 
@@ -24,6 +24,7 @@ export default defineComponent({
     return {
       dlduData: undefined as DlduData | undefined,
       errors: new Set<string>(),
+      totalLabel: getTotalLabel() ?? 'Gesamtpunkte: ',
       secondsPerPage: getSecondsPerPage() ?? 10,
       hideProgressBar: isHideProgressBarSupplied(),
       hideLevelsWithNoPoints: isHideLevelsWithNoPointsSupplied(),
@@ -134,7 +135,7 @@ export default defineComponent({
   </div>
   <template v-if="dlduData">
     <p class="total">
-      Gesamtpunkte: <span class="animationPosition">{{ achievedPoints }}</span>/{{ totalPoints }}
+      <span>{{ totalLabel }}: </span><span class="animationPosition">{{ achievedPoints }}</span>/{{ totalPoints }}
     </p>
     <ProgressBar
       v-if="!hideProgressBar"
@@ -162,6 +163,11 @@ html, body {
 }
 body {
   background-color: #222;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+body, input {
   font-family: "EBGaramond", serif;
   color: #fff;
   text-shadow:
@@ -172,9 +178,6 @@ body {
     -0.653644px -0.756803px #000,
     0.283662px -0.958924px #000,
     0.96017px -0.279416px #000;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
 }
 </style>
 

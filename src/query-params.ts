@@ -43,4 +43,8 @@ function isHideLevelsWithNoPointsSupplied (): boolean {
   return urlParams.get('hideLevelsWithNoPoints') != null
 }
 
-export { isSheetIdSuppliedAndValid, getSheetId, getSecondsPerPage, isHideProgressBarSupplied, isHideLevelsWithNoPointsSupplied }
+function getTotalLabel (): string | null {
+  return urlParams.get('totalLabel')
+}
+
+export { isSheetIdSuppliedAndValid, getSheetId, getSecondsPerPage, isHideProgressBarSupplied, isHideLevelsWithNoPointsSupplied, getTotalLabel }
