@@ -192,7 +192,7 @@ body, input {
   text-align: end;
   font-weight: 600;
   font-size: 200%;
-  margin-top: 20px;
+  margin: 16px 16px 0 0;
 }
 .progress {
   height: 48px;
