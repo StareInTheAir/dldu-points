@@ -135,7 +135,8 @@ export default defineComponent({
   </div>
   <template v-if="dlduData">
     <p class="total">
-      <span>{{ totalLabel }}: </span><span class="animationPosition">{{ achievedPoints }}</span>/{{ totalPoints }}
+      <input name="Total points" v-model="totalLabel" />
+      <span class="animationPosition">{{ achievedPoints }}</span>/{{ totalPoints }}
     </p>
     <ProgressBar
       v-if="!hideProgressBar"
@@ -184,6 +185,18 @@ body, input {
 <style scoped>
 .errors, .total, .loading {
   flex: 0;
+}
+.total {
+  display: flex;
+}
+input[name="Total points"] {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 100%;
+  text-align: end;
+  font-weight: 600;
 }
 .pager {
   flex: 1;
