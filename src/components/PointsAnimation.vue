@@ -62,5 +62,6 @@ export default defineComponent({
 .animation {
   position: absolute;
   width: 300px;
+  pointer-events: none;
 }
 </style>
