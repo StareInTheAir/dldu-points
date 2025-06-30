@@ -78,7 +78,8 @@ export default defineComponent({
       try {
         const newDlduData = await getDlduData()
         if (this.didAchievedPointsChange(newDlduData)) {
-          void this.$refs.animation.play()
+          const animationComponent = this.$refs.animation as typeof PointsAnimation
+          void animationComponent.play()
           clearTimeout(this.timeoutIdSetDlduData)
           this.timeoutIdSetDlduData = window.setTimeout(() => {
             this.dlduData = newDlduData
