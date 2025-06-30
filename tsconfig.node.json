@@ -22,7 +22,6 @@
     "noUncheckedSideEffectImports": true
   },
   "include": [
-    "vite.config.ts",
-    "eslint.config.ts"
+    "vite.config.ts"
   ]
 }
