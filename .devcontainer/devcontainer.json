@@ -2,7 +2,7 @@
 // https://github.com/devcontainers/images/tree/main/src/javascript-node
 {
 	"name": "Node.js",
-	"image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+	"image": "mcr.microsoft.com/devcontainers/javascript-node:24",
 
 	"features": {
 		"ghcr.io/devcontainers/features/common-utils:2": {
