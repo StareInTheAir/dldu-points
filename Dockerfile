@@ -1,4 +1,4 @@
-FROM node:22-alpine AS build-stage
+FROM node:24-alpine AS build-stage
 
 ARG DLDU_POINTS_API_KEY
 ARG DLDU_POINTS_GIT_HASH
