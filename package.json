@@ -15,7 +15,7 @@
     "@vue/tsconfig": "0.7.0",
     "ajv": "8.17.1",
     "lodash.debounce": "4.0.8",
-    "vite": "7.1.1",
+    "vite": "7.1.2",
     "vue": "3.5.18",
     "vue-tsc": "3.0.5"
   },
