@@ -12,15 +12,15 @@
   "dependencies": {
     "@types/lodash.debounce": "4.0.9",
     "@vitejs/plugin-vue": "6.0.1",
-    "@vue/tsconfig": "0.8.0",
+    "@vue/tsconfig": "0.8.1",
     "ajv": "8.17.1",
     "lodash.debounce": "4.0.8",
     "vite": "7.1.5",
-    "vue": "3.5.18",
-    "vue-tsc": "3.0.5"
+    "vue": "3.5.21",
+    "vue-tsc": "3.0.7"
   },
   "devDependencies": {
-    "@types/node": "24.3.0",
+    "@types/node": "24.3.3",
     "@vue/eslint-config-standard-with-typescript": "9.2.0",
     "@vue/eslint-config-typescript": "14.6.0",
     "jiti": "2.5.1",
