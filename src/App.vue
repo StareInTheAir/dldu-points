@@ -195,6 +195,7 @@ input[name="Total points"] {
   background: none;
   border: none;
   padding: 0;
+  min-width: 0;
   font-size: 100%;
   text-align: end;
   font-weight: 600;
