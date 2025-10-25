@@ -54,6 +54,11 @@ function googleDataToDlduData (googleData: GoogleSheetsDlduData): DlduData {
       continue
     }
 
+    if (row[0] === undefined || row[1] === undefined || row[2] === undefined || row[3] === undefined) {
+      console.warn(`Ignoring row with invalid data: ${rowAsString}`)
+      continue
+    }
+
     const type = row[0].trim()
     const name = row[1].trim()
     const points = parseInt(row[2].trim())
@@ -81,7 +86,7 @@ function googleDataToDlduData (googleData: GoogleSheetsDlduData): DlduData {
             points,
             beaten: checked
           }
-          levels[levels.length - 1].bosses.push(boss)
+          levels[levels.length - 1]?.bosses.push(boss)
         }
       }
     } else if (type !== 'Type') {
