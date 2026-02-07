@@ -21,7 +21,7 @@ Open the cloned repository in VS Code and it will offer you to reopen the folder
 A Google Cloud Platform API key is required to access data from Google Sheets. To prevent targeted attacks, no API key is part of the source code. For development, create a file named `api.key` in the repository root directory and make this API key the content of that file:
 
 ```
-AIzaSyAqL193sdtj8fQpeHyoXIg0DOWiI6ujdSU
+AIzaSyA0HixV4dH5WdpOdFOSPfCbQLnmOTJvkXM
 ```
 
 This API key only works, when the application is run on `localhost:5173`. This is the default while developing.
