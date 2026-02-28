@@ -23,7 +23,7 @@
     "vue-tsc": "3.2.5"
   },
   "devDependencies": {
-    "@types/node": "24.10.15",
+    "@types/node": "24.11.0",
     "@vue/eslint-config-standard-with-typescript": "9.2.0",
     "@vue/eslint-config-typescript": "14.7.0",
     "jiti": "2.6.1",
