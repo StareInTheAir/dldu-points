@@ -160,14 +160,16 @@ export default defineComponent({
 </template>
 
 <style>
-html, body {
+html, body, #app {
   height: 100%;
 }
-body {
-  background-color: #222;
+body, #app {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+body {
+  background-color: #222;
 }
 body, input {
   font-family: "EBGaramond", serif;
