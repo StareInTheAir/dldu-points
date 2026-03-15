@@ -7,9 +7,9 @@
     "node": "24.x"
   },
   "scripts": {
-    "dev": "vite --host",
+    "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview --host",
+    "preview": "vite preview",
     "lint": "eslint ."
   },
   "dependencies": {
