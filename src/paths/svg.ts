@@ -1,5 +1,5 @@
-import svgTopString from './top.svg?raw'
 import svgCornerString from './corner.svg?raw'
+import svgTopString from './top.svg?raw'
 
 interface PathWithViewBox {
   path: Path2D

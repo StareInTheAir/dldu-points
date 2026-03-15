@@ -1,6 +1,6 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
 import debounce from 'lodash.debounce'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'PointsAnimation',

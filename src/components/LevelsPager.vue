@@ -1,11 +1,11 @@
 <script lang="ts">
 
-import { defineComponent, type PropType } from 'vue'
-import type { DarkSoulsLevel } from '../types'
-import LevelPoints from './LevelPoints.vue'
-import FakeHideDirective from '../directives/FakeHide'
-import AboutPanel from './AboutPanel.vue'
 import debounce from 'lodash.debounce'
+import { defineComponent, type PropType } from 'vue'
+import FakeHideDirective from '../directives/FakeHide'
+import type { DarkSoulsLevel } from '../types'
+import AboutPanel from './AboutPanel.vue'
+import LevelPoints from './LevelPoints.vue'
 
 export default defineComponent({
   name: 'LevelsPager',

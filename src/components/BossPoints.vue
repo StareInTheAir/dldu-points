@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { DarkSoulsBoss } from '../types'
 import { defineComponent, type PropType } from 'vue'
+import type { DarkSoulsBoss } from '../types'
 
 export default defineComponent({
   name: 'BossPoints',

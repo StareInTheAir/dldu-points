@@ -1,14 +1,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import LevelsPager from './components/LevelsPager.vue'
 import AboutPanel from './components/AboutPanel.vue'
+import LevelsPager from './components/LevelsPager.vue'
 import PointsAnimation from './components/PointsAnimation.vue'
+import ProgressBar from './components/ProgressBar.vue'
 import { BadRequestError, ForbiddenError } from './errors'
 import { getDlduData } from './google-sheets'
 import { achievedLevelPoints, achievedRunPoints, totalRunPoints } from './points'
-import { getSecondsPerPage, isHideLevelsWithNoPointsSupplied, isSheetIdSuppliedAndValid, isHideProgressBarSupplied, getTotalLabel } from './query-params'
-import type { DlduData, DarkSoulsLevel } from './types'
-import ProgressBar from './components/ProgressBar.vue'
+import { getSecondsPerPage, getTotalLabel, isHideLevelsWithNoPointsSupplied, isHideProgressBarSupplied, isSheetIdSuppliedAndValid } from './query-params'
+import type { DarkSoulsLevel, DlduData } from './types'
 
 export default defineComponent({
   name: 'App',

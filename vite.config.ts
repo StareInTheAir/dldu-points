@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { execSync } from 'child_process'
 import { readFileSync } from 'fs'
+import { defineConfig } from 'vite'
 
 const encoding = 'utf-8'
 
