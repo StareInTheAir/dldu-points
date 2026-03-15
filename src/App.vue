@@ -66,10 +66,10 @@ export default defineComponent({
   },
 
   created () {
-    if (!isSheetIdSuppliedAndValid()) {
-      this.errors.add('Sheet ID is missing in URL')
-    } else {
+    if (isSheetIdSuppliedAndValid()) {
       void this.scheduleGetData()
+    } else {
+      this.errors.add('Sheet ID is missing in URL')
     }
   },
 
@@ -80,8 +80,8 @@ export default defineComponent({
         if (this.didAchievedPointsChange(newDlduData)) {
           const animationComponent = this.$refs.animation as typeof PointsAnimation
           void animationComponent.play()
-          clearTimeout(this.timeoutIdSetDlduData)
-          this.timeoutIdSetDlduData = window.setTimeout(() => {
+          globalThis.clearTimeout(this.timeoutIdSetDlduData)
+          this.timeoutIdSetDlduData = globalThis.setTimeout(() => {
             this.dlduData = newDlduData
           }, 1_000)
         } else {
@@ -103,15 +103,15 @@ export default defineComponent({
 
     async scheduleGetData (): Promise<void> {
       await this.getData()
-      window.setInterval(() => this.getData(), 9_901)
+      globalThis.setInterval(() => this.getData(), 9_901)
     },
 
     didAchievedPointsChange (newData: DlduData): boolean {
       const currentData = this.dlduData
-      if (currentData != null) {
-        return achievedRunPoints(currentData) < achievedRunPoints(newData)
-      } else {
+      if (currentData == null) {
         return false
+      } else {
+        return achievedRunPoints(currentData) < achievedRunPoints(newData)
       }
     }
   }

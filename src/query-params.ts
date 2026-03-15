@@ -1,4 +1,4 @@
-const urlParams = new URLSearchParams(window.location.search)
+const urlParams = new URLSearchParams(globalThis.location.search)
 
 function getSheetIdInternal (): string | null {
   return urlParams.get('sheetId')
@@ -17,14 +17,14 @@ function getSheetId (): string {
   if (sheetId != null) {
     return sheetId.trim()
   }
-  throw Error('sheetId query parameter is missing')
+  throw new Error('sheetId query parameter is missing')
 }
 
 function getIntParam (key: string): number | undefined {
   const param = urlParams.get(key)
   if (param != null) {
-    const numParam = parseInt(param)
-    if (!isNaN(numParam)) {
+    const numParam = Number.parseInt(param)
+    if (!Number.isNaN(numParam)) {
       return numParam
     }
   }

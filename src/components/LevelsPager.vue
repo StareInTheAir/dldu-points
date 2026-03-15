@@ -75,7 +75,7 @@ export default defineComponent({
       const elementCount = this.getElementCount()
       const startIndex = this.startIndex
       const endIndex = this.endIndex
-      const hiddenList = Array<boolean>(elementCount)
+      const hiddenList = new Array<boolean>(elementCount)
       for (let index = 0; index < elementCount; index += 1) {
         hiddenList[index] = index < startIndex || index > endIndex
       }
@@ -94,8 +94,8 @@ export default defineComponent({
     secondsPerPage: {
       immediate: true,
       handler () {
-        clearInterval(this.intervalIdNextPage)
-        this.intervalIdNextPage = window.setInterval(() => this.nextPage(), this.secondsPerPage * 1_000)
+        globalThis.clearInterval(this.intervalIdNextPage)
+        this.intervalIdNextPage = globalThis.setInterval(() => this.nextPage(), this.secondsPerPage * 1_000)
       }
     }
   },
@@ -133,15 +133,15 @@ export default defineComponent({
 
     getContainerHeight (): number {
       const container = this.$refs.container as HTMLDivElement | undefined
-      return container != null ? container.clientHeight : Infinity
+      return container == null ? Infinity : container.clientHeight
     },
 
     getElements (): Element[] {
       const containerRef = this.$refs.container as HTMLDivElement | undefined
-      if (containerRef != null) {
-        return Array.from(containerRef.children)
-      } else {
+      if (containerRef == null) {
         return []
+      } else {
+        return Array.from(containerRef.children)
       }
     },
 

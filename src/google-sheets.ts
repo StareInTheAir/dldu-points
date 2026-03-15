@@ -61,7 +61,7 @@ function googleDataToDlduData (googleData: GoogleSheetsDlduData): DlduData {
 
     const type = row[0].trim()
     const name = row[1].trim()
-    const points = parseInt(row[2].trim())
+    const points = Number.parseInt(row[2].trim())
     const checked = row[3] === 'TRUE' || row[4] === 'TRUE'
 
     if (type === 'level') {
@@ -75,19 +75,17 @@ function googleDataToDlduData (googleData: GoogleSheetsDlduData): DlduData {
         })
       }
     } else if (type === 'boss') {
-      if (name.length === 0 || isNaN(points)) {
+      if (name.length === 0 || Number.isNaN(points)) {
         console.warn(`Ignoring boss with invalid data: ${rowAsString}`)
+      } else if (levels.length === 0) {
+        console.warn(`Ignoring boss without previous level: ${rowAsString}`)
       } else {
-        if (levels.length === 0) {
-          console.warn(`Ignoring boss without previous level: ${rowAsString}`)
-        } else {
-          const boss: DarkSoulsBoss = {
-            name,
-            points,
-            beaten: checked
-          }
-          levels[levels.length - 1]?.bosses.push(boss)
+        const boss: DarkSoulsBoss = {
+          name,
+          points,
+          beaten: checked
         }
+        levels.at(-1)?.bosses.push(boss)
       }
     } else if (type !== 'Type') {
       console.warn(`Ignoring unexpected type in row ${rowAsString}`)

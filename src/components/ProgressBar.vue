@@ -90,7 +90,7 @@ export default defineComponent({
       const gradient = this.context.createLinearGradient(0, 0, 0, height)
       gradient.addColorStop(0, '#527262')
       gradient.addColorStop(0.56, '#324b3c')
-      gradient.addColorStop(0.70, '#324b3c')
+      gradient.addColorStop(0.7, '#324b3c')
       gradient.addColorStop(1, '#3d574d')
       this.context.fillStyle = gradient
 
@@ -114,15 +114,15 @@ export default defineComponent({
       this.context.restore()
     },
 
+    rotate (context: CanvasRenderingContext2D, viewBox: DOMRect, degrees: number): void {
+      context.translate(viewBox.width / 2, viewBox.height / 2)
+      context.rotate(degrees * Math.PI / 180)
+      context.translate(-viewBox.width / 2, -viewBox.height / 2)
+    },
+
     drawBorder () {
       if (this.canvas == null || this.context == null) {
         return
-      }
-
-      function rotate (context: CanvasRenderingContext2D, viewBox: DOMRect, degrees: number): void {
-        context.translate(viewBox.width / 2, viewBox.height / 2)
-        context.rotate(degrees * Math.PI / 180)
-        context.translate(-viewBox.width / 2, -viewBox.height / 2)
       }
 
       this.context.save()
@@ -143,7 +143,7 @@ export default defineComponent({
 
       // Draw top left corner
       this.context.save()
-      rotate(this.context, SVG_CORNER.viewBox, 90)
+      this.rotate(this.context, SVG_CORNER.viewBox, 90)
       this.context.fill(SVG_CORNER.path)
       this.context.stroke(SVG_CORNER.path)
       this.context.restore()
@@ -151,7 +151,7 @@ export default defineComponent({
       // Draw top right corner
       this.context.save()
       this.context.translate(this.canvas.width - SVG_CORNER.viewBox.width, 0)
-      rotate(this.context, SVG_CORNER.viewBox, 180)
+      this.rotate(this.context, SVG_CORNER.viewBox, 180)
       this.context.fill(SVG_CORNER.path)
       this.context.stroke(SVG_CORNER.path)
       this.context.restore()
@@ -159,7 +159,7 @@ export default defineComponent({
       // Draw lower right corner
       this.context.save()
       this.context.translate(this.canvas.width - SVG_CORNER.viewBox.width, this.canvas.height - SVG_CORNER.viewBox.height)
-      rotate(this.context, SVG_CORNER.viewBox, 270)
+      this.rotate(this.context, SVG_CORNER.viewBox, 270)
       this.context.fill(SVG_CORNER.path)
       this.context.stroke(SVG_CORNER.path)
       this.context.restore()
@@ -181,7 +181,7 @@ export default defineComponent({
         // Draw bottom border
         this.context.save()
         this.context.translate(tile * SVG_TOP.viewBox.width, this.canvas.height - SVG_TOP.viewBox.height)
-        rotate(this.context, SVG_TOP.viewBox, 180)
+        this.rotate(this.context, SVG_TOP.viewBox, 180)
         this.context.fill(SVG_TOP.path)
         this.context.stroke(SVG_TOP.path)
         this.context.restore()
@@ -198,7 +198,7 @@ export default defineComponent({
         // Draw right border
         this.context.save()
         this.context.translate(this.canvas.width - SVG_TOP.viewBox.height, tile * SVG_TOP.viewBox.width)
-        rotate(this.context, SVG_TOP.viewBox, 90)
+        this.rotate(this.context, SVG_TOP.viewBox, 90)
         // Correct origin after rotation, so that border is at top left and not center
         this.context.translate(-(SVG_TOP.viewBox.height - SVG_TOP.viewBox.width) / 2, (SVG_TOP.viewBox.width - SVG_TOP.viewBox.height) / 2)
         this.context.fill(SVG_TOP.path)
@@ -208,7 +208,7 @@ export default defineComponent({
         // Draw left border
         this.context.save()
         this.context.translate(0, tile * SVG_TOP.viewBox.width)
-        rotate(this.context, SVG_TOP.viewBox, 270)
+        this.rotate(this.context, SVG_TOP.viewBox, 270)
         // Correct origin after rotation, so that border is at top left and not center
         this.context.translate((SVG_TOP.viewBox.height - SVG_TOP.viewBox.width) / 2, -(SVG_TOP.viewBox.width - SVG_TOP.viewBox.height) / 2)
         this.context.fill(SVG_TOP.path)
