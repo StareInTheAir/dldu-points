@@ -4,17 +4,22 @@ These instructions will help you setup the development tools necessary to make c
 
 ## Necessary tools
 
-This repository is setup to use the [development container features](https://code.visualstudio.com/docs/remote/containers) of Visual Studio Code.
-
-In short, you need to install:
+You need to install:
 
 - [VS Code](https://code.visualstudio.com/)
-- The VS Code [Remote - Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-- [Docker Desktop](https://docs.docker.com/desktop/) (on Windows or macOS)
+- The VS Code [Vue - Official (Volar) extension](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+- [nvm](https://github.com/nvm-sh/nvm) (Node Version Manager)
+- [pnpm](https://pnpm.io/installation)
 
-The VS Code extension marketplace page contains [more detailed install instructions](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers#installation).
+After cloning the repository, install and activate the correct Node.js version using nvm, then install dependencies:
 
-Open the cloned repository in VS Code and it will offer you to reopen the folder in a development container. The extension will handle the rest of the setup process.
+```sh
+nvm install
+nvm use
+pnpm install
+```
+
+The repository includes an `.nvmrc` file that pins the required Node.js version.
 
 ## API key
 
@@ -28,19 +33,19 @@ This API key only works, when the application is run on `localhost:5173`. This i
 
 You can also create your own key by following the instructions in [BUILD.md](BUILD.md#api-key).
 
-## npm scripts
+## pnpm scripts
 
-Open the terminal inside VS Code using the `View` → `Terminal` action from the menu bar. This terminal runs in the development Docker container. `npm` and all dependencies are already installed in this terminal.
+Open the terminal inside VS Code using the `View` → `Terminal` action from the menu bar.
 
-### `npm run dev`
+### `pnpm run dev`
 
-Starts the application in development mode. The dev container extension automatically creates a port forwarding to the container and you can navigate to `http://localhost:5173` on your local machine to see the application running. Changes to the source code will be injected live into the running application. No manual reloads are required.
+Starts the application in development mode. Navigate to `http://localhost:5173` to see the application running. Changes to the source code will be injected live into the running application. No manual reloads are required.
 
-### `npm run lint`
+### `pnpm run lint`
 
-Runs all ts-standard code checks.
+Runs all eslint code checks.
 
-### `npm run build`
+### `pnpm run build`
 
 Builds the application. Output is available in the `dist` folder.
 

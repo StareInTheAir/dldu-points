@@ -1,6 +1,7 @@
-.devcontainer
 .git
 .vscode
 dist
 docs
 node_modules
+*.key
+*.md
