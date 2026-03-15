@@ -3,13 +3,15 @@ FROM node:24-alpine AS build-stage
 ARG DLDU_POINTS_API_KEY
 ARG DLDU_POINTS_GIT_HASH
 
-ENV NODE_ENV=production
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
 
 WORKDIR /app
 COPY . .
 
-RUN npm install
-RUN npm run build
+RUN pnpm install --prod
+RUN pnpm run build
 
 
 
