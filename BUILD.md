@@ -14,29 +14,47 @@ A Google Cloud Platform API key is required to access data from Google Sheets. G
   - You can enforce HTTP referer for your own domain name
   - You can limit it to the Google Sheets API
 
+Create a file named `api.key` in the repository root directory and put your API key into that file. Alternatively you can also set an environment variable:
 
-## Build with docker
+```shell
+export DLDU_POINTS_API_KEY=your_key_here
+```
 
-To build a directly serve this app, git clone this repository and then run:
+## Git hash
+
+The git commit hash is displayed in [AboutPanel.vue](src/components/AboutPanel.vue). It's automatically fetched during build time, but can be overridden by setting an environment variable:
+
+
+```shell
+export DLDU_POINTS_GIT_HASH=your_hash_here
+```
+
+Check [vite.config.ts](vite.config.ts) for the implementation.
+
+## Build
+
+To build this app run:
+
+```shell
+pnpm run build
+```
+
+The output files are in the `dist` folder.
+
+## Docker image
+
+To build and directly serve this app, git clone this repository and then run:
 
 ```shell
 docker build \
   --build-arg DLDU_POINTS_API_KEY=YOUR_GOOGLE_API_KEY \
   --build-arg DLDU_POINTS_GIT_HASH=$(git rev-parse --short HEAD) \
   --tag dldu_points \
-  --target production-stage \
   .
 
 docker run --publish 8000:80 dldu_points
 ```
 
-To build this app and output the output files to the `dist` folder, run:
+`podman` can also be used instead of `docker`.
 
-```shell
-docker build \
-  --build-arg DLDU_POINTS_API_KEY=YOUR_GOOGLE_API_KEY \
-  --build-arg DLDU_POINTS_GIT_HASH=$(git rev-parse --short HEAD) \
-  --target export-stage \
-  --output dist \
-  .
-```
+dldu-points is now available on http://localhost:8000

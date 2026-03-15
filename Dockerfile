@@ -10,15 +10,7 @@ RUN corepack enable
 WORKDIR /app
 COPY . .
 
-RUN pnpm install --prod
-RUN pnpm run build
-
-
-
-FROM scratch AS export-stage
-COPY --from=build-stage /app/dist .
-
-
+RUN pnpm install --prod && pnpm run build
 
 FROM nginx:stable-alpine AS production-stage
 COPY --from=build-stage /app/dist /usr/share/nginx/html
