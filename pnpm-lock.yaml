@@ -11,6 +11,9 @@ importers:
       '@types/lodash.debounce':
         specifier: 4.0.9
         version: 4.0.9
+      '@types/node':
+        specifier: 24.12.0
+        version: 24.12.0
       '@vitejs/plugin-vue':
         specifier: 6.0.5
         version: 6.0.5(vite@8.0.0(@types/node@24.12.0)(esbuild@0.27.4)(jiti@2.6.1))(vue@3.5.30(typescript@5.9.3))
@@ -23,6 +26,9 @@ importers:
       lodash.debounce:
         specifier: 4.0.8
         version: 4.0.8
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
       vite:
         specifier: 8.0.0
         version: 8.0.0(@types/node@24.12.0)(esbuild@0.27.4)(jiti@2.6.1)
@@ -33,9 +39,6 @@ importers:
         specifier: 3.2.5
         version: 3.2.5(typescript@5.9.3)
     devDependencies:
-      '@types/node':
-        specifier: 24.12.0
-        version: 24.12.0
       '@vue/eslint-config-standard-with-typescript':
         specifier: 9.2.0
         version: 9.2.0(@typescript-eslint/parser@8.57.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/utils@8.57.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@vue/eslint-config-typescript@14.7.0(eslint-plugin-vue@10.8.0(@stylistic/eslint-plugin@4.4.1(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/parser@8.57.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1))(vue-eslint-parser@10.4.0(eslint@9.39.4(jiti@2.6.1))))(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint-plugin-vue@10.8.0(@stylistic/eslint-plugin@4.4.1(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/parser@8.57.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1))(vue-eslint-parser@10.4.0(eslint@9.39.4(jiti@2.6.1))))(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
@@ -48,9 +51,6 @@ importers:
       jiti:
         specifier: 2.6.1
         version: 2.6.1
-      typescript:
-        specifier: 5.9.3
-        version: 5.9.3
 
 packages:
 
