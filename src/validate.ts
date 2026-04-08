@@ -1,4 +1,3 @@
-/* eslint-disable @stylistic/quote-props */
 import Ajv, { type JTDSchemaType } from 'ajv/dist/jtd'
 const ajv = new Ajv()
 
@@ -10,20 +9,20 @@ interface GoogleSheetsDlduData {
 
 const googleSheetsDlduDataSchema: JTDSchemaType<GoogleSheetsDlduData> = {
   properties: {
-    'range': {
-      type: 'string'
+    range: {
+      type: 'string',
     },
-    'majorDimension': {
-      type: 'string'
+    majorDimension: {
+      type: 'string',
     },
-    'values': {
+    values: {
       elements: {
         elements: {
-          type: 'string'
-        }
-      }
-    }
-  }
+          type: 'string',
+        },
+      },
+    },
+  },
 }
 
 const validateGoogleSheetsDlduData = ajv.compile<GoogleSheetsDlduData>(googleSheetsDlduDataSchema)

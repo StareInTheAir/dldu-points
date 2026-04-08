@@ -1,13 +1,21 @@
-import { BadRequestError, FetchFailedError, FetchStatusError, ForbiddenError, JsonParsingFailedError, JsonValidationFailedError, UnauthorizedError } from './errors'
+import {
+  BadRequestError,
+  FetchFailedError,
+  FetchStatusError,
+  ForbiddenError,
+  JsonParsingFailedError,
+  JsonValidationFailedError,
+  UnauthorizedError,
+} from './errors'
 import type { DarkSoulsBoss, DarkSoulsLevel, DlduData } from './types'
 import { getSheetsApiUrl } from './urls'
 import { type GoogleSheetsDlduData, validateGoogleSheetsDlduData } from './validate'
 
-async function getDlduData (): Promise<DlduData> {
+async function getDlduData(): Promise<DlduData> {
   let response: Response
   try {
     response = await fetch(getSheetsApiUrl(), {
-      method: 'GET'
+      method: 'GET',
     })
   } catch (err) {
     throw new FetchFailedError('sheets', err)
@@ -37,7 +45,7 @@ async function getDlduData (): Promise<DlduData> {
   }
 }
 
-function googleDataToDlduData (googleData: GoogleSheetsDlduData): DlduData {
+function googleDataToDlduData(googleData: GoogleSheetsDlduData): DlduData {
   if (googleData.majorDimension !== 'ROWS') {
     throw new JsonValidationFailedError('majorDimension must be ROWS', undefined)
   }
@@ -54,7 +62,12 @@ function googleDataToDlduData (googleData: GoogleSheetsDlduData): DlduData {
       continue
     }
 
-    if (row[0] === undefined || row[1] === undefined || row[2] === undefined || row[3] === undefined) {
+    if (
+      row[0] === undefined ||
+      row[1] === undefined ||
+      row[2] === undefined ||
+      row[3] === undefined
+    ) {
       console.warn(`Ignoring row with invalid data: ${rowAsString}`)
       continue
     }
@@ -71,7 +84,7 @@ function googleDataToDlduData (googleData: GoogleSheetsDlduData): DlduData {
         levels.push({
           name,
           bosses: [],
-          alwaysShowBosses: checked
+          alwaysShowBosses: checked,
         })
       }
     } else if (type === 'boss') {
@@ -83,7 +96,7 @@ function googleDataToDlduData (googleData: GoogleSheetsDlduData): DlduData {
         const boss: DarkSoulsBoss = {
           name,
           points,
-          beaten: checked
+          beaten: checked,
         }
         levels.at(-1)?.bosses.push(boss)
       }
@@ -92,7 +105,7 @@ function googleDataToDlduData (googleData: GoogleSheetsDlduData): DlduData {
     }
   }
 
-  const nonEmptyLevels = levels.filter(level => {
+  const nonEmptyLevels = levels.filter((level) => {
     if (level.bosses.length === 0) {
       console.warn(`Ignoring bossless level ${level.name}`)
       return false

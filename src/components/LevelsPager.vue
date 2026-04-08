@@ -1,7 +1,7 @@
 <script lang="ts">
-
 import debounce from 'lodash.debounce'
 import { defineComponent, type PropType } from 'vue'
+
 import FakeHideDirective from '../directives/FakeHide'
 import type { DarkSoulsLevel } from '../types'
 import AboutPanel from './AboutPanel.vue'
@@ -12,40 +12,40 @@ export default defineComponent({
 
   components: {
     LevelPoints,
-    AboutPanel
+    AboutPanel,
   },
 
   directives: {
-    'fake-hide': FakeHideDirective
+    'fake-hide': FakeHideDirective,
   },
 
   props: {
     levels: {
       type: Object as PropType<DarkSoulsLevel[]>,
-      required: true
+      required: true,
     },
     secondsPerPage: {
       type: Number,
-      required: true
+      required: true,
     },
     showAboutPanelEvery: {
       type: Number,
-      default: 15
-    }
+      default: 15,
+    },
   },
 
-  data () {
+  data() {
     return {
       startIndex: 0,
       intervalIdNextPage: undefined as number | undefined,
       rollOverCounter: 0,
       pagerSizeChangedEventData: true,
-      resizeObserver: undefined as ResizeObserver | undefined
+      resizeObserver: undefined as ResizeObserver | undefined,
     }
   },
 
   computed: {
-    endIndex (): number {
+    endIndex(): number {
       // For Vues tracking when to recompute this property to work,
       // we need to access all other properties used in the computation.
       // Even a for loop body is not executed.
@@ -71,7 +71,7 @@ export default defineComponent({
       return end
     },
 
-    elementHidden (): boolean[] {
+    elementHidden(): boolean[] {
       const elementCount = this.getElementCount()
       const startIndex = this.startIndex
       const endIndex = this.endIndex
@@ -82,37 +82,42 @@ export default defineComponent({
       return hiddenList
     },
 
-    aboutHidden (): boolean {
+    aboutHidden(): boolean {
       // The AboutPanel is always the last element
       const hiddenBasedOnElementHidden = this.elementHidden[this.elementHidden.length - 1]
       const hiddenBasedOnRollover = this.rollOverCounter !== 0
       return hiddenBasedOnElementHidden || hiddenBasedOnRollover
-    }
+    },
   },
 
   watch: {
     secondsPerPage: {
       immediate: true,
-      handler () {
+      handler() {
         globalThis.clearInterval(this.intervalIdNextPage)
-        this.intervalIdNextPage = globalThis.setInterval(() => this.nextPage(), this.secondsPerPage * 1_000)
-      }
-    }
+        this.intervalIdNextPage = globalThis.setInterval(
+          () => this.nextPage(),
+          this.secondsPerPage * 1_000,
+        )
+      },
+    },
   },
 
-  mounted () {
+  mounted() {
     const debouncedFirePagerSizeChangedEvent = debounce(() => this.firePagerChangedEvent(), 100)
     this.resizeObserver = new ResizeObserver(debouncedFirePagerSizeChangedEvent)
 
     // Only when in mounted state, refs are available
     const container = this.$refs.container as HTMLDivElement
-    new MutationObserver(() => this.registerResizeObserver()).observe(container, { childList: true })
+    new MutationObserver(() => this.registerResizeObserver()).observe(container, {
+      childList: true,
+    })
     // MutationObserver callback is not immediatelly called, so we call it initially manually once
     this.registerResizeObserver()
   },
 
   methods: {
-    registerResizeObserver (): void {
+    registerResizeObserver(): void {
       const resizeObserver = this.resizeObserver
       if (resizeObserver != null) {
         resizeObserver.disconnect()
@@ -127,16 +132,16 @@ export default defineComponent({
       }
     },
 
-    firePagerChangedEvent (): void {
+    firePagerChangedEvent(): void {
       this.pagerSizeChangedEventData = !this.pagerSizeChangedEventData
     },
 
-    getContainerHeight (): number {
+    getContainerHeight(): number {
       const container = this.$refs.container as HTMLDivElement | undefined
       return container == null ? Infinity : container.clientHeight
     },
 
-    getElements (): Element[] {
+    getElements(): Element[] {
       const containerRef = this.$refs.container as HTMLDivElement | undefined
       if (containerRef == null) {
         return []
@@ -145,11 +150,11 @@ export default defineComponent({
       }
     },
 
-    getElementCount (): number {
+    getElementCount(): number {
       return this.getElements().length
     },
 
-    nextPage (): void {
+    nextPage(): void {
       const nextIndex = this.endIndex + 1
       if (nextIndex < this.getElementCount()) {
         this.startIndex = nextIndex
@@ -157,25 +162,20 @@ export default defineComponent({
         this.startIndex = 0
         this.rollOverCounter = (this.rollOverCounter + 1) % this.showAboutPanelEvery
       }
-    }
-  }
+    },
+  },
 })
 </script>
 
 <template>
-  <div
-    ref="container"
-    class="container"
-  >
+  <div ref="container" class="container">
     <LevelPoints
       v-for="[i, level] in levels.entries()"
       :key="level.name"
       v-fake-hide="elementHidden[i]"
       :level="level"
     />
-    <AboutPanel
-      v-fake-hide="aboutHidden"
-    />
+    <AboutPanel v-fake-hide="aboutHidden" />
   </div>
 </template>
 

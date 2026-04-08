@@ -24,7 +24,6 @@ export DLDU_POINTS_API_KEY=your_key_here
 
 The git commit hash is displayed in [AboutPanel.vue](src/components/AboutPanel.vue). It's automatically fetched during build time, but can be overridden by setting an environment variable:
 
-
 ```shell
 export DLDU_POINTS_GIT_HASH=your_hash_here
 ```

@@ -1,6 +1,7 @@
-import vue from '@vitejs/plugin-vue'
 import { execSync } from 'child_process'
 import { readFileSync } from 'fs'
+
+import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 
 const encoding = 'utf-8'
@@ -21,12 +22,10 @@ if (process.env.DLDU_POINTS_GIT_HASH != null) {
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    vue()
-  ],
+  plugins: [vue()],
   define: {
     API_KEY: JSON.stringify(apiKey.trim()),
     APP_VERSION: JSON.stringify(process.env.npm_package_version),
-    GIT_COMMIT_HASH: JSON.stringify(gitHash.trim())
-  }
+    GIT_COMMIT_HASH: JSON.stringify(gitHash.trim()),
+  },
 })

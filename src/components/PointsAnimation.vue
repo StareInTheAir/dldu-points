@@ -5,7 +5,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'PointsAnimation',
 
-  created () {
+  created() {
     const body = document.querySelector('body')
     if (body != null) {
       // this.positionVideo is also called immediately after starting observing
@@ -13,12 +13,14 @@ export default defineComponent({
     }
     const animationPosition = document.querySelector('.animationPosition')
     if (animationPosition != null) {
-      new MutationObserver(() => this.positionVideo()).observe(animationPosition, { childList: true })
+      new MutationObserver(() => this.positionVideo()).observe(animationPosition, {
+        childList: true,
+      })
     }
   },
 
   methods: {
-    positionVideo (): void {
+    positionVideo(): void {
       const animationPosition = document.querySelector('.animationPosition')
       if (animationPosition == null) {
         return
@@ -35,26 +37,20 @@ export default defineComponent({
       video.style.left = `${pointsX - videoX}px`
     },
 
-    async play (): Promise<void> {
+    async play(): Promise<void> {
       const video = this.$refs.animation as HTMLMediaElement | undefined
       if (video != null) {
         video.currentTime = 0
         await video.play()
       }
-    }
-  }
+    },
+  },
 })
 </script>
 
 <template>
-  <video
-    ref="animation"
-    class="animation"
-  >
-    <source
-      src="../assets/pop.webm"
-      type="video/webm"
-    >
+  <video ref="animation" class="animation">
+    <source src="../assets/pop.webm" type="video/webm" />
   </video>
 </template>
 

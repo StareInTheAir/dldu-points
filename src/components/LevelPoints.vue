@@ -1,5 +1,6 @@
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
+
 import { achievedLevelPoints, totalLevelPoints } from '../points'
 import type { DarkSoulsBoss, DarkSoulsLevel } from '../types'
 import BossPoints from './BossPoints.vue'
@@ -7,63 +8,50 @@ import BossPoints from './BossPoints.vue'
 export default defineComponent({
   name: 'LevelPoints',
   components: {
-    BossPoints
+    BossPoints,
   },
   props: {
     level: {
       type: Object as PropType<DarkSoulsLevel>,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
-    totalPoints (): number {
+    totalPoints(): number {
       return totalLevelPoints(this.level)
     },
-    achievedPoints (): number {
+    achievedPoints(): number {
       return achievedLevelPoints(this.level)
     },
-    bossesVisible (): boolean {
+    bossesVisible(): boolean {
       const levelInProgress = this.achievedPoints > 0 && this.achievedPoints < this.totalPoints
       return this.level.alwaysShowBosses || levelInProgress
     },
-    filteredBosses (): DarkSoulsBoss[] {
+    filteredBosses(): DarkSoulsBoss[] {
       if (this.bossesVisible) {
         return this.level.bosses
       } else {
         return []
       }
     },
-    isIncomplete (): boolean {
+    isIncomplete(): boolean {
       return this.achievedPoints !== this.totalPoints
-    }
-  }
+    },
+  },
 })
 </script>
 
 <template>
   <div class="grid">
-    <span
-      v-if="bossesVisible"
-      class="spacer"
-    />
+    <span v-if="bossesVisible" class="spacer" />
     <span class="name">
       {{ level.name }}
     </span>
-    <span
-      class="points"
-      :class="{ incomplete: isIncomplete }"
-    >
+    <span class="points" :class="{ incomplete: isIncomplete }">
       {{ achievedPoints }}/{{ totalPoints }}
     </span>
-    <BossPoints
-      v-for="boss in filteredBosses"
-      :key="level.name + boss.name"
-      :boss="boss"
-    />
-    <span
-      v-if="bossesVisible"
-      class="spacer"
-    />
+    <BossPoints v-for="boss in filteredBosses" :key="level.name + boss.name" :boss="boss" />
+    <span v-if="bossesVisible" class="spacer" />
   </div>
 </template>
 
@@ -81,7 +69,8 @@ export default defineComponent({
   grid-column: span 2;
   height: 12px;
 }
-.name, .points {
+.name,
+.points {
   font-size: 150%;
 }
 .name {

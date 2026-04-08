@@ -1,5 +1,6 @@
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
+
 import type { DarkSoulsBoss } from '../types'
 
 export default defineComponent({
@@ -7,28 +8,22 @@ export default defineComponent({
   props: {
     boss: {
       type: Object as PropType<DarkSoulsBoss>,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
-    className (): string {
+    className(): string {
       return this.boss.beaten ? 'beaten' : 'alive'
-    }
-  }
+    },
+  },
 })
 </script>
 
 <template>
-  <p
-    :class="className"
-    class="name"
-  >
+  <p :class="className" class="name">
     {{ boss.name }}
   </p>
-  <p
-    :class="className"
-    class="points"
-  >
+  <p :class="className" class="points">
     {{ boss.points }}
   </p>
 </template>

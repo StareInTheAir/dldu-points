@@ -58,7 +58,6 @@ https://youtu.be/yrKhPNEN7qU
 
 <img alt="Screenshot of the browser address bar with the sheet ID highlighted and selected" src="docs/02-sheet-id.png" />
 
-
 ## OBS setup
 
 A hosted version of the website is available but not public. Contact [stareintheair](https://discord.com/users/277888096757088256) on Discord to request access. I also speak German 😉
@@ -93,7 +92,6 @@ You can share access to the Google Sheet with moderators or trusted viewers, so 
 - Living bosses appear in gray.
 - Defeated bosses appear in white.
 
-
 ### Levels
 
 - Bosses in a level will only appear on the website if at least one, but not all, of the bosses in that level have been defeated.
@@ -106,7 +104,6 @@ You can share access to the Google Sheet with moderators or trusted viewers, so 
 - The order of the levels can be changed by reordering the rows.
 
 ## Configuration options
-
 
 ### Seconds per page
 

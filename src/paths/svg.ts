@@ -8,13 +8,13 @@ interface PathWithViewBox {
 
 const PARSER = new DOMParser()
 
-function parseSvg (svgContent: string): PathWithViewBox {
+function parseSvg(svgContent: string): PathWithViewBox {
   const xmlDocument = PARSER.parseFromString(svgContent, 'image/svg+xml')
   const svgDocument = xmlDocument.firstChild as SVGSVGElement
   const svgPath = svgDocument.firstChild as SVGPathElement
   return {
     path: new Path2D(svgPath.attributes.getNamedItem('d')?.value),
-    viewBox: svgDocument.viewBox.baseVal
+    viewBox: svgDocument.viewBox.baseVal,
   }
 }
 

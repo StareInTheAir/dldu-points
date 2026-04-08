@@ -49,7 +49,6 @@ Runs all eslint code checks.
 
 Builds the application. Output is available in the `dist` folder.
 
-
 ## Browser dev tools
 
 The [Vue devtools browser extension](https://devtools.vuejs.org/guide/installation.html) can be used to view a lot of the internals of dldu-points.

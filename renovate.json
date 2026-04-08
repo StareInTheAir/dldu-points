@@ -9,22 +9,15 @@
   ],
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": [
-      "after 12:00 on Saturday"
-    ]
+    "schedule": ["after 12:00 on Saturday"]
   },
   "packageRules": [
     {
-      "matchPackageNames": [
-        "vite",
-        "@vitejs/*"
-      ],
+      "matchPackageNames": ["vite", "@vitejs/*"],
       "groupName": "vite packages"
     }
   ],
   "timezone": "Europe/Berlin",
   "ignoreTests": true,
-  "schedule": [
-    "before 12:00 on Saturday"
-  ]
+  "schedule": ["before 12:00 on Saturday"]
 }

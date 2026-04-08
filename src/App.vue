@@ -1,5 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 import AboutPanel from './components/AboutPanel.vue'
 import LevelsPager from './components/LevelsPager.vue'
 import PointsAnimation from './components/PointsAnimation.vue'
@@ -7,7 +8,13 @@ import ProgressBar from './components/ProgressBar.vue'
 import { BadRequestError, ForbiddenError } from './errors'
 import { getDlduData } from './google-sheets'
 import { achievedLevelPoints, achievedRunPoints, totalRunPoints } from './points'
-import { getSecondsPerPage, getTotalLabel, isHideLevelsWithNoPointsSupplied, isHideProgressBarSupplied, isSheetIdSuppliedAndValid } from './query-params'
+import {
+  getSecondsPerPage,
+  getTotalLabel,
+  isHideLevelsWithNoPointsSupplied,
+  isHideProgressBarSupplied,
+  isSheetIdSuppliedAndValid,
+} from './query-params'
 import type { DarkSoulsLevel, DlduData } from './types'
 
 export default defineComponent({
@@ -17,10 +24,10 @@ export default defineComponent({
     LevelsPager,
     AboutPanel,
     PointsAnimation,
-    ProgressBar
+    ProgressBar,
   },
 
-  data () {
+  data() {
     return {
       dlduData: undefined as DlduData | undefined,
       errors: new Set<string>(),
@@ -28,33 +35,33 @@ export default defineComponent({
       secondsPerPage: getSecondsPerPage() ?? 10,
       hideProgressBar: isHideProgressBarSupplied(),
       hideLevelsWithNoPoints: isHideLevelsWithNoPointsSupplied(),
-      timeoutIdSetDlduData: undefined as number | undefined
+      timeoutIdSetDlduData: undefined as number | undefined,
     }
   },
 
   computed: {
-    totalPoints (): number {
+    totalPoints(): number {
       if (this.dlduData == null) {
         return 0
       }
       return totalRunPoints(this.dlduData)
     },
 
-    achievedPoints (): number {
+    achievedPoints(): number {
       if (this.dlduData == null) {
         return 0
       }
       return achievedRunPoints(this.dlduData)
     },
 
-    allLevels (): DarkSoulsLevel[] {
+    allLevels(): DarkSoulsLevel[] {
       if (this.dlduData == null) {
         return []
       }
       return this.dlduData.levels
     },
 
-    filteredLevels (): DarkSoulsLevel[] {
+    filteredLevels(): DarkSoulsLevel[] {
       if (this.dlduData == null) {
         return []
       }
@@ -62,10 +69,10 @@ export default defineComponent({
         return this.dlduData.levels.filter((level) => achievedLevelPoints(level) !== 0)
       }
       return this.dlduData.levels
-    }
+    },
   },
 
-  created () {
+  created() {
     if (isSheetIdSuppliedAndValid()) {
       void this.scheduleGetData()
     } else {
@@ -74,7 +81,7 @@ export default defineComponent({
   },
 
   methods: {
-    async getData (): Promise<void> {
+    async getData(): Promise<void> {
       try {
         const newDlduData = await getDlduData()
         if (this.didAchievedPointsChange(newDlduData)) {
@@ -93,42 +100,38 @@ export default defineComponent({
         if (err instanceof ForbiddenError) {
           this.errors.add('No permission to access data from Google Sheets.')
         } else if (err instanceof BadRequestError) {
-          this.errors.add('Couldn\'t retrieve data from Google Sheets.')
-          this.errors.add('You are probably using an old and no longer supported sheet structure. Go through the setup steps again.')
+          this.errors.add("Couldn't retrieve data from Google Sheets.")
+          this.errors.add(
+            'You are probably using an old and no longer supported sheet structure. Go through the setup steps again.',
+          )
         } else {
-          this.errors.add('Couldn\'t retrieve data from Google Sheets.')
+          this.errors.add("Couldn't retrieve data from Google Sheets.")
         }
       }
     },
 
-    async scheduleGetData (): Promise<void> {
+    async scheduleGetData(): Promise<void> {
       await this.getData()
       globalThis.setInterval(() => this.getData(), 9_901)
     },
 
-    didAchievedPointsChange (newData: DlduData): boolean {
+    didAchievedPointsChange(newData: DlduData): boolean {
       const currentData = this.dlduData
       if (currentData == null) {
         return false
       } else {
         return achievedRunPoints(currentData) < achievedRunPoints(newData)
       }
-    }
-  }
+    },
+  },
 })
 </script>
 
 <template>
-  <div
-    v-if="errors.size > 0"
-    class="errors"
-  >
+  <div v-if="errors.size > 0" class="errors">
     Something went wrong:
     <ul>
-      <li
-        v-for="error in errors"
-        :key="error"
-      >
+      <li v-for="error in errors" :key="error">
         {{ error }}
       </li>
     </ul>
@@ -137,33 +140,24 @@ export default defineComponent({
   <template v-if="dlduData">
     <p class="total">
       <input name="Total points" v-model="totalLabel" />
-      <span class="animationPosition">{{ achievedPoints }}</span>/{{ totalPoints }}
+      <span class="animationPosition">{{ achievedPoints }}</span
+      >/{{ totalPoints }}
     </p>
-    <ProgressBar
-      v-if="!hideProgressBar"
-      class="progress"
-      :levels="allLevels"
-    />
-    <LevelsPager
-      :levels="filteredLevels"
-      :seconds-per-page="secondsPerPage"
-      class="pager"
-    />
+    <ProgressBar v-if="!hideProgressBar" class="progress" :levels="allLevels" />
+    <LevelsPager :levels="filteredLevels" :seconds-per-page="secondsPerPage" class="pager" />
     <PointsAnimation ref="animation" />
   </template>
-  <p
-    v-else
-    class="loading"
-  >
-    Loading
-  </p>
+  <p v-else class="loading">Loading</p>
 </template>
 
 <style>
-html, body, #app {
+html,
+body,
+#app {
   height: 100%;
 }
-body, #app {
+body,
+#app {
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -171,8 +165,9 @@ body, #app {
 body {
   background-color: #222;
 }
-body, input {
-  font-family: "EBGaramond", serif;
+body,
+input {
+  font-family: 'EBGaramond', serif;
   color: #fff;
   text-shadow:
     1px 0px #000,
@@ -186,13 +181,15 @@ body, input {
 </style>
 
 <style scoped>
-.errors, .total, .loading {
+.errors,
+.total,
+.loading {
   flex: 0;
 }
 .total {
   display: flex;
 }
-input[name="Total points"] {
+input[name='Total points'] {
   flex: 1;
   background: none;
   border: none;
@@ -205,7 +202,8 @@ input[name="Total points"] {
 .pager {
   flex: 1;
 }
-.total, .loading {
+.total,
+.loading {
   text-align: end;
   font-weight: 600;
   font-size: 200%;
@@ -217,8 +215,9 @@ input[name="Total points"] {
 .errors {
   text-align: end;
 }
-.errors li:before, .errors li:after {
-  content: "⚠️";
+.errors li:before,
+.errors li:after {
+  content: '⚠️';
   padding: 0 5px;
 }
 </style>

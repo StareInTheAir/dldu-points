@@ -5,32 +5,36 @@ const ANIMATION_DURATION_CSS_STRING = `${ANIMATION_DURATION_MS / 1_000}s`
 const ANIMATION_PAUSE_MS = 314
 const ATTRIBUTE_NAME_LAST_TIMEOUT_ID = 'dldu-hide-timeout-id'
 
-function fadeIn (el: HTMLElement): void {
+function fadeIn(el: HTMLElement): void {
   el.style.opacity = '1'
 }
 
-function fadeOut (el: HTMLElement): void {
+function fadeOut(el: HTMLElement): void {
   el.style.opacity = '0'
 }
 
-function setupOpacityTranstion (el: HTMLElement): void {
+function setupOpacityTranstion(el: HTMLElement): void {
   fadeOut(el) // doesn't fade out, since transitionProperty is not set yet
   el.style.transitionTimingFunction = 'ease-in'
   el.style.transitionProperty = 'opacity'
   el.style.transitionDuration = ANIMATION_DURATION_CSS_STRING
 }
 
-function hideElement (el: HTMLElement): void {
+function hideElement(el: HTMLElement): void {
   el.style.position = 'absolute'
   el.style.top = '-99999px'
 }
 
-function unhideElement (el: HTMLElement): void {
+function unhideElement(el: HTMLElement): void {
   el.style.position = ''
   el.style.top = '0'
 }
 
-function clearAndSetTimeout (handler: (el: HTMLElement) => void, timeout: number, el: HTMLElement): void {
+function clearAndSetTimeout(
+  handler: (el: HTMLElement) => void,
+  timeout: number,
+  el: HTMLElement,
+): void {
   const lastTimeoutId = el.getAttribute(ATTRIBUTE_NAME_LAST_TIMEOUT_ID)
   if (lastTimeoutId != null) {
     globalThis.clearTimeout(Number.parseInt(lastTimeoutId))
@@ -40,25 +44,29 @@ function clearAndSetTimeout (handler: (el: HTMLElement) => void, timeout: number
 }
 
 const FakeHideDirective: ObjectDirective<HTMLElement, boolean> = {
-  mounted (el) {
+  mounted(el) {
     setupOpacityTranstion(el)
     // All elements are hidden at the start
     hideElement(el)
   },
 
-  updated (el, binding) {
+  updated(el, binding) {
     if (binding.value) {
       // el should be fake hidden
       fadeOut(el)
       clearAndSetTimeout(hideElement, ANIMATION_DURATION_MS, el)
     } else {
       // el should visible
-      clearAndSetTimeout((el: HTMLElement) => {
-        unhideElement(el)
-        fadeIn(el)
-      }, ANIMATION_DURATION_MS + ANIMATION_PAUSE_MS, el)
+      clearAndSetTimeout(
+        (el: HTMLElement) => {
+          unhideElement(el)
+          fadeIn(el)
+        },
+        ANIMATION_DURATION_MS + ANIMATION_PAUSE_MS,
+        el,
+      )
     }
-  }
+  },
 }
 
 export default FakeHideDirective
