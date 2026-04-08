@@ -9,8 +9,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview",
-    "lint": "eslint ."
+    "preview": "vite preview"
   },
   "dependencies": {
     "@types/lodash.debounce": "4.0.9",
@@ -23,11 +22,5 @@
     "vite": "8.0.5",
     "vue": "3.5.32",
     "vue-tsc": "3.2.6"
-  },
-  "devDependencies": {
-    "@vue/eslint-config-standard-with-typescript": "9.2.0",
-    "@vue/eslint-config-typescript": "14.7.0",
-    "eslint-plugin-vue": "10.8.0",
-    "jiti": "2.6.1"
   }
 }
