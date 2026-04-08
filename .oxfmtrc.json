@@ -1,0 +1,7 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "ignorePatterns": ["src/assets/minireset.min.css"],
+  "semi": false,
+  "singleQuote": true,
+  "sortImports": true
+}

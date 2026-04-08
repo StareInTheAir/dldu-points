@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "fmt": "oxfmt"
   },
   "dependencies": {
     "@types/lodash.debounce": "4.0.9",
@@ -22,5 +23,8 @@
     "vite": "8.0.5",
     "vue": "3.5.32",
     "vue-tsc": "3.2.6"
+  },
+  "devDependencies": {
+    "oxfmt": "0.44.0"
   }
 }

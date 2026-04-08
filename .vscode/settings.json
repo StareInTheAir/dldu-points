@@ -1,4 +1,8 @@
 {
   "editor.detectIndentation": false,
   "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "[json][jsonc][typescript][markdown][vue][css][html]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  }
 }
