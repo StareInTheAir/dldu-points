@@ -75,7 +75,7 @@ export default defineComponent({
       const elementCount = this.getElementCount()
       const startIndex = this.startIndex
       const endIndex = this.endIndex
-      const hiddenList = new Array<boolean>(elementCount)
+      const hiddenList = Array.from<boolean>({ length: elementCount })
       for (let index = 0; index < elementCount; index += 1) {
         hiddenList[index] = index < startIndex || index > endIndex
       }
