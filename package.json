@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
-    "fmt": "oxfmt"
+    "fmt": "oxfmt",
+    "lint": "oxlint"
   },
   "dependencies": {
     "@types/lodash.debounce": "4.0.9",
@@ -22,7 +23,9 @@
     "vue-tsc": "3.2.6"
   },
   "devDependencies": {
-    "oxfmt": "0.44.0"
+    "oxfmt": "0.44.0",
+    "oxlint": "1.59.0",
+    "oxlint-tsgolint": "0.20.0"
   },
   "engines": {
     "node": "24.x"
