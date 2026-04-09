@@ -1,24 +1,13 @@
-import { execSync } from 'child_process'
-import { readFileSync } from 'fs'
+import { execSync } from 'node:child_process'
+import { readFileSync } from 'node:fs'
 
 import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 
 const encoding = 'utf-8'
-
-let apiKey: string
-if (process.env.DLDU_POINTS_API_KEY != null) {
-  apiKey = process.env.DLDU_POINTS_API_KEY
-} else {
-  apiKey = readFileSync('api.key', { encoding })
-}
-
-let gitHash: string
-if (process.env.DLDU_POINTS_GIT_HASH != null) {
-  gitHash = process.env.DLDU_POINTS_GIT_HASH
-} else {
-  gitHash = execSync('git rev-parse --short HEAD', { encoding })
-}
+const apiKey = process.env.DLDU_POINTS_API_KEY ?? readFileSync('api.key', { encoding })
+const gitHash =
+  process.env.DLDU_POINTS_GIT_HASH ?? execSync('git rev-parse --short HEAD', { encoding })
 
 // https://vite.dev/config/
 export default defineConfig({
