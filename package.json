@@ -17,15 +17,15 @@
     "@vue/tsconfig": "0.9.1",
     "ajv": "8.18.0",
     "lodash.debounce": "4.0.8",
-    "typescript": "6.0.2",
+    "typescript": "6.0.3",
     "vite": "8.0.8",
     "vue": "3.5.32",
     "vue-tsc": "3.2.6"
   },
   "devDependencies": {
-    "oxfmt": "0.44.0",
-    "oxlint": "1.59.0",
-    "oxlint-tsgolint": "0.20.0"
+    "oxfmt": "0.45.0",
+    "oxlint": "1.60.0",
+    "oxlint-tsgolint": "0.21.1"
   },
   "engines": {
     "node": "24.x"
