@@ -20,12 +20,12 @@
     "typescript": "6.0.3",
     "vite": "8.0.14",
     "vue": "3.5.34",
-    "vue-tsc": "3.2.9"
+    "vue-tsc": "3.3.1"
   },
   "devDependencies": {
-    "oxfmt": "0.50.0",
-    "oxlint": "1.65.0",
-    "oxlint-tsgolint": "0.22.1"
+    "oxfmt": "0.51.0",
+    "oxlint": "1.66.0",
+    "oxlint-tsgolint": "0.23.0"
   },
   "engines": {
     "node": "24.x"
