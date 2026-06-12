@@ -12,19 +12,19 @@
   },
   "dependencies": {
     "@types/lodash.debounce": "4.0.9",
-    "@types/node": "24.13.1",
+    "@types/node": "24.13.2",
     "@vitejs/plugin-vue": "6.0.7",
     "@vue/tsconfig": "0.9.1",
     "ajv": "8.20.0",
     "lodash.debounce": "4.0.8",
     "typescript": "6.0.3",
     "vite": "8.0.16",
-    "vue": "3.5.35",
-    "vue-tsc": "3.3.3"
+    "vue": "3.5.38",
+    "vue-tsc": "3.3.4"
   },
   "devDependencies": {
-    "oxfmt": "0.53.0",
-    "oxlint": "1.68.0",
+    "oxfmt": "0.54.0",
+    "oxlint": "1.69.0",
     "oxlint-tsgolint": "0.23.0"
   },
   "engines": {
