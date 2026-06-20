@@ -20,11 +20,11 @@
     "typescript": "6.0.3",
     "vite": "8.0.16",
     "vue": "3.5.38",
-    "vue-tsc": "3.3.4"
+    "vue-tsc": "3.3.5"
   },
   "devDependencies": {
-    "oxfmt": "0.54.0",
-    "oxlint": "1.69.0",
+    "oxfmt": "0.55.0",
+    "oxlint": "1.70.0",
     "oxlint-tsgolint": "0.23.0"
   },
   "engines": {
