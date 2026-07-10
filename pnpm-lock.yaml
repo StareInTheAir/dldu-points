@@ -16,7 +16,7 @@ importers:
         version: 24.13.3
       '@vitejs/plugin-vue':
         specifier: 6.0.7
-        version: 6.0.7(vite@8.1.3(@types/node@24.13.3))(vue@3.5.39(typescript@6.0.3))
+        version: 6.0.7(vite@8.1.4(@types/node@24.13.3))(vue@3.5.39(typescript@6.0.3))
       '@vue/tsconfig':
         specifier: 0.9.1
         version: 0.9.1(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3))
@@ -30,8 +30,8 @@ importers:
         specifier: 6.0.3
         version: 6.0.3
       vite:
-        specifier: 8.1.3
-        version: 8.1.3(@types/node@24.13.3)
+        specifier: 8.1.4
+        version: 8.1.4(@types/node@24.13.3)
       vue:
         specifier: 3.5.39
         version: 3.5.39(typescript@6.0.3)
@@ -739,8 +739,8 @@ packages:
   undici-types@7.18.2:
     resolution: {integrity: sha512-AsuCzffGHJybSaRrmr5eHr81mwJU3kjw6M+uprWvCXiNeN9SOGwQ3Jn8jb8m3Z6izVgknn1R0FTCEAP2QrLY/w==}
 
-  vite@8.1.3:
-    resolution: {integrity: sha512-Ds+gBRbj0lwRO2Y5hwnUBdxSwlAve9LeRyU4sNnAr0ewW0gWF0n5bgXgUzbgZ49MV9BVUAQUFYVcDUcilUExMA==}
+  vite@8.1.4:
+    resolution: {integrity: sha512-bTT9PsdWO+MQMNG9ZXIP/qM9wGh37DFxTV/sPq9cFpHr3w4jkgef032PkAL9jAqhk3Nz8NQw3O8n6/xFkqO4QQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -1039,10 +1039,10 @@ snapshots:
     dependencies:
       undici-types: 7.18.2
 
-  '@vitejs/plugin-vue@6.0.7(vite@8.1.3(@types/node@24.13.3))(vue@3.5.39(typescript@6.0.3))':
+  '@vitejs/plugin-vue@6.0.7(vite@8.1.4(@types/node@24.13.3))(vue@3.5.39(typescript@6.0.3))':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
-      vite: 8.1.3(@types/node@24.13.3)
+      vite: 8.1.4(@types/node@24.13.3)
       vue: 3.5.39(typescript@6.0.3)
 
   '@volar/language-core@2.4.28':
@@ -1322,7 +1322,7 @@ snapshots:
 
   undici-types@7.18.2: {}
 
-  vite@8.1.3(@types/node@24.13.3):
+  vite@8.1.4(@types/node@24.13.3):
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.5
