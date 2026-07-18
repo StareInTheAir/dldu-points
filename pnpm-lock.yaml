@@ -15,8 +15,8 @@ importers:
         specifier: 24.13.3
         version: 24.13.3
       '@vitejs/plugin-vue':
-        specifier: 6.0.7
-        version: 6.0.7(vite@8.1.4(@types/node@24.13.3))(vue@3.5.39(typescript@6.0.3))
+        specifier: 6.0.8
+        version: 6.0.8(vite@8.1.5(@types/node@24.13.3))(vue@3.5.39(typescript@6.0.3))
       '@vue/tsconfig':
         specifier: 0.9.1
         version: 0.9.1(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3))
@@ -30,8 +30,8 @@ importers:
         specifier: 6.0.3
         version: 6.0.3
       vite:
-        specifier: 8.1.4
-        version: 8.1.4(@types/node@24.13.3)
+        specifier: 8.1.5
+        version: 8.1.5(@types/node@24.13.3)
       vue:
         specifier: 3.5.39
         version: 3.5.39(typescript@6.0.3)
@@ -473,8 +473,8 @@ packages:
   '@types/node@24.13.3':
     resolution: {integrity: sha512-Dh8vAsV36ig5wa9OX4pXvMc9D3Veibfw2wix0CUwYODLD8nkj9UsLjASr49nPg+2eKzxhBV+v7L8pXvT4e639Q==}
 
-  '@vitejs/plugin-vue@6.0.7':
-    resolution: {integrity: sha512-km+p+XdSz9Sxm5rqUbqcSfZYaAniKxWBj1KURl+Jr7UaPvvX7BmaWMdP69I5rrFDeQGyxAG7NXdc57vz+snhWg==}
+  '@vitejs/plugin-vue@6.0.8':
+    resolution: {integrity: sha512-0ZjgOg7oO6farnNGup7yvoM/YXZV84OZxHAwtflItNa/6zzQyVb5LNxyea3FEKEX2XlagIKzrlH7wwxkKgtiew==}
     engines: {node: ^20.19.0 || >=22.12.0}
     peerDependencies:
       vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
@@ -707,6 +707,10 @@ packages:
     resolution: {integrity: sha512-vuwillviilfKZsg0VGj5R/YwwcHx4SLsIOI/7K6mQkWx+l5cUHTjj5g0AasTBcyXsbfTgrwsUNmVUb5xVwyPwg==}
     engines: {node: ^10 || ^12 || >=14}
 
+  postcss@8.5.19:
+    resolution: {integrity: sha512-Mz8SaolMd8nB+G13WkORcxQKHZ/NE4xXevtkJHVuG+guo9/wYKlIMTKAqGdEmYOXR2ijPjTYNHssizdaVSUNdQ==}
+    engines: {node: ^10 || ^12 || >=14}
+
   require-from-string@2.0.2:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
@@ -739,8 +743,8 @@ packages:
   undici-types@7.18.2:
     resolution: {integrity: sha512-AsuCzffGHJybSaRrmr5eHr81mwJU3kjw6M+uprWvCXiNeN9SOGwQ3Jn8jb8m3Z6izVgknn1R0FTCEAP2QrLY/w==}
 
-  vite@8.1.4:
-    resolution: {integrity: sha512-bTT9PsdWO+MQMNG9ZXIP/qM9wGh37DFxTV/sPq9cFpHr3w4jkgef032PkAL9jAqhk3Nz8NQw3O8n6/xFkqO4QQ==}
+  vite@8.1.5:
+    resolution: {integrity: sha512-7ULLwsCdYx/nRyrpiEwvqb5TFHrMVZyBt+rg/OAXT7rgj/z+DtTDyKFeLAdDkubDVDKD8jOsndmy7m55XcfUsw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -1039,10 +1043,10 @@ snapshots:
     dependencies:
       undici-types: 7.18.2
 
-  '@vitejs/plugin-vue@6.0.7(vite@8.1.4(@types/node@24.13.3))(vue@3.5.39(typescript@6.0.3))':
+  '@vitejs/plugin-vue@6.0.8(vite@8.1.5(@types/node@24.13.3))(vue@3.5.39(typescript@6.0.3))':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
-      vite: 8.1.4(@types/node@24.13.3)
+      vite: 8.1.5(@types/node@24.13.3)
       vue: 3.5.39(typescript@6.0.3)
 
   '@volar/language-core@2.4.28':
@@ -1283,6 +1287,12 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
+  postcss@8.5.19:
+    dependencies:
+      nanoid: 3.3.15
+      picocolors: 1.1.1
+      source-map-js: 1.2.1
+
   require-from-string@2.0.2: {}
 
   rolldown@1.1.5:
@@ -1322,11 +1332,11 @@ snapshots:
 
   undici-types@7.18.2: {}
 
-  vite@8.1.4(@types/node@24.13.3):
+  vite@8.1.5(@types/node@24.13.3):
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.5
-      postcss: 8.5.16
+      postcss: 8.5.19
       rolldown: 1.1.5
       tinyglobby: 0.2.17
     optionalDependencies:
