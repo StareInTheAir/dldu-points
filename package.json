@@ -19,12 +19,12 @@
     "lodash.debounce": "4.0.8",
     "typescript": "6.0.3",
     "vite": "8.2.1",
-    "vue": "3.5.40",
+    "vue": "3.5.41",
     "vue-tsc": "3.3.9"
   },
   "devDependencies": {
-    "oxfmt": "0.61.0",
-    "oxlint": "1.76.0",
+    "oxfmt": "0.62.0",
+    "oxlint": "1.77.0",
     "oxlint-tsgolint": "0.25.0"
   },
   "engines": {
