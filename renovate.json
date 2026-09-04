@@ -19,5 +19,6 @@
   ],
   "timezone": "Europe/Berlin",
   "ignoreTests": true,
-  "schedule": ["before 12:00 on Saturday"]
+  "schedule": ["before 12:00 on Saturday"],
+  "configMigration": true
 }
