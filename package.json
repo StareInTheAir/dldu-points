@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@types/lodash.debounce": "4.0.9",
-    "@types/node": "24.13.3",
+    "@types/node": "24.13.4",
     "@vitejs/plugin-vue": "6.0.8",
     "@vue/tsconfig": "0.9.1",
     "ajv": "8.20.0",
@@ -23,8 +23,8 @@
     "vue-tsc": "3.3.11"
   },
   "devDependencies": {
-    "oxfmt": "0.66.0",
-    "oxlint": "1.81.0",
+    "oxfmt": "0.67.0",
+    "oxlint": "1.82.0",
     "oxlint-tsgolint": "0.25.0"
   },
   "engines": {
