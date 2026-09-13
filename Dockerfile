@@ -6,7 +6,7 @@ ARG DLDU_POINTS_GIT_HASH
 WORKDIR /app
 COPY --chown=vp:vp . .
 
-RUN vp install --frozen-lockfile --prod && vp build
+RUN vp install --frozen-lockfile && vpr build
 
 FROM docker.io/nginx:stable-alpine AS production
 COPY --from=build /app/dist /usr/share/nginx/html
