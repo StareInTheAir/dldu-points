@@ -1,5 +1,5 @@
 <script lang="ts">
-import debounce from 'lodash.debounce'
+import { debounce } from 'lodash-es'
 import { defineComponent, type PropType } from 'vue'
 
 import FakeHideDirective from '../directives/FakeHide'
