@@ -1,17 +1,13 @@
-FROM node:24-alpine AS build-stage
+FROM ghcr.io/voidzero-dev/vite-plus:0.3.1 AS build
 
 ARG DLDU_POINTS_API_KEY
 ARG DLDU_POINTS_GIT_HASH
 
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
-
 WORKDIR /app
-COPY . .
+COPY --chown=vp:vp . .
 
-RUN pnpm install --prod && pnpm run build
+RUN vp install --frozen-lockfile --prod && vp build
 
-FROM nginx:stable-alpine AS production-stage
-COPY --from=build-stage /app/dist /usr/share/nginx/html
+FROM docker.io/nginx:stable-alpine AS production
+COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 80
