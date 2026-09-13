@@ -7,6 +7,7 @@ import { defineConfig, lazyPlugins } from 'vite-plus'
 
 const encoding = 'utf-8'
 const apiKey = process.env.DLDU_POINTS_API_KEY ?? readFileSync('api.key', { encoding })
+const appVersion = JSON.parse(readFileSync('package.json', { encoding })).version
 const gitHash =
   process.env.DLDU_POINTS_GIT_HASH ?? execSync('git rev-parse --short HEAD', { encoding })
 
@@ -33,7 +34,7 @@ export default defineConfig({
   },
   define: {
     API_KEY: JSON.stringify(apiKey.trim()),
-    APP_VERSION: JSON.stringify(process.env.npm_package_version),
+    APP_VERSION: JSON.stringify(appVersion.trim()),
     GIT_COMMIT_HASH: JSON.stringify(gitHash.trim()),
   },
 })
