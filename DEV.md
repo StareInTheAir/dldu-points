@@ -7,19 +7,15 @@ These instructions will help you setup the development tools necessary to make c
 You need to install:
 
 - [VS Code](https://code.visualstudio.com/)
-- The VS Code [Vue - Official (Volar) extension](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
-- [nvm](https://github.com/nvm-sh/nvm) (Node Version Manager)
-- [pnpm](https://pnpm.io/installation)
+- The VS Code [Vue extension](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+- The VS Code [Oxlint and Oxfmt extension](https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode)
+- [Vite+](https://viteplus.dev/guide/)
 
-After cloning the repository, install and activate the correct Node.js version using nvm, then install dependencies:
+After cloning the repository, Vite+ will install Node.js, pnpm, and dependencies:
 
 ```sh
-nvm install
-nvm use
-pnpm install
+vp install
 ```
-
-The repository includes an `.nvmrc` file that pins the required Node.js version.
 
 ## API key
 
@@ -33,24 +29,24 @@ This API key only works, when the application is run on `localhost:5173`. This i
 
 You can also create your own key by following the instructions in [BUILD.md](BUILD.md#api-key).
 
-## pnpm scripts
+## vp scripts
 
 Open the terminal inside VS Code using the `View` → `Terminal` action from the menu bar.
 
-### `pnpm run dev`
+### `vp dev`
 
 Starts the application in development mode. Navigate to `http://localhost:5173` to see the application running. Changes to the source code will be injected live into the running application. No manual reloads are required.
 
-### `pnpm run lint`
+### `vp lint`
 
-Runs all eslint code checks.
+Runs all lint code checks.
 
-### `pnpm run build`
+### `vp build`
 
 Builds the application. Output is available in the `dist` folder.
 
 ## Browser dev tools
 
-The [Vue devtools browser extension](https://devtools.vuejs.org/guide/installation.html) can be used to view a lot of the internals of dldu-points.
+The [Vue devtools browser extension](https://vuejs.org/guide/scaling-up/tooling.html#browser-devtools) can be used to view a lot of the internals of dldu-points.
 
 To open the Vue devtools, open the default browser devtools with `F12` and select the new Vue tab on the right.
