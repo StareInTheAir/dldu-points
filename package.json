@@ -4,30 +4,40 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview",
-    "fmt": "oxfmt",
-    "lint": "oxlint"
+    "dev": "vp dev",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vp preview",
+    "build-only": "vp build",
+    "type-check": "vue-tsc --build",
+    "format": "vp fmt src/"
   },
   "dependencies": {
+    "@tsconfig/node26": "26.0.1",
     "@types/lodash.debounce": "4.0.9",
-    "@types/node": "24.13.4",
-    "@vitejs/plugin-vue": "6.0.8",
-    "@vue/tsconfig": "0.9.1",
+    "@types/node": "26.5.1",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "@vue/tsconfig": "^0.9.1",
     "ajv": "8.20.0",
     "lodash.debounce": "4.0.8",
-    "typescript": "6.0.3",
-    "vite": "8.3.0",
+    "npm-run-all2": "9.0.3",
+    "vite-plus": "catalog:",
     "vue": "3.5.42",
     "vue-tsc": "3.3.11"
   },
   "devDependencies": {
-    "oxfmt": "0.67.0",
-    "oxlint": "1.82.0",
-    "oxlint-tsgolint": "0.25.0"
+    "typescript": "6.0.3",
+    "vite": "catalog:"
   },
-  "engines": {
-    "node": "24.x"
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.4.1",
+      "onFail": "download"
+    },
+    "runtime": {
+      "name": "node",
+      "version": "26.8.2",
+      "onFail": "download"
+    }
   }
 }

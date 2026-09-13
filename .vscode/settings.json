@@ -2,7 +2,11 @@
   "editor.detectIndentation": false,
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.oxc": "explicit"
+  },
   "[json][jsonc][typescript][markdown][vue][css][html]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
-  }
+  },
+  "npm.scriptRunner": "vp"
 }
