@@ -1,9 +1,10 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended",
-    ":prHourlyLimitNone",
+    "config:best-practices",
     "group:allNonMajor",
+    ":prConcurrentLimitNone",
+    ":prHourlyLimitNone",
     ":automergeMinor",
     ":automergeBranch"
   ],
@@ -19,6 +20,5 @@
   ],
   "timezone": "Europe/Berlin",
   "ignoreTests": true,
-  "schedule": ["before 12:00 on Saturday"],
-  "configMigration": true
+  "schedule": ["before 12:00 on Saturday"]
 }
