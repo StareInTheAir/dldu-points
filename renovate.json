@@ -5,8 +5,9 @@
     "group:allNonMajor",
     ":prConcurrentLimitNone",
     ":prHourlyLimitNone",
+    ":automergeBranch",
     ":automergeMinor",
-    ":automergeBranch"
+    ":automergeDigest"
   ],
   "lockFileMaintenance": {
     "enabled": true,
