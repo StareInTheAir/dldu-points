@@ -8,6 +8,6 @@ COPY --chown=vp:vp . .
 
 RUN vp install --frozen-lockfile && vpr build
 
-FROM docker.io/nginx:stable-alpine AS production
+FROM docker.io/nginx:stable-alpine@sha256:dc5069ad14f19660b141b21236140b91656bf89bbc3e2417c70ae650cd66104c AS production
 COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 80
