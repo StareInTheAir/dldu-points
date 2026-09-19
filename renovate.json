@@ -15,8 +15,8 @@
   },
   "packageRules": [
     {
-      "matchPackageNames": ["vite", "@vitejs/*"],
-      "groupName": "vite packages"
+      "matchPackageNames": ["vite", "@vitejs/*", "ghcr.io/voidzero-dev/vite-plus"],
+      "groupName": "vite"
     }
   ],
   "timezone": "Europe/Berlin",
