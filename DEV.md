@@ -37,9 +37,13 @@ Open the terminal inside VS Code using the `View` → `Terminal` action from the
 
 Starts the application in development mode. Navigate to `http://localhost:5173` to see the application running. Changes to the source code will be injected live into the running application. No manual reloads are required.
 
+### `vp fmt`
+
+Formats all files with Oxfmt.
+
 ### `vp lint`
 
-Runs all lint code checks.
+Runs all lint code checks with Oxlint.
 
 ### `vp build`
 
