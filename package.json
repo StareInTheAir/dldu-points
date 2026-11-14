@@ -18,18 +18,18 @@
     "typescript": "6.0.3",
     "vite": "catalog:",
     "vite-plus": "catalog:",
-    "vue": "3.5.44",
+    "vue": "3.5.45",
     "vue-tsc": "3.3.14"
   },
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "12.17.0",
+      "version": "12.18.0",
       "onFail": "download"
     },
     "runtime": {
       "name": "node",
-      "version": "26.13.0",
+      "version": "26.13.1",
       "onFail": "download"
     }
   }
