@@ -140,8 +140,7 @@ export default defineComponent({
   <template v-if="dlduData">
     <p class="total">
       <input name="Total points" v-model="totalLabel" />
-      <span class="animationPosition">{{ achievedPoints }}</span
-      >/{{ totalPoints }}
+      <span class="animationPosition">{{ achievedPoints }}</span>/{{ totalPoints }}
     </p>
     <ProgressBar v-if="!hideProgressBar" class="progress" :levels="allLevels" />
     <LevelsPager :levels="filteredLevels" :seconds-per-page="secondsPerPage" class="pager" />
