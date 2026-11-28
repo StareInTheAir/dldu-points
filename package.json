@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@types/lodash-es": "4.17.12",
-    "@types/node": "26.6.6",
+    "@types/node": "26.6.7",
     "@vitejs/plugin-vue": "6.0.11",
     "@vue/tsconfig": "0.9.1",
     "ajv": "8.20.0",
@@ -18,13 +18,13 @@
     "typescript": "6.0.3",
     "vite": "catalog:",
     "vite-plus": "catalog:",
-    "vue": "3.5.45",
+    "vue": "3.5.46",
     "vue-tsc": "3.3.14"
   },
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "12.21.0",
+      "version": "12.23.0",
       "onFail": "download"
     },
     "runtime": {
